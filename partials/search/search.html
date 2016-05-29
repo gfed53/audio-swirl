@@ -1,0 +1,57 @@
+<div class="search-main">
+	<div class="row">
+		<div class="col-md-12">
+			<form id="search-term">
+				<div class="input-group">		
+					<div class="input-group-btn">
+						<select class="form-control select-cat" id="select-cat">
+							<option value="everything">Everything</option>
+							<option value="music">Music</option>
+							<option value="movie">Movie</option>
+							<option value="show">Show</option>
+							<option value="game">Game</option>
+							<option value="author">Author</option>
+							<option value="book">Book</option>
+						</select>
+					</div>
+					<input type="text" id="query" ng-model="search.searchTerm" class="form-control" placeholder="Search for...">
+					<span class="input-group-btn">
+						<button class="btn btn-default btn-search" ng-click="search.submit()">Go!</button>
+					</span>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 output">
+			<h3>You searched for:</h3>
+			<uib-accordion>
+				<uib-accordion-group ng-repeat="item in search.info" heading="{{ item.Name }}">
+					<div class="row inner-content">
+						<h4 class="result-type">{{item.Type}}</h4>
+						<div class="result-blurb">
+							<p>{{ item.wTeaser }}</p>
+							<span>
+								<button class="btn btn-default btn-add" ng-click="search.add(item.Name)" type="button">Add</button>
+							</span>
+						</div>
+					</div>
+				</uib-accordion-group>
+			</uib-accordion>
+			<h3>Results:</h3>
+			<uib-accordion>
+				<uib-accordion-group ng-repeat="item in search.results" heading="{{ item.Name }}">
+					<div class="row inner-content">
+						<h4 class="result-type">{{item.Type}}</h4>
+						<div class="result-blurb">
+							<p>{{ item.wTeaser }}</p>
+							<span>
+								<button class="btn btn-default btn-add"  ng-click="search.add(item.Name)" type="button">Add</button>
+							</span>
+						</div>
+					</div>
+				</uib-accordion-group>
+			</uib-accordion>					
+		</div>
+	</div>
+</div>

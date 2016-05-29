@@ -1,0 +1,23 @@
+{
+  "name": "api-hack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gfed53/API-Hack.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gfed53/API-Hack/issues"
+  },
+  "homepage": "https://github.com/gfed53/API-Hack#readme",
+  "devDependencies": {
+    "angular": "^1.5.5",
+    "angular-ui-bootstrap": "^1.3.2"
+  }
+}
