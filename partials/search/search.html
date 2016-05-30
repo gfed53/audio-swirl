@@ -3,7 +3,7 @@
 		<div class="col-md-12">
 			<form id="search-term">
 				<div class="input-group">		
-					<div class="input-group-btn">
+					<!-- <div class="input-group-btn">
 						<select class="form-control select-cat" id="select-cat">
 							<option value="everything">Everything</option>
 							<option value="music">Music</option>
@@ -13,7 +13,7 @@
 							<option value="author">Author</option>
 							<option value="book">Book</option>
 						</select>
-					</div>
+					</div> -->
 					<input type="text" id="query" ng-model="search.searchTerm" class="form-control" placeholder="Search for...">
 					<span class="input-group-btn">
 						<button class="btn btn-default btn-search" ng-click="search.submit()">Go!</button>
@@ -33,13 +33,10 @@
 							<p>{{ item.wTeaser }}</p>
 							<span>
 								<button class="btn btn-default btn-add" ng-click="search.add(item.Name)" type="button">Add</button>
-								<button class="btn btn-default btn-spotify" ng-click="search.spotSearch(item.Name)">Spotify Info</button>
+								<button class="btn btn-default btn-spotify" ng-click="search.spotSearch(item.Name)">Spotify</button>
 							</span>
 							<div class="spot-blurb" ng-if="search.item === item.Name">
-								<!-- <pre>{{ search.spotSearch(item.Name) }}</pre> -->
-								<pre>{{ search.link }}</pre>
-								<!-- <a href="{{ search.spotSearch(item.Name) }}">Check it out on Spotify</a> -->
-								
+								<a target="_blank" href="{{ search.link }}">Go to page!</a>
 							</div>
 						</div>
 					</div>
@@ -54,22 +51,39 @@
 							<p>{{ item.wTeaser }}</p>
 							<span>
 								<button class="btn btn-default btn-add"  ng-click="search.add(item.Name)" type="button">Add</button>
-								<button class="btn btn-default btn-spotify" ng-click="search.spotSearch(item.Name)">Spotify Info</button>
+								<button class="btn btn-default btn-spotify" ng-click="search.spotSearch(item.Name)">Spotify</button>
 							</span>
 							<div class="spot-blurb" ng-if="search.item === item.Name">
-								<!-- <pre>{{ search.spotSearch(item.Name) }}</pre> -->
-								<pre>{{ search.link }}</pre>
-								<!-- <a href="{{ search.spotSearch(item.Name) }}">Check it out on Spotify</a> -->
-								
+								<a target="_blank" href="{{ search.link }}">Go to page!</a>
 							</div>
 						</div>
 					</div>
 				</uib-accordion-group>
-			</uib-accordion>					
+			</uib-accordion>
+			<div class="past-searches" ng-if="search.pastSearches.length > 0">
+				<h3>Previous Searches</h3>
+				<uib-accordion>
+					<uib-accordion-group ng-repeat="item in search.pastSearches" heading="{{ item.Name }}">
+						<div class="row inner-content">
+							<h4 class="result-type">{{item.Type}}</h4>
+							<div class="result-blurb">
+								<p>{{ item.wTeaser }}</p>
+								<span>
+									<button class="btn btn-default btn-add" ng-click="search.add(item.Name)" type="button">Add</button>
+									<button class="btn btn-default btn-spotify" ng-click="search.spotSearch(item.Name)">Spotify</button>
+								</span>
+								<div class="spot-blurb" ng-if="search.item === item.Name">
+									<a target="_blank" href="{{ search.link }}">Go to page!</a>
+								</div>
+							</div>
+						</div>
+					</uib-accordion-group>
+				</uib-accordion>
+			</div>				
 		</div>
 	</div>
 </div>
-<div class="search-history">
+<!-- <div class="output search-history">
 	<div class="row" ng-if="search.pastSearches">
 		<h3>Previous Searches</h3>
 		<uib-accordion>
@@ -80,12 +94,16 @@
 							<p>{{ item.wTeaser }}</p>
 							<span>
 								<button class="btn btn-default btn-add" ng-click="search.add(item.Name)" type="button">Add</button>
+								<button class="btn btn-default btn-spotify" ng-click="search.spotSearch(item.Name)">Spotify</button>
 							</span>
+							<div class="spot-blurb" ng-if="search.item === item.Name">
+								<a target="_blank" href="{{ search.link }}">Go to page!</a>
+							</div>
 						</div>
 					</div>
 				</uib-accordion-group>
 			</uib-accordion>
 	</div>
-</div>
+</div> -->
 
 

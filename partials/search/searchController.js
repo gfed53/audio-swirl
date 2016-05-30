@@ -12,16 +12,19 @@ function SearchCtrl(ahSearch, ahSpotSearch, ahSearchHistory){
 	vm.pastSearches = ahSearchHistory.get();
 	vm.link;
 	vm.items = [];
-	spotSearch();
+	console.log(vm.pastSearches);
+	// spotSearch();
 
 	function submit(){
 		$(".output h3").show();
-		vm.category = document.getElementById("select-cat").value;
-		if(vm.category !== "everything"){
-			vm.searchTermNew = vm.category+":"+vm.searchTerm;
-		} else {
-			vm.searchTermNew = vm.searchTerm;
-		}
+		// vm.category = document.getElementById("select-cat").value;
+		// if(vm.category !== "everything"){
+		// 	vm.searchTermNew = vm.category+":"+vm.searchTerm;
+		// } else {
+		// 	vm.searchTermNew = vm.searchTerm;
+		// }
+
+		vm.searchTermNew = "music:"+vm.searchTerm;
 
 		ahSearch(vm.searchTermNew).getResults()
 		.then(function(response){
