@@ -2,7 +2,8 @@ angular
 .module("myApp")
 
 .factory("ahSearch", ["$http", "$q", ahSearch])
-.factory("ahSpotSearch", ["Spotify", ahSpotSearch])
+.factory("ahSpotSearch", ["Spotify", "$q", ahSpotSearch])
+.service("ahSearchHistory", [ahSearchHistory])
 
 function ahSearch($http, $q){
 	return function(searchTerm){
@@ -34,12 +35,40 @@ function ahSearch($http, $q){
 	}
 }
 
-function ahSpotSearch(Spotify){
-	return function(){
+function ahSpotSearch(Spotify, $q){
+	return function(item){
+		if(typeof item === "undefined"){
+			item = "Nirvana";
+		}
 		console.log("spotify search");
-		Spotify.search('Nirvana', 'artist')
+		return Spotify.search(item, 'artist')
 		.then(function(response){
-			console.log(response);
+			console.log(response.artists);
+			var link = response.artists.items[0].external_urls.spotify;
+			console.log(link);
+			return $q.when(response);
 		})
 	}
 }
+
+
+function ahSearchHistory(){
+	this.tKid = [];
+	this.get = get;
+	this.add = add;
+
+	function get(){
+		return this.tKid;
+	}
+
+	function add(item){
+		if(this.tKid.indexOf(item) === -1){
+			this.tKid.push(item);
+		}
+		console.log(this.tKid);
+	}
+}
+
+
+
+

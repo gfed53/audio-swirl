@@ -33,7 +33,14 @@
 							<p>{{ item.wTeaser }}</p>
 							<span>
 								<button class="btn btn-default btn-add" ng-click="search.add(item.Name)" type="button">Add</button>
+								<button class="btn btn-default btn-spotify" ng-click="search.spotSearch(item.Name)">Spotify Info</button>
 							</span>
+							<div class="spot-blurb" ng-if="search.item === item.Name">
+								<!-- <pre>{{ search.spotSearch(item.Name) }}</pre> -->
+								<pre>{{ search.link }}</pre>
+								<!-- <a href="{{ search.spotSearch(item.Name) }}">Check it out on Spotify</a> -->
+								
+							</div>
 						</div>
 					</div>
 				</uib-accordion-group>
@@ -47,7 +54,14 @@
 							<p>{{ item.wTeaser }}</p>
 							<span>
 								<button class="btn btn-default btn-add"  ng-click="search.add(item.Name)" type="button">Add</button>
+								<button class="btn btn-default btn-spotify" ng-click="search.spotSearch(item.Name)">Spotify Info</button>
 							</span>
+							<div class="spot-blurb" ng-if="search.item === item.Name">
+								<!-- <pre>{{ search.spotSearch(item.Name) }}</pre> -->
+								<pre>{{ search.link }}</pre>
+								<!-- <a href="{{ search.spotSearch(item.Name) }}">Check it out on Spotify</a> -->
+								
+							</div>
 						</div>
 					</div>
 				</uib-accordion-group>
@@ -55,3 +69,23 @@
 		</div>
 	</div>
 </div>
+<div class="search-history">
+	<div class="row" ng-if="search.pastSearches">
+		<h3>Previous Searches</h3>
+		<uib-accordion>
+				<uib-accordion-group ng-repeat="item in search.pastSearches" heading="{{ item.Name }}">
+					<div class="row inner-content">
+						<h4 class="result-type">{{item.Type}}</h4>
+						<div class="result-blurb">
+							<p>{{ item.wTeaser }}</p>
+							<span>
+								<button class="btn btn-default btn-add" ng-click="search.add(item.Name)" type="button">Add</button>
+							</span>
+						</div>
+					</div>
+				</uib-accordion-group>
+			</uib-accordion>
+	</div>
+</div>
+
+
