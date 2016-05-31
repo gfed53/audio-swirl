@@ -79,8 +79,28 @@
 						</div>
 					</uib-accordion-group>
 				</uib-accordion>
-			</div>				
-		</div>
+			</div>
+			<!-- <div class="past-results" ng-if="search.pastSearches.length > 0">
+				<h3>Previous Searches</h3>
+				<uib-accordion>
+					<uib-accordion-group ng-repeat="item in search.pastSearches" heading="{{ item.Name }}">
+						<div class="row inner-content">
+							<h4 class="result-type">{{item.Type}}</h4>
+							<div class="result-blurb">
+								<p>{{ item.wTeaser }}</p>
+								<span>
+									<button class="btn btn-default btn-add" ng-click="search.add(item.Name)" type="button">Add</button>
+									<button class="btn btn-default btn-spotify" ng-click="search.spotSearch(item.Name)">Spotify</button>
+								</span>
+								<div class="spot-blurb" ng-if="search.item === item.Name">
+									<a target="_blank" href="{{ search.link }}">Go to page!</a>
+								</div>
+							</div>
+						</div>
+					</uib-accordion-group>
+				</uib-accordion>
+			</div>			
+		</div> -->
 	</div>
 </div>
 <!-- <div class="output search-history">

@@ -4,6 +4,7 @@ angular
 .factory("ahSearch", ["$http", "$q", ahSearch])
 .factory("ahSpotSearch", ["Spotify", "$q", ahSpotSearch])
 .service("ahSearchHistory", [ahSearchHistory])
+.service("ahResultHistory", [ahResultHistory])
 
 function ahSearch($http, $q){
 	return function(searchTerm){
@@ -53,6 +54,23 @@ function ahSpotSearch(Spotify, $q){
 
 
 function ahSearchHistory(){
+	this.tKid = [];
+	this.get = get;
+	this.add = add;
+
+	function get(){
+		return this.tKid;
+	}
+
+	function add(item){
+		if(this.tKid.indexOf(item) === -1){
+			this.tKid.push(item);
+		}
+		console.log(this.tKid);
+	}
+}
+
+function ahResultHistory(){
 	this.tKid = [];
 	this.get = get;
 	this.add = add;

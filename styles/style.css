@@ -5,14 +5,21 @@ body {
 .container {
 	text-align: center;
 	margin: 3em auto;
-	border: 7px ridge bisque;
-	background-color: #D9EDF7;
+	border: 5px solid bisque;
+	background: url("../images/amp-guitar.jpeg") no-repeat center fixed;
+	background-size: cover;
+	/*background-color: #D9EDF7;*/
 	border-radius: 1em;
 	font-family: "Open Sans", sans-serif;
 }
 
+#header, #content h3, #directions, #footer {
+	color: whitesmoke;
+}
+
 #header, #content, #menu, #footer {
 	margin-bottom: 2em;
+	/*color: whitesmoke;*/
 }
 
 h1, h3 {
@@ -55,7 +62,7 @@ h3 {
 }
 
 .nav-tabs>li>a {
-	color: #446CB3;
+	color: whitesmoke;
 	font-weight: bold;
 	/*border: 1px solid #ddd;*/
 }
@@ -64,6 +71,10 @@ h3 {
 .nav>li>a:focus, .nav>li>a:hover {
 	background-color: #5F5F5F;	
 	color: white;
+}
+
+#directions {
+	background-color: rgba(0, 0, 0, 0.5);
 }
 
 .nav-tabs>li>.active {
