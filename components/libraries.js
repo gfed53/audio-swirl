@@ -8,31 +8,31 @@ angular
 
 function ahSearch($http, $q){
 	return function(searchTerm){
-	    var url = "http://www.tastekid.com/api/similar?callback=JSON_CALLBACK";
-	    var request = {
+		var url = "http://www.tastekid.com/api/similar?callback=JSON_CALLBACK";
+		var request = {
 			q: searchTerm,
 			k: "179625-Educatio-EE7ZUYWY",
 			info: 1
-	    };
-	    var services = {
-	    	getResults: getResults
-	    };
-	    return services;
+		};
+		var services = {
+			getResults: getResults
+		};
+		return services;
 
-	    function getResults(){
-	    	return $http({
-	    		method: 'JSONP',
-	    		url: url,
-	    		params: request
-	    	})
-	    	.then(function(response){
-	    		var results = response;
-	    		return $q.when(response);
-	    	},
-	    	function(response){
-	    		alert("Sorry, an error occurred. Please try again later");
-	    	});
-	    }
+		function getResults(){
+			return $http({
+				method: 'JSONP',
+				url: url,
+				params: request
+			})
+			.then(function(response){
+				var results = response;
+				return $q.when(response);
+			},
+			function(response){
+				alert("Sorry, an error occurred. Please try again later");
+			});
+		}
 	}
 }
 
@@ -79,9 +79,11 @@ function ahResultHistory(){
 		return this.tKid;
 	}
 
-	function add(item){
-		if(this.tKid.indexOf(item) === -1){
-			this.tKid.push(item);
+	function add(array){
+		for(var i=0; i<array.length; i++){
+			if(this.tKid.indexOf(array[i]) === -1){
+				this.tKid.push(array[i]);
+			}
 		}
 		console.log(this.tKid);
 	}

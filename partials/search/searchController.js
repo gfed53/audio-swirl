@@ -2,17 +2,20 @@ angular
 
 .module("myApp")
 
-.controller("SearchCtrl", ["ahSearch", "ahSpotSearch", "ahSearchHistory", SearchCtrl])
+.controller("SearchCtrl", ["ahSearch", "ahSpotSearch", "ahSearchHistory", "ahResultHistory", SearchCtrl])
 
-function SearchCtrl(ahSearch, ahSpotSearch, ahSearchHistory){
+function SearchCtrl(ahSearch, ahSpotSearch, ahSearchHistory, ahResultHistory){
 	var vm = this;
 	vm.submit = submit;
 	vm.add = add;
 	vm.spotSearch = spotSearch;
+	vm.toggleHistory = toggleHistory;
 	vm.pastSearches = ahSearchHistory.get();
+	vm.pastResults = ahResultHistory.get();
 	vm.link;
 	vm.items = [];
 	console.log(vm.pastSearches);
+	console.log(vm.pastResults);
 	// spotSearch();
 
 	function submit(){
@@ -32,6 +35,7 @@ function SearchCtrl(ahSearch, ahSpotSearch, ahSearchHistory){
 				alert("Sorry, the API had trouble finding what you were looking for. Please make sure the spelling is correct. Note that TasteKid's queries are very precise, and what you are looking for may be phrased differently. ex: 'Street Fighter IV' is recognized, but not 'Street Fighter 4'.");
 			} else {
 				ahSearchHistory.add(response.data.Similar.Info[0]);
+				ahResultHistory.add(response.data.Similar.Results);
 				vm.info = response.data.Similar.Info;
 				vm.results = response.data.Similar.Results;
 				vm.searchTerm = "";
@@ -64,6 +68,11 @@ function SearchCtrl(ahSearch, ahSpotSearch, ahSearchHistory){
 		// function match(item){
 		// 	return item.name = item;
 		// }
+	}
+
+	function toggleHistory(){
+		console.log("toggle history");
+		$("#history").slideToggle();
 	}
 }
 
