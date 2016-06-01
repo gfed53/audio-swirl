@@ -2,7 +2,7 @@ angular
 .module("myApp")
 
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
-	$urlRouterProvider.otherwise("search")
+	$urlRouterProvider.otherwise("directions")
 	var myRoot = {
 		name: "root",
 		url: "/",
@@ -11,9 +11,7 @@ angular
 				templateUrl: "./partials/header/header.html"
 			},
 			"content": {
-				templateUrl: "./partials/search/search.html",
-				controller: "SearchCtrl",
-				controllerAs: "search"
+				templateUrl: "./partials/directions/directions.html"
 			},
 			"footer": {
 				templateUrl: "./partials/footer/footer.html"
@@ -26,17 +24,24 @@ angular
 	search = {
 		name: "search",
 		url: "search",
-		parent: "root"
+		parent: "root",
+		views: {
+			'content@': {
+				templateUrl: "./partials/search/search.html",
+				controller: "SearchCtrl",
+				controllerAs: "search"
+			}
+		}
 	}
 	directions = {
 		name: "directions",
 		url: "directions",
-		parent: "root",
-		views: {
-			'content@': {
-				templateUrl: "./partials/directions/directions.html"
-			}
-		}
+		parent: "root"
+		// views: {
+		// 	'content@': {
+		// 		templateUrl: "./partials/directions/directions.html"
+		// 	}
+		// }
 	};
 
 	$stateProvider

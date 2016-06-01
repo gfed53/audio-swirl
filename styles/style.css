@@ -87,6 +87,7 @@ h3 {
 
 #directions {
 	background-color: rgba(0, 0, 0, 0.5);
+	padding: 1.5em;
 }
 
 .nav-tabs>li>.active {

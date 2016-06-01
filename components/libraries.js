@@ -81,11 +81,15 @@ function ahResultHistory(){
 
 	function add(array){
 		for(var i=0; i<array.length; i++){
-			if(this.tKid.indexOf(array[i]) === -1){
+			
 				this.tKid.push(array[i]);
 			}
+		
+
+		function isFound(base, current){
+			return base.yID === current.yID;
 		}
-		console.log(this.tKid);
+		// console.log(this.tKid);
 	}
 }
 
