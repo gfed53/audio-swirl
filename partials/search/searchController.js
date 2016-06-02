@@ -35,7 +35,7 @@ function SearchCtrl(ahSearch, ahSpotSearch, ahSearchHistory, ahResultHistory){
 				alert("Sorry, the API had trouble finding what you were looking for. Please make sure the spelling is correct. Note that TasteKid's queries are very precise, and what you are looking for may be phrased differently. ex: 'Street Fighter IV' is recognized, but not 'Street Fighter 4'.");
 			} else {
 				ahSearchHistory.add(response.data.Similar.Info[0]);
-				ahResultHistory.add(response.data.Similar.Results);
+				ahResultHistory.add(response.data.Similar.Results, ahResultHistory.tKid);
 				vm.info = response.data.Similar.Info;
 				vm.results = response.data.Similar.Results;
 				vm.searchTerm = "";

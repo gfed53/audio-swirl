@@ -79,19 +79,26 @@ function ahResultHistory(){
 		return this.tKid;
 	}
 
-	function add(array){
-		for(var i=0; i<array.length; i++){
-			
-				this.tKid.push(array[i]);
+	function add(array, newArray){
+		array.forEach(function(value,index,array){
+			if(getIndexIfObjWithAttr(newArray, "yID", value.yID) === -1){
+				newArray.push(array[index]);
 			}
-		
-
-		function isFound(base, current){
-			return base.yID === current.yID;
-		}
-		// console.log(this.tKid);
+		})
 	}
+
+
+	function getIndexIfObjWithAttr(array, attr, value) {
+		for(var i = 0; i < array.length; i++) {
+			if(array[i][attr] === value) {
+				return i;
+			}
+		}
+		return -1;
+	}
+		// console.log(this.tKid);
 }
+
 
 
 
