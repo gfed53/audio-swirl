@@ -33,7 +33,10 @@
 			</uib-accordion>
 			<h3>Results:</h3>
 			<uib-accordion>
-				<uib-accordion-group ng-repeat="item in search.results" heading="{{ item.Name }}">
+				<uib-accordion-group ng-repeat="item in search.results" is-open="item.open">
+				<uib-accordion-heading>
+					<span ng-click="search.spotSearch(item.Name)">{{ item.Name }}</span>
+				</uib-accordion-heading>	
 					<div class="row inner-content">
 						<h4 class="result-type">{{item.Type}}</h4>
 						<div class="result-blurb">
