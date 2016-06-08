@@ -110,6 +110,10 @@ h3 {
 	text-align: left;
 }
 
+.spot-blurb {
+	margin: 1em 0;
+}
+
 #select-cat {
 	width: 8em;
 }
