@@ -37,11 +37,6 @@ angular
 		name: "directions",
 		url: "directions",
 		parent: "root"
-		// views: {
-		// 	'content@': {
-		// 		templateUrl: "./partials/directions/directions.html"
-		// 	}
-		// }
 	};
 
 	$stateProvider

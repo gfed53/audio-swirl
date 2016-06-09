@@ -9,14 +9,9 @@ body {
 	border: 5px solid bisque;
 	background: url("../images/amp-guitar.jpeg") no-repeat center fixed;
 	background-size: cover;
-	/*background-color: #D9EDF7;*/
 	border-radius: 1em;
 	font-family: "Open Sans", sans-serif;
 }
-
-/*#directions p {
-	color: whitesmoke;
-}*/
 
 #search-main p, .btn-toggle {
 	color: black;
@@ -76,13 +71,18 @@ h3 {
 .nav-tabs>li>a {
 	color: whitesmoke;
 	font-weight: bold;
-	/*border: 1px solid #ddd;*/
+	transition: 250ms linear all;
 }
 
 .active,
-.nav>li>a:focus, .nav>li>a:hover {
+.nav>li>a:focus {
 	background-color: #5F5F5F;	
 	color: white;
+}
+
+.nav>li>a:hover {
+	background-color: lightgrey;
+	color: black;
 }
 
 #directions {
@@ -177,5 +177,11 @@ footer a:hover {
 		font-size: 1em;
 	}
 
+}
+
+@media screen and (max-width: 500px){
+	.container {
+		background: url("../images/amp-guitar-sm.jpeg") no-repeat center fixed;		
+	}
 }
 

@@ -66,7 +66,6 @@ function ahSearchHistory(){
 		if(this.tKid.indexOf(item) === -1){
 			this.tKid.push(item);
 		}
-		console.log(this.tKid);
 	}
 }
 
@@ -96,7 +95,6 @@ function ahResultHistory(){
 		}
 		return -1;
 	}
-		// console.log(this.tKid);
 }
 
 

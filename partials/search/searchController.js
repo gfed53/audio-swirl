@@ -14,25 +14,16 @@ function SearchCtrl(ahSearch, ahSpotSearch, ahSearchHistory, ahResultHistory){
 	vm.pastResults = ahResultHistory.get();
 	vm.link;
 	vm.items = [];
-	console.log(vm.pastSearches);
-	console.log(vm.pastResults);
-	// spotSearch();
 
 	function submit(){
 		$(".output h3").show();
-		// vm.category = document.getElementById("select-cat").value;
-		// if(vm.category !== "everything"){
-		// 	vm.searchTermNew = vm.category+":"+vm.searchTerm;
-		// } else {
-		// 	vm.searchTermNew = vm.searchTerm;
-		// }
 
 		vm.searchTermNew = "music:"+vm.searchTerm;
 
 		ahSearch(vm.searchTermNew).getResults()
 		.then(function(response){
 			if(vm.info = response.data.Similar.Info[0].Type === "unknown"){
-				alert("Sorry, the API had trouble finding what you were looking for. Please make sure the spelling is correct. Note that TasteKid's queries are very precise, and what you are looking for may be phrased differently. ex: 'Street Fighter IV' is recognized, but not 'Street Fighter 4'.");
+				alert("Sorry, the API had trouble finding what you were looking for. Please make sure the spelling is correct. Note that TasteKid's queries are very precise, and what you are looking for may be phrased differently.");
 			} else {
 				ahSearchHistory.add(response.data.Similar.Info[0]);
 				ahResultHistory.add(response.data.Similar.Results, ahResultHistory.tKid);
@@ -53,25 +44,12 @@ function SearchCtrl(ahSearch, ahSpotSearch, ahSearchHistory, ahResultHistory){
 		ahSpotSearch(item)
 		.then(function(response){
 			var link = response.artists.items[0].external_urls.spotify;
-				console.log(typeof link);
-				console.log(link);
-				// return link;
-				// vm.items.push({
-				// 	item: item,
-				// 	link: link
-				// });
 				vm.item = item;
 				vm.link = link;
-				console.log(vm.link);
 		})
-		
-		// function match(item){
-		// 	return item.name = item;
-		// }
 	}
 
 	function toggleHistory(){
-		console.log("toggle history");
 		$("#history").slideToggle();
 	}
 }
