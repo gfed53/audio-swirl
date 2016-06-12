@@ -14,6 +14,7 @@ function SearchCtrl(ahSearch, ahSpotSearch, ahSearchHistory, ahResultHistory){
 	vm.pastResults = ahResultHistory.get();
 	vm.link;
 	vm.items = [];
+	vm.searchTerm = "";
 
 	function submit(){
 		$(".output h3").show();
@@ -36,6 +37,7 @@ function SearchCtrl(ahSearch, ahSpotSearch, ahSearchHistory, ahResultHistory){
 	}
 
 	function add(name){
+		console.log(vm.searchTerm);
 		vm.searchTerm += (name+", ");
 	}
 
