@@ -52,7 +52,7 @@ function SearchCtrl(ahSearch, ahSpotSearch, ahSearchHistory, ahResultHistory){
 	}
 
 	function toggleHistory(){
-		$("#history").slideToggle();
+		$("#history-contents").slideToggle();
 	}
 }
 
