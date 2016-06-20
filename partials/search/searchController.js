@@ -37,7 +37,6 @@ function SearchCtrl(ahSearch, ahSpotSearch, ahSearchHistory, ahResultHistory){
 	}
 
 	function add(name){
-		console.log(vm.searchTerm);
 		vm.searchTerm += (name+", ");
 	}
 

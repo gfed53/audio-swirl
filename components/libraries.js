@@ -21,7 +21,7 @@ function ahSearch($http, $q){
 
 		function getResults(){
 			return $http({
-				method: 'JSONP',
+				method: "JSONP",
 				url: url,
 				params: request
 			})
@@ -41,12 +41,9 @@ function ahSpotSearch(Spotify, $q){
 		if(typeof item === "undefined"){
 			item = "Nirvana";
 		}
-		console.log("spotify search");
-		return Spotify.search(item, 'artist')
+		return Spotify.search(item, "artist")
 		.then(function(response){
-			console.log(response.artists);
 			var link = response.artists.items[0].external_urls.spotify;
-			console.log(link);
 			return $q.when(response);
 		})
 	}

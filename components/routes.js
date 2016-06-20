@@ -1,7 +1,7 @@
 angular
 .module("myApp")
 
-.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
+.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider){
 	$urlRouterProvider.otherwise("directions")
 	var myRoot = {
 		name: "root",
@@ -16,7 +16,7 @@ angular
 			"footer": {
 				templateUrl: "./partials/footer/footer.html"
 			},
-			'menu@root': {
+			"menu@root": {
 				templateUrl: "./partials/header/header-partials/menu.html",	
 			}
 		}
@@ -26,7 +26,7 @@ angular
 		url: "search",
 		parent: "root",
 		views: {
-			'content@': {
+			"content@": {
 				templateUrl: "./partials/search/search.html",
 				controller: "SearchCtrl",
 				controllerAs: "search"
