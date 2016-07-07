@@ -23,15 +23,12 @@ function SearchCtrl(ahSearch, ahSpotSearch, ahSearchHistory, ahResultHistory){
 
 		ahSearch(vm.searchTermNew).getResults()
 		.then(function(response){
-			if(vm.info = response.data.Similar.Info[0].Type === "unknown"){
-				alert("Sorry, the API had trouble finding what you were looking for. Please make sure the spelling is correct. Note that TasteKid's queries are very precise, and what you are looking for may be phrased differently.");
-			} else {
-				ahSearchHistory.add(response.data.Similar.Info[0]);
-				ahResultHistory.add(response.data.Similar.Results, ahResultHistory.tKid);
-				vm.info = response.data.Similar.Info;
-				vm.results = response.data.Similar.Results;
-				vm.searchTerm = "";
-			}
+			// console.log(response);
+			var obj = ahSearch().checkValid(response);
+			// console.log(obj);
+			vm.info = obj.info;
+			vm.results = obj.results;
+			vm.searchTerm = obj.searchTerm;
 
 		})
 	}

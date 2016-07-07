@@ -1,12 +1,13 @@
 angular
 .module("myApp")
 
-.factory("ahSearch", ["$http", "$q", ahSearch])
+.factory("ahSearch", ["$http", "$q", "ahSearchHistory", "ahResultHistory", ahSearch])
 .factory("ahSpotSearch", ["Spotify", "$q", ahSpotSearch])
+// .factory("ahCheckValid")
 .service("ahSearchHistory", [ahSearchHistory])
 .service("ahResultHistory", [ahResultHistory])
 
-function ahSearch($http, $q){
+function ahSearch($http, $q, ahSearchHistory, ahResultHistory){
 	return function(searchTerm){
 		var url = "http://www.tastekid.com/api/similar?callback=JSON_CALLBACK";
 		var request = {
@@ -15,7 +16,8 @@ function ahSearch($http, $q){
 			info: 1
 		};
 		var services = {
-			getResults: getResults
+			getResults: getResults,
+			checkValid: checkValid
 		};
 		return services;
 
@@ -32,6 +34,26 @@ function ahSearch($http, $q){
 			function(response){
 				alert("Sorry, an error occurred. Please try again later");
 			});
+		}
+
+		function checkValid(response){
+			var obj;
+			if(response.data.Similar.Info[0].Type === "unknown"){
+				alert("Sorry, the API had trouble finding what you were looking for. Please make sure the spelling is correct. Note that TasteKid's queries are very precise, and what you are looking for may be phrased differently.");
+				obj = {
+					info: [],
+					results: []
+				}
+			} else {
+				ahSearchHistory.add(response.data.Similar.Info[0]);
+				ahResultHistory.add(response.data.Similar.Results, ahResultHistory.tKid);
+				obj = {
+					info: response.data.Similar.Info,
+					results: response.data.Similar.Results,
+					searchTerm: ""
+				}
+			}
+			return obj;
 		}
 	}
 }
