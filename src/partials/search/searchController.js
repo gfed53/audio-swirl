@@ -2,7 +2,7 @@ angular
 
 .module("myApp")
 
-.controller("SearchCtrl", ["ahSearch", "ahSpotSearch", "ahSearchHistory", "ahResultHistory", SearchCtrl])
+.controller("SearchCtrl", ["ahSearch", "ahSpotSearch", "ahSearchHistory", "ahResultHistory", SearchCtrl]);
 
 function SearchCtrl(ahSearch, ahSpotSearch, ahSearchHistory, ahResultHistory){
 	var vm = this;
@@ -12,7 +12,7 @@ function SearchCtrl(ahSearch, ahSpotSearch, ahSearchHistory, ahResultHistory){
 	vm.toggleHistory = toggleHistory;
 	vm.pastSearches = ahSearchHistory.get();
 	vm.pastResults = ahResultHistory.get();
-	vm.link;
+	// vm.link;
 	vm.items = [];
 	vm.searchTerm = "";
 
@@ -30,7 +30,7 @@ function SearchCtrl(ahSearch, ahSpotSearch, ahSearchHistory, ahResultHistory){
 			vm.results = obj.results;
 			vm.searchTerm = obj.searchTerm;
 
-		})
+		});
 	}
 
 	function add(name){
@@ -44,7 +44,7 @@ function SearchCtrl(ahSearch, ahSpotSearch, ahSearchHistory, ahResultHistory){
 			var link = response.artists.items[0].external_urls.spotify;
 				vm.item = item;
 				vm.link = link;
-		})
+		});
 	}
 
 	function toggleHistory(){

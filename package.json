@@ -18,6 +18,20 @@
   "homepage": "https://github.com/gfed53/API-Hack#readme",
   "devDependencies": {
     "angular": "^1.5.5",
-    "angular-ui-bootstrap": "^1.3.2"
+    "angular-ui-bootstrap": "^1.3.2",
+    "del": "^2.2.1",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.0.11",
+    "gulp-imagemin": "^3.0.1",
+    "gulp-jshint": "^2.0.1",
+    "gulp-jslint": "^1.0.1",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-minify-html": "^1.0.6",
+    "gulp-ng-annotate": "^2.0.0",
+    "gulp-ngmin": "^0.3.0",
+    "gulp-uglify": "^1.5.4",
+    "gulp-usemin": "^0.3.23",
+    "jshint": "^2.9.2",
+    "jslint": "^0.10.1"
   }
 }

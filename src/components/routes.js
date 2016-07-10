@@ -2,7 +2,7 @@ angular
 .module("myApp")
 
 .config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider){
-	$urlRouterProvider.otherwise("directions")
+	$urlRouterProvider.otherwise("directions");
 	var myRoot = {
 		name: "root",
 		url: "/",
@@ -32,7 +32,7 @@ angular
 				controllerAs: "search"
 			}
 		}
-	}
+	};
 	directions = {
 		name: "directions",
 		url: "directions",
@@ -43,4 +43,6 @@ angular
 	.state(myRoot)
 	.state(search)
 	.state(directions);
-}])
+}]);
+
+

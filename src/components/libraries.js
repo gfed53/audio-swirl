@@ -5,7 +5,7 @@ angular
 .factory("ahSpotSearch", ["Spotify", "$q", ahSpotSearch])
 // .factory("ahCheckValid")
 .service("ahSearchHistory", [ahSearchHistory])
-.service("ahResultHistory", [ahResultHistory])
+.service("ahResultHistory", [ahResultHistory]);
 
 function ahSearch($http, $q, ahSearchHistory, ahResultHistory){
 	return function(searchTerm){
@@ -43,7 +43,7 @@ function ahSearch($http, $q, ahSearchHistory, ahResultHistory){
 				obj = {
 					info: [],
 					results: []
-				}
+				};
 			} else {
 				ahSearchHistory.add(response.data.Similar.Info[0]);
 				ahResultHistory.add(response.data.Similar.Results, ahResultHistory.tKid);
@@ -51,11 +51,11 @@ function ahSearch($http, $q, ahSearchHistory, ahResultHistory){
 					info: response.data.Similar.Info,
 					results: response.data.Similar.Results,
 					searchTerm: ""
-				}
+				};
 			}
 			return obj;
 		}
-	}
+	};
 }
 
 function ahSpotSearch(Spotify, $q){
@@ -67,8 +67,8 @@ function ahSpotSearch(Spotify, $q){
 		.then(function(response){
 			var link = response.artists.items[0].external_urls.spotify;
 			return $q.when(response);
-		})
-	}
+		});
+	};
 }
 
 
@@ -102,7 +102,7 @@ function ahResultHistory(){
 			if(getIndexIfObjWithAttr(newArray, "yID", value.yID) === -1){
 				newArray.push(array[index]);
 			}
-		})
+		});
 	}
 
 
