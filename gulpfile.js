@@ -3,6 +3,7 @@ var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var uglify = require('gulp-uglify');
 var ngmin = require('gulp-ngmin');
+var ngAnnotate = require('gulp-ng-annotate');
 var minifyHtml = require('gulp-minify-html');
 var minifyCss = require('gulp-minify-css');
 var cleanCSS = require('gulp-clean-css');
@@ -55,7 +56,7 @@ gulp.task('usemin', [ 'copy', 'images' ], function(){
 	gulp.src( paths.index )
 	.pipe(usemin({
 		css: [ cleanCSS() ],
-		js: [ ngmin(), uglify() ]
+		js: [ ngAnnotate(), uglify() ]
 	}))
 	.pipe(gulp.dest( paths.dist ))
 });

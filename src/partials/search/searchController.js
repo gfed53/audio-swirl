@@ -12,20 +12,18 @@ function SearchCtrl(ahSearch, ahSpotSearch, ahSearchHistory, ahResultHistory){
 	vm.toggleHistory = toggleHistory;
 	vm.pastSearches = ahSearchHistory.get();
 	vm.pastResults = ahResultHistory.get();
-	// vm.link;
 	vm.items = [];
 	vm.searchTerm = "";
 
 	function submit(){
+		//Refactor(no jQuery & move to directive)
 		$(".output h3").show();
 
 		vm.searchTermNew = "music:"+vm.searchTerm;
 
 		ahSearch(vm.searchTermNew).getResults()
 		.then(function(response){
-			// console.log(response);
 			var obj = ahSearch().checkValid(response);
-			// console.log(obj);
 			vm.info = obj.info;
 			vm.results = obj.results;
 			vm.searchTerm = obj.searchTerm;
@@ -47,6 +45,7 @@ function SearchCtrl(ahSearch, ahSpotSearch, ahSearchHistory, ahResultHistory){
 		});
 	}
 
+	//Should move to directive
 	function toggleHistory(){
 		$("#history-contents").slideToggle();
 	}
