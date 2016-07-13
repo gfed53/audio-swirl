@@ -3,7 +3,7 @@ angular
 
 .factory("ahSearch", ["$http", "$q", "ahSearchHistory", "ahResultHistory", ahSearch])
 .factory("ahSpotSearch", ["Spotify", "$q", ahSpotSearch])
-// .factory("ahCheckValid")
+.service("ahSearchTerm", ahSearchTerm)
 .service("ahSearchHistory", [ahSearchHistory])
 .service("ahResultHistory", [ahResultHistory]);
 
@@ -71,7 +71,21 @@ function ahSpotSearch(Spotify, $q){
 	};
 }
 
+function ahSearchTerm(){
+	this.searchTerm = "";
+	this.get = get;
+	this.set = set;
 
+	function get(){
+		return this.searchTerm;
+	}
+
+	function set(_searchTerm_){
+		this.searchTerm = _searchTerm_;
+	}
+}
+
+//Merge these services, since past searches work just like past results! (There can be multiple searched artists at a time, and there might be dups. Use the same add function for both instances and have a two dif arrays: searches and results)
 function ahSearchHistory(){
 	this.tKid = [];
 	this.get = get;
@@ -103,6 +117,7 @@ function ahResultHistory(){
 				newArray.push(array[index]);
 			}
 		});
+		console.log(this.tKid);
 	}
 
 

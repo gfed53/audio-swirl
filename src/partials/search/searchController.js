@@ -2,9 +2,9 @@ angular
 
 .module("myApp")
 
-.controller("SearchCtrl", ["ahSearch", "ahSpotSearch", "ahSearchHistory", "ahResultHistory", SearchCtrl]);
+.controller("SearchCtrl", ["$scope", "ahSearch", "ahSpotSearch", "ahSearchHistory", "ahResultHistory", "ahSearchTerm", SearchCtrl]);
 
-function SearchCtrl(ahSearch, ahSpotSearch, ahSearchHistory, ahResultHistory){
+function SearchCtrl($scope, ahSearch, ahSpotSearch, ahSearchHistory, ahResultHistory, ahSearchTerm){
 	var vm = this;
 	vm.submit = submit;
 	vm.add = add;
@@ -13,7 +13,12 @@ function SearchCtrl(ahSearch, ahSpotSearch, ahSearchHistory, ahResultHistory){
 	vm.pastSearches = ahSearchHistory.get();
 	vm.pastResults = ahResultHistory.get();
 	vm.items = [];
-	vm.searchTerm = "";
+	vm.searchTerm = ahSearchTerm.get();
+
+	$scope.$watch("search.searchTerm", function(newVal, oldVal){
+		ahSearchTerm.set(newVal);
+	});
+
 
 	function submit(){
 		//Refactor(no jQuery & move to directive)
@@ -27,12 +32,16 @@ function SearchCtrl(ahSearch, ahSpotSearch, ahSearchHistory, ahResultHistory){
 			vm.info = obj.info;
 			vm.results = obj.results;
 			vm.searchTerm = obj.searchTerm;
+			ahSearchTerm.set(vm.searchTerm);
 
 		});
 	}
 
 	function add(name){
+		//Prob move to service/factory
 		vm.searchTerm += (name+", ");
+		ahSearchTerm.set(vm.searchTerm);
+		alert("Artist added to search bar!");
 	}
 
 	function spotSearch(item){

@@ -20,7 +20,6 @@
 						<span ng-click="search.spotSearch(item.Name)">{{ item.Name }}</span>
 					</uib-accordion-heading>
 					<div class="row inner-content">
-						<!-- <h4 class="result-type">{{item.Type}}</h4> -->
 						<div class="result-blurb">
 							<p>{{ item.wTeaser }}</p>
 							<span>
@@ -40,7 +39,6 @@
 					<span ng-click="search.spotSearch(item.Name)">{{ item.Name }}</span>
 				</uib-accordion-heading>	
 					<div class="row inner-content">
-						<!-- <h4 class="result-type">{{item.Type}}</h4> -->
 						<div class="result-blurb">
 							<p>{{ item.wTeaser }}</p>
 							<span>
@@ -52,59 +50,7 @@
 						</div>
 					</div>
 				</uib-accordion-group>
-			</uib-accordion>
-			<div id="history" ng-if="search.pastSearches.length > 0">
-				<h2>Search History</h2>
-				<div class="btn-wrapper">
-					<button class="btn btn-default btn-toggle" ng-click="search.toggleHistory()">Show/Hide</button>
-				</div>
-				<div id="history-contents">
-					<div class="past-searches">
-						<h3>Previous Searches</h3>
-						<uib-accordion>
-							<uib-accordion-group ng-repeat="item in search.pastSearches">
-								<uib-accordion-heading>
-									<span ng-click="search.spotSearch(item.Name)">{{ item.Name }}</span>
-								</uib-accordion-heading>
-								<div class="row inner-content">
-									<!-- <h4 class="result-type">{{item.Type}}</h4> -->
-									<div class="result-blurb">
-										<p>{{ item.wTeaser }}</p>
-										<span>
-											<button class="btn btn-default btn-add" ng-click="search.add(item.Name)" type="button">Add</button>
-										</span>
-										<div class="spot-blurb" ng-if="search.item === item.Name">
-											<a target="_blank" href="{{ search.link }}"><i class="fa fa-spotify" aria-hidden="true"></i> Spotify Page</a>
-										</div>
-									</div>
-								</div>
-							</uib-accordion-group>
-						</uib-accordion>
-					</div>
-					<div class="past-results" ng-if="search.pastResults.length > 0">
-						<h3>Previous Results</h3>
-						<uib-accordion>
-							<uib-accordion-group ng-repeat="item in search.pastResults">
-								<uib-accordion-heading>
-									<span ng-click="search.spotSearch(item.Name)">{{ item.Name }}</span>
-								</uib-accordion-heading>
-								<div class="row inner-content">
-									<!-- <h4 class="result-type">{{item.Type}}</h4> -->
-									<div class="result-blurb">
-										<p>{{ item.wTeaser }}</p>
-										<span>
-											<button class="btn btn-default btn-add" ng-click="search.add(item.Name)" type="button">Add</button>
-										</span>
-										<div class="spot-blurb" ng-if="search.item === item.Name">
-											<a target="_blank" href="{{ search.link }}"><i class="fa fa-spotify" aria-hidden="true"></i> Spotify Page</a>
-										</div>
-									</div>
-								</div>
-							</uib-accordion-group>
-						</uib-accordion>
-					</div>
-				</div>
-			</div>	
+			</uib-accordion>	
 		</div>
 	</div>
 </div>

@@ -32,7 +32,19 @@ angular
 				controllerAs: "search"
 			}
 		}
-	};
+	},
+	history = {
+		name: "history",
+		url: "history",
+		parent: "root",
+		views: {
+			"content@": {
+				templateUrl: "./partials/history/history.html",
+				controller: "HistoryCtrl",
+				controllerAs: "history"
+			}
+		}
+	},
 	directions = {
 		name: "directions",
 		url: "directions",
@@ -42,6 +54,7 @@ angular
 	$stateProvider
 	.state(myRoot)
 	.state(search)
+	.state(history)
 	.state(directions);
 }]);
 

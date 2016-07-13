@@ -1,0 +1,47 @@
+<div id="history" ng-if="history.pastSearches.length > 0">
+	<div id="history-contents">
+		<div class="past-searches output">
+			<h3>Previous Searches</h3>
+			<uib-accordion>
+				<uib-accordion-group ng-repeat="item in history.pastSearches">
+					<uib-accordion-heading>
+						<span ng-click="history.spotSearch(item.Name)">{{ item.Name }}</span>
+					</uib-accordion-heading>
+					<div class="row inner-content">
+						<div class="result-blurb">
+							<p>{{ item.wTeaser }}</p>
+							<span>
+								<button class="btn btn-default btn-add" ng-click="history.add(item.Name)" type="button">Add</button>
+							</span>
+							<div class="spot-blurb" ng-if="history.item === item.Name">
+								<a target="_blank" href="{{ history.link }}"><i class="fa fa-spotify" aria-hidden="true"></i> Spotify Page</a>
+							</div>
+						</div>
+					</div>
+				</uib-accordion-group>
+			</uib-accordion>
+		</div>
+		<div class="past-results output" ng-if="history.pastResults.length > 0">
+			<h3>Previous Results</h3>
+			<uib-accordion>
+				<uib-accordion-group ng-repeat="item in history.pastResults">
+					<uib-accordion-heading>
+						<span ng-click="history.spotSearch(item.Name)">{{ item.Name }}</span>
+					</uib-accordion-heading>
+					<div class="row inner-content">
+						<div class="result-blurb">
+							<p>{{ item.wTeaser }}</p>
+							<span>
+								<button class="btn btn-default btn-add" ng-click="history.add(item.Name)" type="button">Add</button>
+							</span>
+							<div class="spot-blurb" ng-if="history.item === item.Name">
+								<a target="_blank" href="{{ history.link }}"><i class="fa fa-spotify" aria-hidden="true"></i> Spotify Page</a>
+							</div>
+						</div>
+					</div>
+				</uib-accordion-group>
+			</uib-accordion>
+		</div>
+	</div>
+</div>
+
