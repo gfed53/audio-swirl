@@ -45,8 +45,8 @@ function ahSearch($http, $q, ahSearchHistory, ahResultHistory){
 					results: []
 				};
 			} else {
-				ahSearchHistory.add(response.data.Similar.Info[0]);
-				ahResultHistory.add(response.data.Similar.Results, ahResultHistory.tKid);
+				ahResultHistory.add(response.data.Similar.Info, ahResultHistory.searched);
+				ahResultHistory.add(response.data.Similar.Results, ahResultHistory.results);
 				obj = {
 					info: response.data.Similar.Info,
 					results: response.data.Similar.Results,
@@ -103,12 +103,18 @@ function ahSearchHistory(){
 }
 
 function ahResultHistory(){
-	this.tKid = [];
-	this.get = get;
+	this.searched = [];
+	this.results = [];
+	this.getSearched = getSearched;
+	this.getResults = getResults;
 	this.add = add;
 
-	function get(){
-		return this.tKid;
+	function getSearched() {
+		return this.searched;
+	}
+
+	function getResults(){
+		return this.results;
 	}
 
 	function add(array, newArray){
@@ -117,7 +123,8 @@ function ahResultHistory(){
 				newArray.push(array[index]);
 			}
 		});
-		console.log(this.tKid);
+		console.log(this.searched);
+		console.log(this.results);
 	}
 
 

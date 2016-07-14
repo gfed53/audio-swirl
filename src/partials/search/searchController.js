@@ -10,8 +10,8 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahSearchHistory, ahResultHis
 	vm.add = add;
 	vm.spotSearch = spotSearch;
 	vm.toggleHistory = toggleHistory;
-	vm.pastSearches = ahSearchHistory.get();
-	vm.pastResults = ahResultHistory.get();
+	vm.pastSearches = ahResultHistory.getSearched();
+	vm.pastResults = ahResultHistory.getResults();
 	vm.items = [];
 	vm.searchTerm = ahSearchTerm.get();
 
@@ -21,7 +21,6 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahSearchHistory, ahResultHis
 
 
 	function submit(){
-		//Refactor(no jQuery & move to directive)
 		$(".output h3").show();
 
 		vm.searchTermNew = "music:"+vm.searchTerm;
@@ -38,7 +37,6 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahSearchHistory, ahResultHis
 	}
 
 	function add(name){
-		//Prob move to service/factory
 		vm.searchTerm += (name+", ");
 		ahSearchTerm.set(vm.searchTerm);
 		alert("Artist added to search bar!");
@@ -54,7 +52,6 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahSearchHistory, ahResultHis
 		});
 	}
 
-	//Should move to directive
 	function toggleHistory(){
 		$("#history-contents").slideToggle();
 	}
