@@ -2,9 +2,9 @@ angular
 
 .module("myApp")
 
-.controller("SearchCtrl", ["$scope", "ahSearch", "ahSpotSearch", "ahSearchHistory", "ahResultHistory", "ahSearchTerm", SearchCtrl]);
+.controller("SearchCtrl", ["$scope", "ahSearch", "ahSpotSearch", "ahResultHistory", "ahSearchTerm", SearchCtrl]);
 
-function SearchCtrl($scope, ahSearch, ahSpotSearch, ahSearchHistory, ahResultHistory, ahSearchTerm){
+function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTerm){
 	var vm = this;
 	vm.submit = submit;
 	vm.add = add;

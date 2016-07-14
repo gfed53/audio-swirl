@@ -2,17 +2,15 @@ angular
 
 .module("myApp")
 
-.controller("HistoryCtrl", ["ahSearch", "ahSpotSearch", "ahSearchHistory", "ahResultHistory", "ahSearchTerm", HistoryCtrl]);
+.controller("HistoryCtrl", ["ahSearch", "ahSpotSearch", "ahResultHistory", "ahSearchTerm", HistoryCtrl]);
 
-function HistoryCtrl(ahSearch, ahSpotSearch, ahSearchHistory, ahResultHistory, ahSearchTerm){
-	console.log("history");
+function HistoryCtrl(ahSearch, ahSpotSearch, ahResultHistory, ahSearchTerm){
 	var vm = this;
 	vm.pastSearches = ahResultHistory.getSearched();
 	vm.pastResults = ahResultHistory.getResults();
 	vm.searchTerm = ahSearchTerm.get();
 	vm.add = add;
 	vm.spotSearch = spotSearch;
-	console.log(vm.pastSearches);
 
 	function add(name){
 		vm.searchTerm += (name+", ");

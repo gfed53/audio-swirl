@@ -1,13 +1,12 @@
 angular
 .module("myApp")
 
-.factory("ahSearch", ["$http", "$q", "ahSearchHistory", "ahResultHistory", ahSearch])
+.factory("ahSearch", ["$http", "$q", "ahResultHistory", ahSearch])
 .factory("ahSpotSearch", ["Spotify", "$q", ahSpotSearch])
 .service("ahSearchTerm", ahSearchTerm)
-.service("ahSearchHistory", [ahSearchHistory])
 .service("ahResultHistory", [ahResultHistory]);
 
-function ahSearch($http, $q, ahSearchHistory, ahResultHistory){
+function ahSearch($http, $q, ahResultHistory){
 	return function(searchTerm){
 		var url = "http://www.tastekid.com/api/similar?callback=JSON_CALLBACK";
 		var request = {
@@ -85,23 +84,6 @@ function ahSearchTerm(){
 	}
 }
 
-//Merge these services, since past searches work just like past results! (There can be multiple searched artists at a time, and there might be dups. Use the same add function for both instances and have a two dif arrays: searches and results)
-function ahSearchHistory(){
-	this.tKid = [];
-	this.get = get;
-	this.add = add;
-
-	function get(){
-		return this.tKid;
-	}
-
-	function add(item){
-		if(this.tKid.indexOf(item) === -1){
-			this.tKid.push(item);
-		}
-	}
-}
-
 function ahResultHistory(){
 	this.searched = [];
 	this.results = [];
@@ -123,8 +105,6 @@ function ahResultHistory(){
 				newArray.push(array[index]);
 			}
 		});
-		console.log(this.searched);
-		console.log(this.results);
 	}
 
 
