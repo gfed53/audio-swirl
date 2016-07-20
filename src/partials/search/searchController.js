@@ -9,20 +9,17 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 	vm.submit = submit;
 	vm.add = add;
 	vm.spotSearch = spotSearch;
-	vm.toggleHistory = toggleHistory;
 	vm.pastSearches = ahResultHistory.getSearched();
 	vm.pastResults = ahResultHistory.getResults();
-	vm.items = [];
 	vm.searchTerm = ahSearchTerm.get();
 
-	$scope.$watch("search.searchTerm", function(newVal, oldVal){
+	$scope.$watch("search.searchTerm", function(newVal){
+		//Watches for changes in the search bar, so if the user switches over to a different tab and then return to it, they won't lose what they inputed.
 		ahSearchTerm.set(newVal);
 	});
 
 
 	function submit(){
-		$(".output h3").show();
-
 		vm.searchTermNew = "music:"+vm.searchTerm;
 
 		ahSearch(vm.searchTermNew).getResults()
@@ -47,13 +44,9 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 		ahSpotSearch(item)
 		.then(function(response){
 			var link = response.artists.items[0].external_urls.spotify;
-				vm.item = item;
-				vm.link = link;
+			vm.item = item;
+			vm.link = link;
 		});
-	}
-
-	function toggleHistory(){
-		$("#history-contents").slideToggle();
 	}
 }
 

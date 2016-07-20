@@ -1,7 +1,10 @@
 angular
 .module("myApp")
 
-.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider){
+.config(["$compileProvider", "$stateProvider", "$urlRouterProvider", function($compileProvider, $stateProvider, $urlRouterProvider){
+	
+	$compileProvider.debugInfoEnabled(false);
+
 	$urlRouterProvider.otherwise("directions");
 	var myRoot = {
 		name: "root",

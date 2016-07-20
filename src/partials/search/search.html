@@ -13,7 +13,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12 output">
-			<h3>You searched for:</h3>
+			<h3 ng-if="search.info">You searched for:</h3>
 			<uib-accordion>
 				<uib-accordion-group ng-repeat="item in search.info">
 					<uib-accordion-heading>
@@ -32,7 +32,7 @@
 					</div>
 				</uib-accordion-group>
 			</uib-accordion>
-			<h3>Results:</h3>
+			<h3 ng-if="search.results">Results:</h3>
 			<uib-accordion>
 				<uib-accordion-group ng-repeat="item in search.results">
 				<uib-accordion-heading>
