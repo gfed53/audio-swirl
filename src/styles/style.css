@@ -33,10 +33,13 @@ h1 {
 	text-shadow: 2px 4px 4px grey;
 }
 
-h3 {
+h2, h3 {
 	font-family: "Arimo", serif;
-	font-size: 2em;
 	font-weight: 600;
+}
+
+h2 {
+	font-size: 2em;
 }
 
 .btn-directions {
@@ -84,6 +87,7 @@ h3 {
 #directions {
 	background-color: rgba(0, 0, 0, 0.5);
 	padding: 1.5em;
+	text-align: left;
 }
 
 .nav-tabs>li>.active {
