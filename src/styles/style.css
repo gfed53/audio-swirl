@@ -132,6 +132,10 @@ h2 {
 	display: block;
 }
 
+.sort-btns {
+	text-align: right;
+}
+
 .inner-content {
 	margin: 1.5em;
 }

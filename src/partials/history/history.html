@@ -23,8 +23,13 @@
 		</div>
 		<div class="past-results output" ng-if="history.pastResults.length > 0">
 			<h3>Previous Results</h3>
+			<div class="sort-btns">
+				<label>Sort By: </label>
+				<button class="btn btn-default btn-sm" ng-click="history.sort('$$hashKey')">Relevance</button>
+				<button class="btn btn-default btn-sm" ng-click="history.sort('Name')">Name</button>
+			</div>
 			<uib-accordion>
-				<uib-accordion-group ng-repeat="item in history.pastResults">
+				<uib-accordion-group ng-repeat="item in history.pastResults | orderBy:history.predicate:history.reverse">
 					<uib-accordion-heading>
 						<span ng-click="history.spotSearch(item.Name)">{{ item.Name }}</span>
 					</uib-accordion-heading>

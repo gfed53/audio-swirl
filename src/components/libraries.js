@@ -4,7 +4,8 @@ angular
 .factory("ahSearch", ["$http", "$q", "ahResultHistory", ahSearch])
 .factory("ahSpotSearch", ["Spotify", "$q", ahSpotSearch])
 .service("ahSearchTerm", ahSearchTerm)
-.service("ahResultHistory", [ahResultHistory]);
+.service("ahResultHistory", [ahResultHistory])
+.service("ahSortOrder", [ahSortOrder])
 
 function ahSearch($http, $q, ahResultHistory){
 	return function(searchTerm){
@@ -115,6 +116,29 @@ function ahResultHistory(){
 			}
 		}
 		return -1;
+	}
+}
+
+function ahSortOrder(){
+
+	this.reverse = false;
+	this.predicate = '$$hashKey';
+	//Name
+	this.order = order;
+	this.get = get;
+
+	function order(current, _predicate) {
+		this.reverse = (_predicate === current) ? !this.reverse : false;
+		this.predicate = _predicate;
+		var sortObj = {
+			reverse: this.reverse,
+			predicate: this.predicate
+		}
+		return sortObj;
+	}
+
+	function get(){
+		return sortObj;
 	}
 }
 
