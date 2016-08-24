@@ -14,7 +14,6 @@ function HistoryCtrl(ahSearch, ahSpotSearch, ahResultHistory, ahSearchTerm, ahSo
 	vm.reverse = ahSortOrder.reverse;
 	vm.predicate = ahSortOrder.predicate;
 	vm.sort = sort;
-	console.log(vm.pastResults);
 
 	function add(name){
 		vm.searchTerm += (name+", ");
@@ -36,8 +35,6 @@ function HistoryCtrl(ahSearch, ahSpotSearch, ahResultHistory, ahSearchTerm, ahSo
 		var sortObj = ahSortOrder.order(vm.predicate, predicate);
 		vm.predicate = sortObj.predicate;
 		vm.reverse = sortObj.reverse;
-		console.log(vm.predicate);
-		console.log(vm.reverse);
 	}
 }
 
