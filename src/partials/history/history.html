@@ -25,8 +25,16 @@
 			<h3>Previous Results</h3>
 			<div class="sort-btns">
 				<label>Sort By: </label>
-				<button class="btn btn-default btn-sm" ng-click="history.sort('$$hashKey')">Relevance</button>
-				<button class="btn btn-default btn-sm" ng-click="history.sort('Name')">Name</button>
+				<button class="btn btn-default btn-sm" ng-click="history.sort('$$hashKey')">
+				Relevance
+				<span ng-if="!history.reverse && history.predicate === '$$hashKey'" class="glyphicon glyphicon-triangle-top"></span>
+				<span ng-if="history.reverse && history.predicate === '$$hashKey'" class="glyphicon glyphicon-triangle-bottom"></span>
+				</button>
+				<button class="btn btn-default btn-sm" ng-click="history.sort('Name')">
+				Name
+				<span ng-if="!history.reverse && history.predicate === 'Name'" class="glyphicon glyphicon-triangle-top"></span>
+				<span ng-if="history.reverse && history.predicate === 'Name'" class="glyphicon glyphicon-triangle-bottom"></span>
+				</button>
 			</div>
 			<uib-accordion>
 				<uib-accordion-group ng-repeat="item in history.pastResults | orderBy:history.predicate:history.reverse">
