@@ -8,6 +8,7 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 	var vm = this;
 	vm.submit = submit;
 	vm.add = add;
+	vm.isAdded = isAdded;
 	vm.spotSearch = spotSearch;
 	vm.pastSearches = ahResultHistory.getSearched();
 	vm.pastResults = ahResultHistory.getResults();
@@ -36,7 +37,12 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 	function add(name){
 		vm.searchTerm += (name+", ");
 		ahSearchTerm.set(vm.searchTerm);
-		alert("Artist added to search bar!");
+		vm.itemAdded = name;
+		// alert("Artist added to search bar!");
+	}
+
+	function isAdded(name){
+		return (name === vm.itemAdded);
 	}
 
 	function spotSearch(item){

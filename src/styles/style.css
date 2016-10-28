@@ -170,6 +170,19 @@ footer a:hover {
 	background-color: white;
 }
 
+/*Alerts*/
+
+.alert-video-saved {
+	display: inline-block;
+	margin: 0 1em;
+}
+
+/*Buttons*/
+
+.btn-add {
+	margin: 1em 0;
+}
+
 @media (max-width: 513px) {
 	
 	h1 {
