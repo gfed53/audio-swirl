@@ -10,6 +10,7 @@ function HistoryCtrl(ahSearch, ahSpotSearch, ahResultHistory, ahSearchTerm, ahSo
 	vm.pastResults = ahResultHistory.getResults();
 	vm.searchTerm = ahSearchTerm.get();
 	vm.add = add;
+	vm.isAdded = isAdded;
 	vm.spotSearch = spotSearch;
 	vm.reverse = ahSortOrder.reverse;
 	vm.predicate = ahSortOrder.predicate;
@@ -17,8 +18,12 @@ function HistoryCtrl(ahSearch, ahSpotSearch, ahResultHistory, ahSearchTerm, ahSo
 
 	function add(name){
 		vm.searchTerm += (name+", ");
+		vm.itemAdded = name;
 		ahSearchTerm.set(vm.searchTerm);
-		alert("Artist added to search bar!");
+	}
+
+	function isAdded(name){
+		return (name === vm.itemAdded);
 	}
 
 	function spotSearch(item){

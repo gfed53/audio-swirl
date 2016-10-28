@@ -38,7 +38,6 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 		vm.searchTerm += (name+", ");
 		ahSearchTerm.set(vm.searchTerm);
 		vm.itemAdded = name;
-		// alert("Artist added to search bar!");
 	}
 
 	function isAdded(name){
