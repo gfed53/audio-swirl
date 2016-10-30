@@ -1,15 +1,18 @@
 angular
 .module("myApp")
 
-.factory("ahSearch", ["$http", "$q", "ahResultHistory", ahSearch])
+.factory("ahSearch", ["$http", "$q", "ahResultHistory", 'ahModals', ahSearch])
 .factory("ahSpotSearch", ["Spotify", "$q", ahSpotSearch])
+.factory("ahModals", ['$uibModal', ahModals])
 .service("ahSearchTerm", ahSearchTerm)
 .service("ahResultHistory", [ahResultHistory])
 .service("ahSortOrder", [ahSortOrder])
 
-function ahSearch($http, $q, ahResultHistory){
+function ahSearch($http, $q, ahResultHistory, ahModals){
 	return function(searchTerm){
 		var url = "http://www.tastekid.com/api/similar?callback=JSON_CALLBACK";
+		var getErrorUrl = "./partials/search/modals/get-error-modal.html";
+		var validErrorUrl = "./partials/search/modals/valid-error-modal.html";
 		var request = {
 			q: searchTerm,
 			k: "179625-Educatio-EE7ZUYWY",
@@ -32,14 +35,16 @@ function ahSearch($http, $q, ahResultHistory){
 				return $q.when(response);
 			},
 			function(response){
-				alert("Sorry, an error occurred. Please try again later");
+				// alert("Sorry, an error occurred. Please try again later");
+				ahModals().create(getErrorUrl);
 			});
 		}
 
 		function checkValid(response){
 			var obj;
 			if(response.data.Similar.Info[0].Type === "unknown"){
-				alert("Sorry, the API had trouble finding what you were looking for. Please make sure the spelling is correct. Note that TasteKid's queries are very precise, and what you are looking for may be phrased differently.");
+				// alert("Sorry, the API had trouble finding what you were looking for. Please make sure the spelling is correct. Note that TasteKid's queries are very precise, and what you are looking for may be phrased differently.");
+				ahModals().create(validErrorUrl);
 				obj = {
 					info: [],
 					results: []
@@ -69,6 +74,24 @@ function ahSpotSearch(Spotify, $q){
 			return $q.when(response);
 		});
 	};
+}
+
+function ahModals($uibModal){
+	return function(){
+		var services = {
+			create: create
+		}
+
+		function create(_templateUrl){
+			var modalInstance = $uibModal.open({
+				templateUrl: _templateUrl,
+				controller: 'ErrorModalController',
+				controllerAs: 'errorModal'
+			});
+		}
+
+		return services;
+	}
 }
 
 function ahSearchTerm(){

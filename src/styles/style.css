@@ -177,6 +177,10 @@ footer a:hover {
 	margin: 0 1em;
 }
 
+.modal-body {
+	color: black;
+}
+
 /*Buttons*/
 
 .btn-add {
