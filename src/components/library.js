@@ -35,7 +35,6 @@ function ahSearch($http, $q, ahResultHistory, ahModals){
 				return $q.when(response);
 			},
 			function(response){
-				// alert("Sorry, an error occurred. Please try again later");
 				ahModals().create(getErrorUrl);
 			});
 		}
@@ -43,11 +42,10 @@ function ahSearch($http, $q, ahResultHistory, ahModals){
 		function checkValid(response){
 			var obj;
 			if(response.data.Similar.Info[0].Type === "unknown"){
-				// alert("Sorry, the API had trouble finding what you were looking for. Please make sure the spelling is correct. Note that TasteKid's queries are very precise, and what you are looking for may be phrased differently.");
 				ahModals().create(validErrorUrl);
 				obj = {
-					info: [],
-					results: []
+					info: undefined,
+					results: undefined
 				};
 			} else {
 				ahResultHistory.add(response.data.Similar.Info, ahResultHistory.searched);
