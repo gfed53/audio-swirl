@@ -1,4 +1,4 @@
-<div id="history" ng-if="history.pastSearches.length > 0">
+<div id="history" ng-if="history.pastSearches.length">
 	<div id="history-contents">
 		<div class="past-searches output">
 			<h3>Previous Searches</h3>
@@ -22,12 +22,12 @@
 				</uib-accordion-group>
 			</uib-accordion>
 		</div>
-		<div class="past-results output" ng-if="history.pastResults.length > 0">
+		<div class="past-results output" ng-if="history.pastResults.length">
 			<h3>Previous Results</h3>
 			<div class="sort-btns">
 				<label>Sort By: </label>
 				<button class="btn btn-default btn-sm" ng-click="history.sort('$$hashKey')">
-				Relevance
+				Default
 				<span ng-if="!history.reverse && history.predicate === '$$hashKey'" class="glyphicon glyphicon-triangle-top"></span>
 				<span ng-if="history.reverse && history.predicate === '$$hashKey'" class="glyphicon glyphicon-triangle-bottom"></span>
 				</button>
@@ -59,7 +59,7 @@
 		</div>
 	</div>
 </div>
-<p ng-if="history.pastSearches.length === 0">No history here yet. Make some searches!</p>
+<p ng-if="!history.pastSearches.length">No history here yet. Make some searches!</p>
 
 
 
