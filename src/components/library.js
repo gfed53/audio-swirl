@@ -9,16 +9,16 @@ angular
 .service("ahSortOrder", [ahSortOrder])
 
 function ahSearch($http, $q, ahResultHistory, ahModals){
-	return function(searchTerm){
-		var url = "http://www.tastekid.com/api/similar?callback=JSON_CALLBACK";
-		var getErrorUrl = "./partials/search/modals/get-error-modal.html";
-		var validErrorUrl = "./partials/search/modals/valid-error-modal.html";
-		var request = {
+	return (searchTerm) => {
+		let url = "http://www.tastekid.com/api/similar?callback=JSON_CALLBACK";
+		let getErrorUrl = "./partials/search/modals/get-error-modal.html";
+		let validErrorUrl = "./partials/search/modals/valid-error-modal.html";
+		let request = {
 			q: searchTerm,
 			k: "179625-Educatio-EE7ZUYWY",
 			info: 1
 		};
-		var services = {
+		let services = {
 			getResults: getResults,
 			checkValid: checkValid
 		};
@@ -30,17 +30,17 @@ function ahSearch($http, $q, ahResultHistory, ahModals){
 				url: url,
 				params: request
 			})
-			.then(function(response){
-				var results = response;
+			.then((response) => {
+				let results = response;
 				return $q.when(response);
 			},
-			function(response){
+			(response) => {
 				ahModals().create(getErrorUrl);
 			});
 		}
 
 		function checkValid(response){
-			var obj;
+			let obj;
 			if(response.data.Similar.Info[0].Type === "unknown"){
 				ahModals().create(validErrorUrl);
 				obj = {
@@ -62,26 +62,26 @@ function ahSearch($http, $q, ahResultHistory, ahModals){
 }
 
 function ahSpotSearch(Spotify, $q){
-	return function(item){
+	return (item) => {
 		if(typeof item === "undefined"){
 			item = "Nirvana";
 		}
 		return Spotify.search(item, "artist")
-		.then(function(response){
-			var link = response.artists.items[0].external_urls.spotify;
+		.then((response) => {
+			let link = response.artists.items[0].external_urls.spotify;
 			return $q.when(response);
 		});
 	};
 }
 
 function ahModals($uibModal){
-	return function(){
-		var services = {
+	return () => {
+		let services = {
 			create: create
 		}
 
 		function create(_templateUrl){
-			var modalInstance = $uibModal.open({
+			let modalInstance = $uibModal.open({
 				templateUrl: _templateUrl,
 				controller: 'ErrorModalController',
 				controllerAs: 'errorModal'
@@ -131,7 +131,7 @@ function ahResultHistory(){
 
 
 	function getIndexIfObjWithAttr(array, attr, value) {
-		for(var i = 0; i < array.length; i++) {
+		for(let i = 0; i < array.length; i++) {
 			if(array[i][attr] === value) {
 				return i;
 			}
@@ -151,7 +151,7 @@ function ahSortOrder(){
 	function order(current, _predicate) {
 		this.reverse = (_predicate === current) ? !this.reverse : false;
 		this.predicate = _predicate;
-		var sortObj = {
+		let sortObj = {
 			reverse: this.reverse,
 			predicate: this.predicate
 		}

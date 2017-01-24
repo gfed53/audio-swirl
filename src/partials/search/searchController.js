@@ -5,7 +5,7 @@ angular
 .controller("SearchCtrl", ["$scope", "ahSearch", "ahSpotSearch", "ahResultHistory", "ahSearchTerm", SearchCtrl]);
 
 function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTerm){
-	var vm = this;
+	let vm = this;
 	vm.submit = submit;
 	vm.add = add;
 	vm.isAdded = isAdded;
@@ -14,7 +14,7 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 	vm.pastResults = ahResultHistory.getResults();
 	vm.searchTerm = ahSearchTerm.get();
 
-	$scope.$watch("search.searchTerm", function(newVal){
+	$scope.$watch("search.searchTerm", (newVal) => {
 		//Watches for changes in the search bar, so if the user switches over to a different tab and then return to it, they won't lose what they inputed.
 		ahSearchTerm.set(newVal);
 	});
@@ -24,8 +24,8 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 		vm.searchTermNew = "music:"+vm.searchTerm;
 
 		ahSearch(vm.searchTermNew).getResults()
-		.then(function(response){
-			var obj = ahSearch().checkValid(response);
+		.then((response) => {
+			let obj = ahSearch().checkValid(response);
 			vm.info = obj.info;
 			vm.results = obj.results;
 			vm.searchTerm = obj.searchTerm;
@@ -47,8 +47,8 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 	function spotSearch(item){
 		vm.link = "";
 		ahSpotSearch(item)
-		.then(function(response){
-			var link = response.artists.items[0].external_urls.spotify;
+		.then((response) => {
+			let link = response.artists.items[0].external_urls.spotify;
 			vm.item = item;
 			vm.link = link;
 		});

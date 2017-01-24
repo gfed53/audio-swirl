@@ -1,17 +1,17 @@
-var gulp = require('gulp');
+let gulp = require('gulp');
 
-var jshint = require('gulp-jshint');
-var uglify = require('gulp-uglify');
-var ngmin = require('gulp-ngmin');
-var ngAnnotate = require('gulp-ng-annotate');
-var minifyHtml = require('gulp-minify-html');
-var minifyCss = require('gulp-minify-css');
-var cleanCSS = require('gulp-clean-css');
-var imagemin = require("gulp-imagemin");
-var usemin = require('gulp-usemin');
-var del = require('del');
+let jshint = require('gulp-jshint');
+let uglify = require('gulp-uglify');
+let ngmin = require('gulp-ngmin');
+let ngAnnotate = require('gulp-ng-annotate');
+let minifyHtml = require('gulp-minify-html');
+let minifyCss = require('gulp-minify-css');
+let cleanCSS = require('gulp-clean-css');
+let imagemin = require("gulp-imagemin");
+let usemin = require('gulp-usemin');
+let del = require('del');
 
-var paths = {
+let paths = {
 	scripts: 'src/**/*.js',
 	styles: './src/styles',
 	html: [
