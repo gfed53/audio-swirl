@@ -6,7 +6,6 @@
 	function ErrorModalController($uibModalInstance){
 		let vm = this;
 		vm.ok = ok;
-		// vm.cancel = cancel;
 
 		function ok(){
 			$uibModalInstance.close();

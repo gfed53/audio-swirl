@@ -11,8 +11,16 @@ angular
 function ahSearch($http, $q, ahResultHistory, ahModals){
 	return (searchTerm) => {
 		let url = "http://www.tastekid.com/api/similar?callback=JSON_CALLBACK";
-		let getErrorUrl = "./partials/search/modals/get-error-modal.html";
-		let validErrorUrl = "./partials/search/modals/valid-error-modal.html";
+		let getErrorTemp = {
+			templateUrl: "./partials/search/modals/get-error-modal.html",
+			controller: "ErrorModalController",
+			controllerAs: "errorModal"
+		};
+		let validErrorTemp = {
+			templateUrl: "./partials/search/modals/valid-error-modal.html",
+			controller: "ErrorModalController",
+			controllerAs: "errorModal"
+		};
 		let request = {
 			q: searchTerm,
 			k: "179625-Educatio-EE7ZUYWY",
@@ -80,11 +88,11 @@ function ahModals($uibModal){
 			create: create
 		}
 
-		function create(_templateUrl){
+		function create(_template){
 			let modalInstance = $uibModal.open({
-				templateUrl: _templateUrl,
-				controller: 'ErrorModalController',
-				controllerAs: 'errorModal'
+				templateUrl: _template.templateUrl,
+				controller: _template.controller,
+				controllerAs: _template.controllerAs
 			});
 		}
 
