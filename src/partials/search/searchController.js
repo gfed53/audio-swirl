@@ -2,9 +2,9 @@ angular
 
 .module("myApp")
 
-.controller("SearchCtrl", ["$scope", "ahSearch", "ahSpotSearch", "ahResultHistory", "ahSearchTerm", SearchCtrl]);
+.controller("SearchCtrl", ["$scope", "ahSearch", "ahSpotSearch", "ahResultHistory", "ahSearchTerm", "ahAPIKeys", SearchCtrl]);
 
-function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTerm){
+function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTerm, ahAPIKeys){
 	let vm = this;
 	vm.submit = submit;
 	vm.add = add;
@@ -13,6 +13,8 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 	vm.pastSearches = ahResultHistory.getSearched();
 	vm.pastResults = ahResultHistory.getResults();
 	vm.searchTerm = ahSearchTerm.get();
+
+	ahAPIKeys.check();
 
 	$scope.$watch("search.searchTerm", (newVal) => {
 		//Watches for changes in the search bar, so if the user switches over to a different tab and then return to it, they won't lose what they inputed.
