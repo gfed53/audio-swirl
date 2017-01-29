@@ -216,7 +216,7 @@
 					} else {
 						console.log(result);
 						localStorage.setItem("ah-log-info", JSON.stringify(result));
-						this.apisObj = localStorage["ah-log-info"];
+						this.apisObj = result;
 						deferred.resolve(this.apisObj);
 					}
 				});

@@ -173,8 +173,14 @@ footer a:hover {
 	margin: 0 1em;
 }
 
+/*Modals*/
+
 .modal-body {
 	color: black;
+}
+
+.modal-body > .row {
+	margin-bottom: 1em;
 }
 
 /*Buttons*/
