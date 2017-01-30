@@ -1,12 +1,12 @@
 angular
 .module("myApp")
 
-.config(["$compileProvider", "$stateProvider", "$urlRouterProvider", function($compileProvider, $stateProvider, $urlRouterProvider){
+.config(["$compileProvider", "$stateProvider", "$urlRouterProvider", ($compileProvider, $stateProvider, $urlRouterProvider) => {
 	
 	$compileProvider.debugInfoEnabled(false);
 
 	$urlRouterProvider.otherwise("directions");
-	var myRoot = {
+	let myRoot = {
 		name: "root",
 		url: "/",
 		views: {

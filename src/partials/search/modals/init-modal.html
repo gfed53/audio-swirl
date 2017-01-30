@@ -10,18 +10,22 @@
 	    		<label for="">My ID:</label>
 	    	</div>
 	    	<div class="col-xs-9">
-	    		<input type="text" ng-model="initModal.apisObj.id" placeholder="John Do'h">
+	    		<input class="form-control" type="text" ng-model="initModal.apisObj.id" placeholder="John Do'h">
 	    	</div>
-		    
-		    
 	    </div>
 	    <div class="row">
 	    	<div class="col-xs-3">
 	    		<label for="">TASTEKiD API: </label>
 	    	</div>
 	    	<div class="col-xs-9">
-	    		<input type="text" ng-model="initModal.apisObj.tastekidKey" placeholder="XXXXXX">
-		    	<a target="_blank" href="https://www.tastekid.com/read/api">Get one here!</a>
+		    	<div class="row">
+		    		<div class="col-xs-6">
+		    			<input class="form-control" type="text" ng-model="initModal.apisObj.tastekidKey" placeholder="XXXXXX">
+		    		</div>
+		    		<div class="col-xs-6">
+		    			<a target="_blank" href="https://www.tastekid.com/read/api">Get one here!</a>
+		    		</div>
+		    	</div>
 	    	</div>
 	    </div>
 	</div>

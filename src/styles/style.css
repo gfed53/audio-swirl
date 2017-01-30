@@ -179,7 +179,7 @@ footer a:hover {
 	color: black;
 }
 
-.modal-body > .row {
+.modal-body .row {
 	margin-bottom: 1em;
 }
 

@@ -12,8 +12,6 @@
 
 	function ahSearch($http, $q, ahResultHistory, ahModals, ahAPIKeys){
 		return (searchTerm) => {
-			// let url = "http://www.tastekid.com/api/similar?callback=JSON_CALLBACK";
-			// let key = ahAPIKeys.apisObj.tastekidKey;
 			let getErrorTemp = {
 				templateUrl: "./partials/search/modals/get-error-modal.html",
 				controller: "ErrorModalController",
@@ -24,11 +22,6 @@
 				controller: "ErrorModalController",
 				controllerAs: "errorModal"
 			};
-			// let request = {
-			// 	q: searchTerm,
-			// 	k: key,
-			// 	info: 1
-			// };
 			let services = {
 				getResults: getResults,
 				checkValid: checkValid
@@ -106,9 +99,9 @@
 					controllerAs: modalObj.controllerAs
 				});
 
-				modalInstance.result.then(function(result){
+				modalInstance.result.then((result) => {
 					deferred.resolve(result);
-				}, function(error){
+				}, (error) => {
 					deferred.reject(error);
 				});
 
@@ -149,7 +142,7 @@
 		}
 
 		function add(array, newArray){
-			array.forEach(function(value,index,array){
+			array.forEach((value,index,array) => {
 				if(getIndexIfObjWithAttr(newArray, "yID", value.yID) === -1){
 					newArray.push(array[index]);
 				}
@@ -205,7 +198,6 @@
 			//Checking localStorage to see if user has an id with saved API keys
 			if(localStorage["ah-log-info"]){
 				let obj = JSON.parse(localStorage["ah-log-info"]);
-				console.log(obj);
 				this.apisObj = obj;
 				deferred.resolve(this.apisObj);
 			} else {
@@ -214,7 +206,6 @@
 					if(result === "cancel"){
 						//Do nothing
 					} else {
-						console.log(result);
 						localStorage.setItem("ah-log-info", JSON.stringify(result));
 						this.apisObj = result;
 						deferred.resolve(this.apisObj);
