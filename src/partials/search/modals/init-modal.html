@@ -1,16 +1,18 @@
 <form ng-submit="initModal.ok(initModal.apisObj)">
-	<div class="modal-body">
+	<div class="modal-header">
 		<h2>Hello new user..</h2>
 	    <p>Before using this app, create an ID and submit the necessary API keys to get the search engine running.</p>
 	    <div>
 	    	<a target="_blank" href="https://en.wikipedia.org/wiki/Application_programming_interface_key">What is an API key?</a>
 	    </div>
+	</div>
+	<div class="modal-body">
 	    <div class="row">
 	    	<div class="col-xs-3">
 	    		<label for="">My ID:</label>
 	    	</div>
 	    	<div class="col-xs-9">
-	    		<input class="form-control" type="text" ng-model="initModal.apisObj.id" placeholder="John Do'h">
+	    		<input class="form-control" type="text" ng-model="initModal.apisObj.id" placeholder="John Dough">
 	    	</div>
 	    </div>
 	    <div class="row">
