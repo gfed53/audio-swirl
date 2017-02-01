@@ -16,6 +16,9 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 
 	ahAPIKeys.check();
 
+	// console.log(ahAPIKeys.apisObj);
+	vm.userName = ahAPIKeys.apisObj.id;
+
 	$scope.$watch("search.searchTerm", (newVal) => {
 		//Watches for changes in the search bar, so if the user switches over to a different tab and then return to it, they won't lose what they inputed.
 		ahSearchTerm.set(newVal);

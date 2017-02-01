@@ -20,7 +20,9 @@ angular
 				templateUrl: "./partials/footer/footer.html"
 			},
 			"menu@root": {
-				templateUrl: "./partials/header/header-partials/menu.html",	
+				templateUrl: "./partials/header/header-partials/menu.html",
+				controller: "MenuController",
+				controllerAs: "menu"
 			}
 		}
 	},

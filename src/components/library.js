@@ -8,7 +8,7 @@
 	.service("ahSearchTerm", ahSearchTerm)
 	.service("ahResultHistory", [ahResultHistory])
 	.service("ahSortOrder", [ahSortOrder])
-	.service("ahAPIKeys", ["$q", "ahModals", ahAPIKeys]);
+	.service("ahAPIKeys", ["$q", "$state", "ahModals", ahAPIKeys]);
 
 	function ahSearch($http, $q, ahResultHistory, ahModals, ahAPIKeys){
 		return (searchTerm) => {
@@ -183,9 +183,13 @@
 		}
 	}
 
-	function ahAPIKeys($q, ahModals){
+	function ahAPIKeys($q, $state, ahModals){
 		//Local Storage key name: "ah-log-info"
 		this.check = check;
+		this.update = update;
+		this.apisObj = {
+			id: "New User"
+		};
 
 		let initTemp = {
 			templateUrl: "./partials/search/modals/init-modal.html",
@@ -193,13 +197,18 @@
 			controllerAs: "initModal"
 		}
 
+		let updateTemp = {
+			templateUrl: "./partials/search/modals/update-modal.html",
+			controller: "UpdateModalController",
+			controllerAs: "updateModal"
+		}
+
+
 		function check(){
-			let deferred = $q.defer();
 			//Checking localStorage to see if user has an id with saved API keys
 			if(localStorage["ah-log-info"]){
 				let obj = JSON.parse(localStorage["ah-log-info"]);
 				this.apisObj = obj;
-				deferred.resolve(this.apisObj);
 			} else {
 				ahModals().create(initTemp)
 				.then((result)=>{
@@ -208,13 +217,23 @@
 					} else {
 						localStorage.setItem("ah-log-info", JSON.stringify(result));
 						this.apisObj = result;
-						deferred.resolve(this.apisObj);
+						$state.reload();
 					}
 				});
 			}
-			return deferred.promise;
-			
+		}
 
+		function update(){
+			ahModals().create(updateTemp)
+			.then((result)=>{
+				if(result === "cancel"){
+					//Do nothing
+				} else {
+					localStorage.setItem("ah-log-info", JSON.stringify(result));
+					this.apisObj = result;
+					$state.reload();
+				}
+			});
 		}
 	}
 })();
