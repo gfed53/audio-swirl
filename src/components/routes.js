@@ -5,7 +5,7 @@ angular
 	
 	$compileProvider.debugInfoEnabled(false);
 
-	$urlRouterProvider.otherwise("directions");
+	$urlRouterProvider.otherwise("search");
 	let myRoot = {
 		name: "root",
 		url: "/",
