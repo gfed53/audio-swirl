@@ -35,6 +35,9 @@ angular
 				templateUrl: "./partials/search/search.html",
 				controller: "SearchCtrl",
 				controllerAs: "search"
+			},
+			"auth@search": {
+				templateUrl: "./partials/search/search-partials/auth/auth.html"
 			}
 		}
 	},

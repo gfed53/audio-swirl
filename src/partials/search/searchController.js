@@ -13,10 +13,14 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 	vm.pastSearches = ahResultHistory.getSearched();
 	vm.pastResults = ahResultHistory.getResults();
 	vm.searchTerm = ahSearchTerm.get();
+	vm.submitLogInfo = submitLogInfo;
+	vm.resetLogInfo = resetLogInfo;
+	vm.cancelReset = cancelReset;
 
-	ahAPIKeys.check();
+	vm.needsAuth = ahAPIKeys.check();
 
 	// console.log(ahAPIKeys.apisObj);
+	vm.apisObj = ahAPIKeys.apisObj;
 	vm.userName = ahAPIKeys.apisObj.id;
 
 	$scope.$watch("search.searchTerm", (newVal) => {
@@ -57,6 +61,20 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 			vm.item = item;
 			vm.link = link;
 		});
+	}
+
+	function submitLogInfo(obj){
+		ahAPIKeys.update(obj);
+	}
+
+	function resetLogInfo(){
+		vm.needsAuth = true;
+		vm.reqReset = true;
+	}
+
+	function cancelReset(){
+		vm.needsAuth = false;
+		vm.reqReset = false;
 	}
 }
 

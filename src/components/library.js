@@ -209,31 +209,33 @@
 			if(localStorage["ah-log-info"]){
 				let obj = JSON.parse(localStorage["ah-log-info"]);
 				this.apisObj = obj;
+				return false;
 			} else {
-				ahModals().create(initTemp)
-				.then((result)=>{
-					if(result === "cancel"){
-						//Do nothing
-					} else {
-						localStorage.setItem("ah-log-info", JSON.stringify(result));
-						this.apisObj = result;
-						$state.reload();
-					}
-				});
+				// ahModals().create(initTemp)
+				// .then((result)=>{
+					// if(result === "cancel"){
+					// 	//Do nothing
+					// } else {
+						return true;
+						// localStorage.setItem("ah-log-info", JSON.stringify(result));
+						// this.apisObj = result;
+						// $state.reload();
+					// }
+				// });
 			}
 		}
 
-		function update(){
-			ahModals().create(updateTemp)
-			.then((result)=>{
-				if(result === "cancel"){
-					//Do nothing
-				} else {
-					localStorage.setItem("ah-log-info", JSON.stringify(result));
-					this.apisObj = result;
+		function update(obj){
+			// ahModals().create(updateTemp)
+			// .then((result)=>{
+			// 	if(result === "cancel"){
+			// 		//Do nothing
+			// 	} else {
+					localStorage.setItem("ah-log-info", JSON.stringify(obj));
+					this.apisObj = obj;
 					$state.reload();
-				}
-			});
+				// }
+			// });
 		}
 	}
 })();

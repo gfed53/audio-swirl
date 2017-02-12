@@ -29,9 +29,20 @@ h1, h3 {
 	margin: 0.5em auto;	
 }
 
-.user-greeting {
+.user-greeting, #auth p {
 	color: whitesmoke;
 }
+
+.manage-account-container {
+	margin-bottom: 1em;
+	/*text-align: right;*/
+}
+
+#auth a {
+	color: #6BB9F0;
+}
+
+
 
 h1 {
 
