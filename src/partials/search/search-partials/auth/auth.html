@@ -1,6 +1,6 @@
 <form ng-submit="search.submitLogInfo(search.apisObj)">
-	<p>Before using this app, create an ID and submit the necessary API keys to get the search engine running.</p>
-	<div>
+	<div ng-if="!search.reqReset">
+		<p>Before using this app, create an ID and submit the necessary API keys to get the search engine running.</p>
 		<a target="_blank" href="https://en.wikipedia.org/wiki/Application_programming_interface_key">What is an API key?</a>
 	</div>
 	<div>
