@@ -38,11 +38,28 @@ h1, h3 {
 	/*text-align: right;*/
 }
 
-#auth a {
-	color: #6BB9F0;
+/*#auth a {
+	color: lightblue;
+	padding: 0.4em;
+	border-radius: 0.5em;
 }
 
+#auth a:hover {
+	color: #23527c;
+	background-color: rgba(245, 245, 245, 0.7);
+}*/
 
+.auth-container {
+
+}
+
+ .auth-label {
+	text-align: right;
+ }
+
+.auth-api-link {
+	text-align: left;
+}
 
 h1 {
 
@@ -175,13 +192,14 @@ footer {
 	text-align: center;
 }
 
-footer a {
+#auth a, footer a {
 	color: lightblue;
 	border-radius: .4em;
 	padding: .2em;
 }
 
-footer a:hover {
+#auth a:hover, footer a:hover {
+	color: #23527c;
 	background-color: white;
 }
 
