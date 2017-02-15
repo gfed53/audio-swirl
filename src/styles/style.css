@@ -1,5 +1,6 @@
 * {
 	box-sizing: border-box;
+
 }
 
 *:before, *:after {
@@ -124,10 +125,10 @@ h2 {
 	color: white;
 }
 
-.nav>li>a:hover {
+/*.nav>li>a:hover {
 	background-color: lightgrey;
 	color: black;
-}
+}*/
 
 #directions {
 	background-color: rgba(0, 0, 0, 0.5);
@@ -209,12 +210,13 @@ footer a {
 	color: lightblue;
 	border-radius: .4em;
 	padding: .2em;
+	transition: 250ms linear all;
 }
-
+/*
 footer a:hover {
 	color: #23527c;
 	background-color: white;
-}
+}*/
 
 /*Alerts*/
 
@@ -269,5 +271,17 @@ footer a:hover {
 	.auth-label {
 		text-align: right;
 	 }
+}
+
+@media screen and (min-width: 1024px){
+	/*Hover States*/
+	.nav>li>a:hover {
+		background-color: lightgrey;
+		color: black;
+	}
+	footer a:hover {
+		color: #23527c;
+		background-color: white;
+	}
 }
 
