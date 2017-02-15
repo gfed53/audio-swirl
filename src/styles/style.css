@@ -1,3 +1,11 @@
+* {
+	box-sizing: border-box;
+}
+
+*:before, *:after {
+	box-sizing: inherit;
+}
+
 body {
 	background-color: #333;
 	color: whitesmoke;
@@ -38,28 +46,33 @@ h1, h3 {
 	/*text-align: right;*/
 }
 
-/*#auth a {
-	color: lightblue;
+#auth a {
+	color: #23527c;
 	padding: 0.4em;
+	line-height: 2.5em;
 	border-radius: 0.5em;
+	background-color: rgba(245, 245, 245, 1);
 }
 
-#auth a:hover {
-	color: #23527c;
-	background-color: rgba(245, 245, 245, 0.7);
+/*#auth a:hover {
+	
 }*/
 
-.auth-container {
+ /*.auth-box-container {
+	display: flex;
+}*/
 
-}
-
- .auth-label {
+ /*.auth-label {
 	text-align: right;
- }
+ }*/
 
 .auth-api-link {
-	text-align: left;
+	margin-top: 1em;
 }
+
+/*#auth a {
+	background-color: rgba(0, 0, 0, 0.5);
+} */
 
 h1 {
 
@@ -192,13 +205,13 @@ footer {
 	text-align: center;
 }
 
-#auth a, footer a {
+footer a {
 	color: lightblue;
 	border-radius: .4em;
 	padding: .2em;
 }
 
-#auth a:hover, footer a:hover {
+footer a:hover {
 	color: #23527c;
 	background-color: white;
 }
@@ -246,5 +259,15 @@ footer {
 	.container {
 		background: url("../images/amp-guitar-sm.jpeg") no-repeat center fixed;		
 	}
+}
+
+@media screen and (min-width: 768px){
+	.auth-api-link {
+		text-align: left;
+		margin-top: 0;
+	}
+	.auth-label {
+		text-align: right;
+	 }
 }
 
