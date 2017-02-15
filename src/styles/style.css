@@ -42,9 +42,12 @@ h1, h3 {
 	color: whitesmoke;
 }
 
+#auth-description {
+	margin-bottom: 1em;
+}
+
 .manage-account-container {
 	margin-bottom: 1em;
-	/*text-align: right;*/
 }
 
 #auth a {
