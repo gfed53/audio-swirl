@@ -19,7 +19,6 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 
 	vm.needsAuth = ahAPIKeys.check();
 
-	// console.log(ahAPIKeys.apisObj);
 	vm.apisObj = ahAPIKeys.apisObj;
 	vm.userName = ahAPIKeys.apisObj.id;
 

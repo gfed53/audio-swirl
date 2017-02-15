@@ -58,25 +58,9 @@ h1, h3 {
 	background-color: rgba(245, 245, 245, 1);
 }
 
-/*#auth a:hover {
-	
-}*/
-
- /*.auth-box-container {
-	display: flex;
-}*/
-
- /*.auth-label {
-	text-align: right;
- }*/
-
 .auth-api-link {
 	margin-top: 1em;
 }
-
-/*#auth a {
-	background-color: rgba(0, 0, 0, 0.5);
-} */
 
 h1 {
 
@@ -127,11 +111,6 @@ h2 {
 	background-color: #5F5F5F;	
 	color: white;
 }
-
-/*.nav>li>a:hover {
-	background-color: lightgrey;
-	color: black;
-}*/
 
 #directions {
 	background-color: rgba(0, 0, 0, 0.5);
@@ -215,11 +194,6 @@ footer a {
 	padding: .2em;
 	transition: 250ms linear all;
 }
-/*
-footer a:hover {
-	color: #23527c;
-	background-color: white;
-}*/
 
 /*Alerts*/
 
@@ -271,17 +245,21 @@ footer a:hover {
 		text-align: left;
 		margin-top: 0;
 	}
+	
 	.auth-label {
 		text-align: right;
 	 }
 }
 
 @media screen and (min-width: 1024px){
+
 	/*Hover States*/
+
 	.nav>li>a:hover {
 		background-color: lightgrey;
 		color: black;
 	}
+
 	footer a:hover {
 		color: #23527c;
 		background-color: white;
