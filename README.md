@@ -17,6 +17,8 @@ Enjoy!
 
 ## Known Bugs/Issues
 
+* What was once available without even the need for an API key now apparently requires not only this but also an access token. For the time being, the Spotify part of the app isn't functional, but I'll be working to change that soon.
+
 * Although you may find certain, not-as-well-known artists within your results, their info may not be 100% complete, or the APIs may mistake the artist for a more well-known one. This is simply due to limitations of either API, but I'll probably find a way around this issue in a future version. 
 
 Something to keep in mind:
