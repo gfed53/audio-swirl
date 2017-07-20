@@ -1,7 +1,9 @@
+//jshint esversion: 6
+
 (function(){
 	angular
 	.module('myApp')
-	.controller('MenuController', ['ahAPIKeys', MenuController])
+	.controller('MenuController', ['ahAPIKeys', MenuController]);
 
 	function MenuController(ahAPIKeys){
 		let vm = this;

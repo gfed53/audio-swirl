@@ -31,6 +31,7 @@
 			return services;
 
 			function getResults(){
+				//## Note: JSON_CALLBACK doesn't work in newer versions of Angular 1.x
 				let url = "http://www.tastekid.com/api/similar?callback=JSON_CALLBACK";
 				let key = ahAPIKeys.apisObj.tastekidKey;
 				let request = {
@@ -211,6 +212,7 @@
 			if(localStorage["ah-log-info"]){
 				let obj = JSON.parse(localStorage["ah-log-info"]);
 				this.apisObj = obj;
+				console.log('apisObj:',this.apisObj);
 				return false;
 			} else {
 				return true;
