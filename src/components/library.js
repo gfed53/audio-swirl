@@ -1,3 +1,5 @@
+//jshint esversion: 6
+
 (function(){
 	angular
 	.module("myApp")
@@ -46,7 +48,7 @@
 					return $q.when(response);
 				},
 				(response) => {
-					ahModals().create(getErrorUrl);
+					ahModals().create(getErrorTemp);
 				});
 			}
 
@@ -89,7 +91,7 @@
 		return () => {
 			let services = {
 				create: create
-			}
+			};
 
 			function create(modalObj){
 				let deferred = $q.defer();
@@ -109,7 +111,7 @@
 			}
 
 			return services;
-		}
+		};
 	}
 
 	function ahSearchTerm(){
@@ -174,7 +176,7 @@
 			let sortObj = {
 				reverse: this.reverse,
 				predicate: this.predicate
-			}
+			};
 			return sortObj;
 		}
 
@@ -195,13 +197,13 @@
 			templateUrl: "./partials/search/modals/init-modal.html",
 			controller: "InitModalController",
 			controllerAs: "initModal"
-		}
+		};
 
 		let updateTemp = {
 			templateUrl: "./partials/search/modals/update-modal.html",
 			controller: "UpdateModalController",
 			controllerAs: "updateModal"
-		}
+		};
 
 
 		function check(){

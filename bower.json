@@ -15,6 +15,9 @@
     "tests"
   ],
   "dependencies": {
-    "angular-spotify": "^1.4.0"
+    "angular-spotify": "^1.4.0",
+    "angular": "^1.6.5",
+    "angular-ui-router": "^1.0.5",
+    "angular-bootstrap": "^2.5.0"
   }
 }
