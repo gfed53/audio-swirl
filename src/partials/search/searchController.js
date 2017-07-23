@@ -15,11 +15,6 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 	vm.pastSearches = ahResultHistory.getSearched();
 	vm.pastResults = ahResultHistory.getResults();
 	vm.searchTerm = ahSearchTerm.get();
-	vm.submitLogInfo = submitLogInfo;
-	vm.resetLogInfo = resetLogInfo;
-	vm.cancelReset = cancelReset;
-
-	vm.needsAuth = ahAPIKeys.check();
 
 	vm.apisObj = ahAPIKeys.apisObj;
 	vm.userName = ahAPIKeys.apisObj.id;
@@ -64,19 +59,19 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 		});
 	}
 
-	function submitLogInfo(obj){
-		ahAPIKeys.update(obj);
-	}
+	// function submitLogInfo(obj){
+	// 	ahAPIKeys.update(obj);
+	// }
 
-	function resetLogInfo(){
-		vm.needsAuth = true;
-		vm.reqReset = true;
-	}
+	// function resetLogInfo(){
+	// 	vm.needsAuth = true;
+	// 	vm.reqReset = true;
+	// }
 
-	function cancelReset(){
-		vm.needsAuth = false;
-		vm.reqReset = false;
-	}
+	// function cancelReset(){
+	// 	vm.needsAuth = false;
+	// 	vm.reqReset = false;
+	// }
 }
 
 

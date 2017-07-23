@@ -45,8 +45,12 @@
 					params: request
 				})
 				.then((response) => {
-					let results = response;
-					return $q.when(response);
+					// let results = response;
+					if(response.data.error){
+						console.error(response.data.error);
+					} else {
+						return $q.when(response);
+					}
 				},
 				(response) => {
 					ahModals().create(getErrorTemp);
@@ -75,11 +79,9 @@
 		};
 	}
 
+	// ***Currently not working since change in Spotify API restrictions!!
 	function ahSpotSearch(Spotify, $q){
 		return (item) => {
-			if(typeof item === "undefined"){
-				item = "Nirvana";
-			}
 			return Spotify.search(item, "artist")
 			.then((response) => {
 				let link = response.artists.items[0].external_urls.spotify;
@@ -187,11 +189,10 @@
 	}
 
 	function ahAPIKeys($q, $state, ahModals){
-		//Local Storage key name: "ah-log-info"
 		this.check = check;
 		this.update = update;
 		this.apisObj = {
-			id: "New User"
+			tastekidKey: 'XXXXXX TASTEKiD API KEY HERE'
 		};
 
 		let initTemp = {
