@@ -6,6 +6,7 @@
 
 	.factory("ahSearch", ["$http", "$q", "ahResultHistory", "ahModals", "ahAPIKeys", ahSearch])
 	.factory("ahSpotSearch", ["Spotify", "$q", ahSpotSearch])
+	.factory("ahSpotTest", ["$http", "$q", "ahAPIKeys", ahSpotTest])
 	.factory("ahModals", ["$q", "$uibModal", ahModals])
 	.service("ahSearchTerm", ahSearchTerm)
 	.service("ahResultHistory", [ahResultHistory])
@@ -86,6 +87,22 @@
 				return $q.when(response);
 			});
 		};
+	}
+
+	function ahSpotTest($http, $q, ahAPIKeys){
+		return () => {
+			let url = 'https://accounts.spotify.com/authorize';
+			let client_id = ahAPIKeys.apisObj.spotID;
+			let request = {
+				client_id,
+				response_type: "code",
+				redirect_uri: ''
+
+			};
+
+			// console.log();
+		};
+			
 	}
 
 	function ahModals($q, $uibModal){

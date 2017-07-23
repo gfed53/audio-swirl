@@ -4,9 +4,9 @@ angular
 
 .module("myApp")
 
-.controller("SearchCtrl", ["$scope", "ahSearch", "ahSpotSearch", "ahResultHistory", "ahSearchTerm", "ahAPIKeys", SearchCtrl]);
+.controller("SearchCtrl", ["$scope", "ahSearch", "ahSpotSearch", "ahSpotTest", "ahResultHistory", "ahSearchTerm", "ahAPIKeys", SearchCtrl]);
 
-function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTerm, ahAPIKeys){
+function SearchCtrl($scope, ahSearch, ahSpotSearch, ahSpotTest, ahResultHistory, ahSearchTerm, ahAPIKeys){
 	let vm = this;
 	vm.submit = submit;
 	vm.add = add;
@@ -23,6 +23,8 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 
 	vm.apisObj = ahAPIKeys.apisObj;
 	vm.userName = ahAPIKeys.apisObj.id;
+
+	vm.spotTest = spotTest;
 
 	$scope.$watch("search.searchTerm", (newVal) => {
 		//Watches for changes in the search bar, so if the user switches over to a different tab and then return to it, they won't lose what they inputed.
@@ -62,6 +64,11 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 			vm.item = item;
 			vm.link = link;
 		});
+	}
+
+	function spotTest(){
+		vm.link = "";
+		ahSpotTest();
 	}
 
 	function submitLogInfo(obj){
