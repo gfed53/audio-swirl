@@ -10,9 +10,9 @@ Introducing Audio Swirl, a spinoff to my previously-created Media Swirl focused 
 
 2. Before you start using the app, you will need to supply the app with API keys.
 
-..*Navigate to src/components/library.js.
+  * Navigate to src/components/library.js.
 
-..*Search for 'XXXXXX' using CMD+F (or whatever search command you can use) within that file. You should find the places where the API keys are needed.
+  * Search for 'XXXXXX' using CMD+F (or whatever search command you can use) within that file. You should find the places where the API keys are needed.
 
 A demo version is currently being created - with no API key insertion required - and a link will be supplied right here when it's usable.
 

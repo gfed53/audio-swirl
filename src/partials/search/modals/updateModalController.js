@@ -1,7 +1,9 @@
+
+
 (function(){
 	angular
 	.module('myApp')
-	.controller('UpdateModalController', ['$uibModalInstance', 'ahAPIKeys', UpdateModalController])
+	.controller('UpdateModalController', ['$uibModalInstance', 'ahAPIKeys', UpdateModalController]);
 
 	function UpdateModalController($uibModalInstance, ahAPIKeys){
 		let vm = this;

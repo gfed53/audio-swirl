@@ -45,7 +45,6 @@
 					params: request
 				})
 				.then((response) => {
-					// let results = response;
 					if(response.data.error){
 						console.error(response.data.error);
 					} else {
@@ -213,7 +212,6 @@
 			if(localStorage["ah-log-info"]){
 				let obj = JSON.parse(localStorage["ah-log-info"]);
 				this.apisObj = obj;
-				console.log('apisObj:',this.apisObj);
 				return false;
 			} else {
 				return true;
