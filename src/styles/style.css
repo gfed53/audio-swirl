@@ -1,3 +1,5 @@
+/* Layout */
+
 * {
 	box-sizing: border-box;
 
@@ -26,7 +28,9 @@ a {
 	font-family: "Open Sans", sans-serif;
 }
 
-#search-main p, .panel p, .btn-toggle {
+
+
+#search-main p, .panel p, .btn-toggle, .btn-token-container {
 	color: black;
 }
 
@@ -34,9 +38,6 @@ a {
 	margin-bottom: 2em;
 }
 
-h1, h3 {
-	margin: 0.5em auto;	
-}
 
 .user-greeting, #auth p {
 	color: whitesmoke;
@@ -62,6 +63,12 @@ h1, h3 {
 	margin-top: 1em;
 }
 
+/* Headers */
+
+h1, h3 {
+	margin: 0.5em auto;	
+}
+
 h1 {
 
 	font-family: "Kaushan Script", serif;
@@ -79,9 +86,7 @@ h2 {
 	font-size: 2em;
 }
 
-.btn-directions {
-	margin: 2em auto;
-}
+
 
 .row {
 	margin-bottom: 2em;
@@ -182,6 +187,8 @@ h2 {
 	clear: both;
 }
 
+/* Footer */
+
 footer {
 	margin-top: 2em;
 	color: white;
@@ -195,14 +202,14 @@ footer a {
 	transition: 250ms linear all;
 }
 
-/*Alerts*/
+/* Alerts */
 
 .alert-video-saved {
 	display: inline-block;
 	margin: 0 1em;
 }
 
-/*Modals*/
+/* Modals */
 
 .modal-header, .modal-body {
 	color: black;
@@ -216,11 +223,17 @@ footer a {
 	margin-bottom: 1em;
 }
 
-/*Buttons*/
+/* Buttons */
 
 .btn-add {
 	margin: 1em 0;
 }
+
+
+.btn-directions {
+	margin: 2em auto;
+}
+
 
 @media (max-width: 513px) {
 	

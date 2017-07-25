@@ -2,11 +2,11 @@
 
 angular
 
-.module("myApp")
+.module('myApp')
 
-.controller("SearchCtrl", ["$scope", "ahSearch", "ahSpotSearch", "ahResultHistory", "ahSearchTerm", "ahAPIKeys", SearchCtrl]);
+.controller('SearchCtrl', ['$scope', 'ahSearch', 'ahSpotSearch', 'ahResultHistory', 'ahSearchTerm', 'ahAPIKeys', 'ahGetToken', SearchCtrl]);
 
-function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTerm, ahAPIKeys){
+function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTerm, ahAPIKeys, ahGetToken){
 	let vm = this;
 	vm.submit = submit;
 	vm.add = add;
@@ -15,18 +15,22 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 	vm.pastSearches = ahResultHistory.getSearched();
 	vm.pastResults = ahResultHistory.getResults();
 	vm.searchTerm = ahSearchTerm.get();
+	vm.auth = ahGetToken.auth;
 
 	vm.apisObj = ahAPIKeys.apisObj;
 	vm.userName = ahAPIKeys.apisObj.id;
 
-	$scope.$watch("search.searchTerm", (newVal) => {
+	//Testing
+	console.log('oauth obj:',JSON.parse(localStorage.getItem('spotOAuth')));
+
+	$scope.$watch('search.searchTerm', (newVal) => {
 		//Watches for changes in the search bar, so if the user switches over to a different tab and then return to it, they won't lose what they inputed.
 		ahSearchTerm.set(newVal);
 	});
 
 
 	function submit(){
-		vm.searchTermNew = "music:"+vm.searchTerm;
+		vm.searchTermNew = 'music:'+vm.searchTerm;
 
 		ahSearch(vm.searchTermNew).getResults()
 		.then((response) => {
@@ -40,7 +44,7 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 	}
 
 	function add(name){
-		vm.searchTerm += (name+", ");
+		vm.searchTerm += (name+', ');
 		ahSearchTerm.set(vm.searchTerm);
 		vm.itemAdded = name;
 	}
@@ -50,13 +54,13 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 	}
 
 	function spotSearch(item){
-		// vm.link = "";
-		// ahSpotSearch(item)
-		// .then((response) => {
-		// 	let link = response.data.artists.items[0].external_urls.spotify;
-		// 	vm.item = item;
-		// 	vm.link = link;
-		// });
+		vm.link = '';
+		ahSpotSearch(item)
+		.then((response) => {
+			let link = response.data.artists.items[0].external_urls.spotify;
+			vm.item = item;
+			vm.link = link;
+		});
 	}
 
 	// function submitLogInfo(obj){

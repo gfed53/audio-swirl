@@ -5,12 +5,13 @@
 	.module('myApp')
 
 	.factory('ahSearch', ['$http', '$q', 'ahResultHistory', 'ahModals', 'ahAPIKeys', ahSearch])
-	.factory('ahSpotSearch', ['$http', '$q', ahSpotSearch])
+	.factory('ahSpotSearch', ['$http', '$q', 'ahGetToken', ahSpotSearch])
 	.factory('ahModals', ['$q', '$uibModal', ahModals])
 	.service('ahSearchTerm', ahSearchTerm)
 	.service('ahResultHistory', [ahResultHistory])
 	.service('ahSortOrder', [ahSortOrder])
-	.service('ahAPIKeys', ['$http', '$q', '$state', 'ahModals', ahAPIKeys]);
+	.service('ahAPIKeys', ['$http', '$q', '$state', 'ahModals', ahAPIKeys])
+	.service('ahGetToken', ['ahAPIKeys', ahGetToken]);
 
 	function ahSearch($http, $q, ahResultHistory, ahModals, ahAPIKeys){
 		return (searchTerm) => {
@@ -79,8 +80,33 @@
 	}
 
 	// ***Currently not working since change in Spotify API restrictions!!
-	function ahSpotSearch($http, $q){
-		
+	function ahSpotSearch($http, $q, ahGetToken){
+		return (item) => {
+			let token = ahGetToken.get();
+			console.log('token before search:',token);
+			if(typeof item === "undefined"){
+				item = "Nirvana";
+			}
+			let url = 'https://api.spotify.com/v1/search';
+			let params = {
+				q: item,
+				type: 'artist'
+			};
+
+			let headers = {
+				"Authorization": `Bearer ${token}`
+			};
+			return $http.get(url,{
+				headers,
+				params
+			})
+			.then((response) => {
+				console.log('response is:',response);
+				let link = response.data.artists.items[0].external_urls.spotify;
+				console.log('link is:',link);
+				return $q.when(response);
+			});
+		};
 	}
 
 	function ahModals($q, $uibModal){
@@ -183,12 +209,11 @@
 
 	function ahAPIKeys($http, $q, $state, ahModals){
 		this.check = check;
+		this.get = get;
 		this.update = update;
 		this.init = init;
 		this.initKeys = initKeys;
-		// this.apisObj = {
-		// 	tastekidKey: 'XXXXXX TASTEKiD API KEY HERE'
-		// };
+		// this.apisObj = {};
 
 		let initTemp = {
 			templateUrl: './partials/search/modals/init-modal.html',
@@ -233,10 +258,45 @@
 					});
 		}
 
+		function get(){
+			return this.apisObj;
+		}
+
 		function update(obj){
 			localStorage.setItem('ah-log-info', JSON.stringify(obj));
 			this.apisObj = obj;
 			$state.reload();
+		}
+	}
+
+	function ahGetToken(ahAPIKeys){
+
+		// this.token = null;
+		this.get = get;
+		this.auth = auth;
+
+		// get();
+
+		console.log(this.token);
+
+		function auth(){
+			console.log('req auth',ahAPIKeys.apisObj);
+			let url = 'https://accounts.spotify.com/authorize';
+			let obj = ahAPIKeys.get();
+			console.log('obj',obj);
+			let client_id = ahAPIKeys.get().spotID;
+			console.log('client_id:',client_id);
+			let redirect_uri = 'http://localhost:8080/oauth-callback.html';
+
+			window.location.href = 'https://accounts.spotify.com/authorize?client_id=' + client_id + '&response_type=token&redirect_uri='+redirect_uri;
+		}
+
+		function get(){
+			let obj = JSON.parse(localStorage.getItem('spotOAuth'));
+			if(obj !== null && obj !== undefined){
+				console.log('obj is:',obj);
+				return obj.oauth.access_token;
+			}
 		}
 	}
 })();
