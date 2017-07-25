@@ -17,6 +17,7 @@ var del = require('del');
 var paths = {
 	scripts: './src/**/*.js',
 	styles: './src/styles',
+	dependencies: './src/dependencies',
 	html: [
 	'./src/**/*.html',
 	'!./src/index.html'

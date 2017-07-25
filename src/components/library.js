@@ -2,27 +2,27 @@
 
 (function(){
 	angular
-	.module("myApp")
+	.module('myApp')
 
-	.factory("ahSearch", ["$http", "$q", "ahResultHistory", "ahModals", "ahAPIKeys", ahSearch])
-	.factory("ahSpotSearch", ["Spotify", "$q", ahSpotSearch])
-	.factory("ahModals", ["$q", "$uibModal", ahModals])
-	.service("ahSearchTerm", ahSearchTerm)
-	.service("ahResultHistory", [ahResultHistory])
-	.service("ahSortOrder", [ahSortOrder])
-	.service("ahAPIKeys", ["$q", "$state", "ahModals", ahAPIKeys]);
+	.factory('ahSearch', ['$http', '$q', 'ahResultHistory', 'ahModals', 'ahAPIKeys', ahSearch])
+	.factory('ahSpotSearch', ['$http', '$q', ahSpotSearch])
+	.factory('ahModals', ['$q', '$uibModal', ahModals])
+	.service('ahSearchTerm', ahSearchTerm)
+	.service('ahResultHistory', [ahResultHistory])
+	.service('ahSortOrder', [ahSortOrder])
+	.service('ahAPIKeys', ['$http', '$q', '$state', 'ahModals', ahAPIKeys]);
 
 	function ahSearch($http, $q, ahResultHistory, ahModals, ahAPIKeys){
 		return (searchTerm) => {
 			let getErrorTemp = {
-				templateUrl: "./partials/search/modals/get-error-modal.html",
-				controller: "ErrorModalController",
-				controllerAs: "errorModal"
+				templateUrl: './partials/search/modals/get-error-modal.html',
+				controller: 'ErrorModalController',
+				controllerAs: 'errorModal'
 			};
 			let validErrorTemp = {
-				templateUrl: "./partials/search/modals/valid-error-modal.html",
-				controller: "ErrorModalController",
-				controllerAs: "errorModal"
+				templateUrl: './partials/search/modals/valid-error-modal.html',
+				controller: 'ErrorModalController',
+				controllerAs: 'errorModal'
 			};
 			let services = {
 				getResults: getResults,
@@ -32,7 +32,7 @@
 
 			function getResults(){
 				//## Note: JSON_CALLBACK doesn't work in newer versions of Angular 1.x
-				let url = "http://www.tastekid.com/api/similar?callback=JSON_CALLBACK";
+				let url = 'http://www.tastekid.com/api/similar?callback=JSON_CALLBACK';
 				let key = ahAPIKeys.apisObj.tastekidKey;
 				let request = {
 					q: searchTerm,
@@ -40,7 +40,7 @@
 					info: 1
 				};
 				return $http({
-					method: "JSONP",
+					method: 'JSONP',
 					url: url,
 					params: request
 				})
@@ -58,7 +58,7 @@
 
 			function checkValid(response){
 				let obj;
-				if(response.data.Similar.Info[0].Type === "unknown"){
+				if(response.data.Similar.Info[0].Type === 'unknown'){
 					ahModals().create(validErrorUrl);
 					obj = {
 						info: undefined,
@@ -70,7 +70,7 @@
 					obj = {
 						info: response.data.Similar.Info,
 						results: response.data.Similar.Results,
-						searchTerm: ""
+						searchTerm: ''
 					};
 				}
 				return obj;
@@ -79,14 +79,8 @@
 	}
 
 	// ***Currently not working since change in Spotify API restrictions!!
-	function ahSpotSearch(Spotify, $q){
-		return (item) => {
-			return Spotify.search(item, "artist")
-			.then((response) => {
-				let link = response.artists.items[0].external_urls.spotify;
-				return $q.when(response);
-			});
-		};
+	function ahSpotSearch($http, $q){
+		
 	}
 
 	function ahModals($q, $uibModal){
@@ -117,7 +111,7 @@
 	}
 
 	function ahSearchTerm(){
-		this.searchTerm = "";
+		this.searchTerm = '';
 		this.get = get;
 		this.set = set;
 
@@ -147,7 +141,7 @@
 
 		function add(array, newArray){
 			array.forEach((value,index,array) => {
-				if(getIndexIfObjWithAttr(newArray, "yID", value.yID) === -1){
+				if(getIndexIfObjWithAttr(newArray, 'yID', value.yID) === -1){
 					newArray.push(array[index]);
 				}
 			});
@@ -167,7 +161,7 @@
 	function ahSortOrder(){
 
 		this.reverse = false;
-		this.predicate = "$$hashKey";
+		this.predicate = '$$hashKey';
 		//Name
 		this.order = order;
 		this.get = get;
@@ -187,39 +181,60 @@
 		}
 	}
 
-	function ahAPIKeys($q, $state, ahModals){
+	function ahAPIKeys($http, $q, $state, ahModals){
 		this.check = check;
 		this.update = update;
-		this.apisObj = {
-			tastekidKey: 'XXXXXX TASTEKiD API KEY HERE'
-		};
+		this.init = init;
+		this.initKeys = initKeys;
+		// this.apisObj = {
+		// 	tastekidKey: 'XXXXXX TASTEKiD API KEY HERE'
+		// };
 
 		let initTemp = {
-			templateUrl: "./partials/search/modals/init-modal.html",
-			controller: "InitModalController",
-			controllerAs: "initModal"
+			templateUrl: './partials/search/modals/init-modal.html',
+			controller: 'InitModalController',
+			controllerAs: 'initModal'
 		};
 
 		let updateTemp = {
-			templateUrl: "./partials/search/modals/update-modal.html",
-			controller: "UpdateModalController",
-			controllerAs: "updateModal"
+			templateUrl: './partials/search/modals/update-modal.html',
+			controller: 'UpdateModalController',
+			controllerAs: 'updateModal'
 		};
 
 
 		function check(){
 			//Checking localStorage to see if user has an id with saved API keys
-			if(localStorage["ah-log-info"]){
-				let obj = JSON.parse(localStorage["ah-log-info"]);
-				this.apisObj = obj;
-				return false;
-			} else {
-				return true;
-			}
+			// if(localStorage['ah-log-info']){
+			// 	let obj = JSON.parse(localStorage['ah-log-info']);
+			// 	this.apisObj = obj;
+			// 	return false;
+			// } else {
+			// 	return true;
+			// }
+
+		}
+
+		function init(){
+			let deferred = $q.defer();
+			initKeys()
+			.then((data)=> {
+				this.apisObj = data;
+				deferred.resolve();
+			});
+
+			return deferred.promise;
+		}
+
+		function initKeys(){
+			return $http.get('/access')
+					.then((res) => {
+						return res.data;
+					});
 		}
 
 		function update(obj){
-			localStorage.setItem("ah-log-info", JSON.stringify(obj));
+			localStorage.setItem('ah-log-info', JSON.stringify(obj));
 			this.apisObj = obj;
 			$state.reload();
 		}

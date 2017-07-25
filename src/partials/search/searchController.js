@@ -50,13 +50,13 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 	}
 
 	function spotSearch(item){
-		vm.link = "";
-		ahSpotSearch(item)
-		.then((response) => {
-			let link = response.artists.items[0].external_urls.spotify;
-			vm.item = item;
-			vm.link = link;
-		});
+		// vm.link = "";
+		// ahSpotSearch(item)
+		// .then((response) => {
+		// 	let link = response.data.artists.items[0].external_urls.spotify;
+		// 	vm.item = item;
+		// 	vm.link = link;
+		// });
 	}
 
 	// function submitLogInfo(obj){
