@@ -6,12 +6,18 @@
 
 	.factory("ahSearch", ["$http", "$q", "ahResultHistory", "ahModals", "ahAPIKeys", ahSearch])
 	.factory("ahSpotSearch", ["Spotify", "$q", ahSpotSearch])
+	.factory("ahSpotSearch2", ["$http", "$q", "ahGetToken", ahSpotSearch2])
 	.factory("ahSpotTest", ["$http", "$q", "ahAPIKeys", ahSpotTest])
 	.factory("ahModals", ["$q", "$uibModal", ahModals])
+	.service("ahGetToken", [ahGetToken])
 	.service("ahSearchTerm", ahSearchTerm)
 	.service("ahResultHistory", [ahResultHistory])
 	.service("ahSortOrder", [ahSortOrder])
 	.service("ahAPIKeys", ["$q", "$state", "ahModals", ahAPIKeys]);
+
+	// function ahTrustSrc(){
+
+	// }
 
 	function ahSearch($http, $q, ahResultHistory, ahModals, ahAPIKeys){
 		return (searchTerm) => {
@@ -89,20 +95,63 @@
 		};
 	}
 
+	function ahSpotSearch2($http, $q, ahGetToken){
+
+
+
+		return (item) => {
+			let token = ahGetToken.token;
+			console.log('token before search:',token);
+			if(typeof item === "undefined"){
+				item = "Nirvana";
+			}
+			let url = 'https://api.spotify.com/v1/search';
+			let params = {
+				q: item,
+				type: 'artist'
+			};
+
+			let headers = {
+				"Authorization": `Bearer ${token}`
+			};
+			return $http.get(url,{
+				headers,
+				params
+			})
+			.then((response) => {
+				console.log('response is:',response);
+				let link = response.data.artists.items[0].external_urls.spotify;
+				console.log('link is:',link);
+				return $q.when(response);
+			});
+		};
+	}
+
 	function ahSpotTest($http, $q, ahAPIKeys){
 		return () => {
 			let url = 'https://accounts.spotify.com/authorize';
 			let client_id = ahAPIKeys.apisObj.spotID;
-			let request = {
-				client_id,
-				response_type: "code",
-				redirect_uri: ''
+			let redirect_uri = 'http://localhost/src/oauth-callback.html';
 
-			};
+			window.location.href = 'https://accounts.spotify.com/authorize?client_id=' + client_id + '&response_type=token&redirect_uri='+redirect_uri;
 
 			// console.log();
 		};
 			
+	}
+
+	function ahGetToken(){
+
+		this.token = null;
+		this.get = get;
+
+		function get(){
+			let obj = JSON.parse(localStorage.getItem('spotOAuth'));
+			if(obj !== null && obj !== undefined){
+				console.log('obj is:',obj);
+				this.token = obj.oauth.access_token;
+			}
+		}
 	}
 
 	function ahModals($q, $uibModal){

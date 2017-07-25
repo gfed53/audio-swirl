@@ -4,9 +4,9 @@ angular
 
 .module("myApp")
 
-.controller("SearchCtrl", ["$scope", "ahSearch", "ahSpotSearch", "ahSpotTest", "ahResultHistory", "ahSearchTerm", "ahAPIKeys", SearchCtrl]);
+.controller("SearchCtrl", ["$scope", "ahSearch", "ahSpotSearch", "ahSpotSearch2", "ahSpotTest", "ahGetToken", "ahResultHistory", "ahSearchTerm", "ahAPIKeys", SearchCtrl]);
 
-function SearchCtrl($scope, ahSearch, ahSpotSearch, ahSpotTest, ahResultHistory, ahSearchTerm, ahAPIKeys){
+function SearchCtrl($scope, ahSearch, ahSpotSearch, ahSpotSearch2, ahSpotTest, ahGetToken, ahResultHistory, ahSearchTerm, ahAPIKeys){
 	let vm = this;
 	vm.submit = submit;
 	vm.add = add;
@@ -25,6 +25,10 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahSpotTest, ahResultHistory,
 	vm.userName = ahAPIKeys.apisObj.id;
 
 	vm.spotTest = spotTest;
+
+	//Testing
+	ahGetToken.get();
+	// console.log(JSON.parse(localStorage.getItem('spotOAuth')));
 
 	$scope.$watch("search.searchTerm", (newVal) => {
 		//Watches for changes in the search bar, so if the user switches over to a different tab and then return to it, they won't lose what they inputed.
@@ -58,16 +62,17 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahSpotTest, ahResultHistory,
 
 	function spotSearch(item){
 		vm.link = "";
-		ahSpotSearch(item)
+		ahSpotSearch2(item)
 		.then((response) => {
-			let link = response.artists.items[0].external_urls.spotify;
+			console.log('response in controller:',response);
+			let link = response.data.artists.items[0].external_urls.spotify;
 			vm.item = item;
 			vm.link = link;
 		});
 	}
 
 	function spotTest(){
-		vm.link = "";
+		// vm.link = "";
 		ahSpotTest();
 	}
 

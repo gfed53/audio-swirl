@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
-  "scripts": {
-    
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gfed53/API-Hack.git"
@@ -33,5 +31,9 @@
     "gulp-usemin": "^0.3.23",
     "jshint": "^2.9.2",
     "jslint": "^0.10.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3"
   }
 }
