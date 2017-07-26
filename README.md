@@ -6,15 +6,22 @@ Introducing Audio Swirl, a spinoff to my previously-created Media Swirl focused 
 
 ## Build Instructions
 
-1. Make sure npm is installed, then in the terminal, run 'npm i' to install all dependencies.
+1. Make sure npm is installed, then in the terminal, run `npm i` to install all dependencies.
 
 2. Before you start using the app, you will need to supply the app with API keys.
 
-  * Navigate to src/components/library.js.
+  * Navigate to config.js.
 
-  * Search for 'XXXXXX' using CMD+F (or whatever search command you can use) within that file. You should find the places where the API keys are needed.
+  * You should find the places where the API keys are needed. For Spotify, only the client ID is required, not the secret key.
 
-A demo version is currently being created - with no API key insertion required - and a link will be supplied right here when it's usable.
+  	* [Spotify key link](https://developer.spotify.com/web-api/)
+  	* [TASTEKiD key link](https://www.tastekid.com/read/api)
+
+3. Once all dependencies are installed and everything is in place, you can run `gulp build` in the command line to create a build version.
+
+4. You can serve the app locally by running `node server`. The app listens at port 8080.
+
+A new demo version is currently being created - with no API key insertion required - and a link will be supplied right here when it's usable.
 
 ## Directions
 
@@ -29,11 +36,11 @@ Enjoy!
 
 ## Known Bugs/Issues
 
-* What was once available without even the need for an API key now apparently requires not only this but also an access token. For the time being, the Spotify part of the app isn't functional, but I'll be working to change that soon.
-
 * Although you may find certain, not-as-well-known artists within your results, their info may not be 100% complete, or the APIs may mistake the artist for a more well-known one. This is simply due to limitations of either API, but I'll probably find a way around this issue in a future version. 
 
-Something to keep in mind:
+To keep in mind:
+
+* I recently implemented an OAuth2 implicit grant flow into the app since Spotify's API now requires authorization tokens. Things should be working okay soon, if not now, but keep in mind that it's still a relatively new fix.
 
 * When a user clicks the "Add" button, the artist's name will be added to the search bar, as mentioned in the directions. However, a comma is also automatically added in case the user wants to add more artists to a single search. Because of this, **if you enter an artist manually (typing it in), then use the "Add" feature, there will be issues.** Not serious issues though, just a matter of adjusting what's in the search bar. 
 

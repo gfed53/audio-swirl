@@ -62,20 +62,6 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 			vm.link = link;
 		});
 	}
-
-	// function submitLogInfo(obj){
-	// 	ahAPIKeys.update(obj);
-	// }
-
-	// function resetLogInfo(){
-	// 	vm.needsAuth = true;
-	// 	vm.reqReset = true;
-	// }
-
-	// function cancelReset(){
-	// 	vm.needsAuth = false;
-	// 	vm.reqReset = false;
-	// }
 }
 
 

@@ -83,40 +83,41 @@
 		return (item) => {
 			let spotRefreshTemp = ahModals().getTemp('spotRefreshTemp');
 
-			let token = ahGetToken.get();
+			let token = ahGetToken.token;
 			console.log('token before search:',token);
-			if(typeof item === "undefined"){
-				item = "Nirvana";
-			}
-			let url = 'https://api.spotify.com/v1/search';
-			let params = {
-				q: item,
-				type: 'artist'
-			};
+			if(token){
+				let url = 'https://api.spotify.com/v1/search';
+				let params = {
+					q: item,
+					type: 'artist'
+				};
 
-			let headers = {
-				"Authorization": `Bearer ${token}`
-			};
-			return $http.get(url,{
-				headers,
-				params
-			})
-			.then((response) => {
-				console.log('response is:',response);
-				let link = response.data.artists.items[0].external_urls.spotify;
-				console.log('link is:',link);
-				return $q.when(response);
-			}, (err)=>{
-				console.log(err);
-				if(err.status === 401 && ahGetToken.token){
-					ahModals().create(spotRefreshTemp)
-					.then(()=>{
-						ahGetToken.auth();
-					}, ()=> {
-						//declined
-					});
-				}
-			});
+				let headers = {
+					"Authorization": `Bearer ${token}`
+				};
+				return $http.get(url,{
+					headers,
+					params
+				})
+				.then((response) => {
+					console.log('response is:',response);
+					let link = response.data.artists.items[0].external_urls.spotify;
+					console.log('link is:',link);
+					return $q.when(response);
+				}, (err)=>{
+					console.log(err);
+					if(err.status === 401 && ahGetToken.token){
+						ahModals().create(spotRefreshTemp)
+						.then(()=>{
+							ahGetToken.auth();
+						}, ()=> {
+							//declined
+						});
+					}
+				});
+			} else {
+				return null;
+			}
 		};
 	}
 
@@ -332,7 +333,7 @@
 	}
 
 	function ahGetToken(ahAPIKeys, ahModals){
-
+// localStorage.removeItem('spotOAuth')
 		let obj = JSON.parse(localStorage.getItem('spotOAuth'));
 		let spotAuthTemp = ahModals().getTemp('spotAuthTemp');
 
@@ -361,9 +362,11 @@
 				console.log('obj is:',obj);
 				return obj.oauth.access_token;
 			} else {
-				ahModals.create(spotAuthTemp)
+				ahModals().create(spotAuthTemp)
 				.then(()=>{
 					auth();
+				}, ()=>{
+					return null;
 				});
 			}
 		}

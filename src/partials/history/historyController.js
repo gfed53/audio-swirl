@@ -2,9 +2,9 @@
 
 angular
 
-.module("myApp")
+.module('myApp')
 
-.controller("HistoryCtrl", ["ahSearch", "ahSpotSearch", "ahResultHistory", "ahSearchTerm", "ahSortOrder", HistoryCtrl]);
+.controller('HistoryCtrl', ['ahSearch', 'ahSpotSearch', 'ahResultHistory', 'ahSearchTerm', 'ahSortOrder', HistoryCtrl]);
 
 function HistoryCtrl(ahSearch, ahSpotSearch, ahResultHistory, ahSearchTerm, ahSortOrder){
 	let vm = this;
@@ -19,7 +19,7 @@ function HistoryCtrl(ahSearch, ahSpotSearch, ahResultHistory, ahSearchTerm, ahSo
 	vm.sort = sort;
 
 	function add(name){
-		vm.searchTerm += (name+", ");
+		vm.searchTerm += (name+', ');
 		vm.itemAdded = name;
 		ahSearchTerm.set(vm.searchTerm);
 	}
@@ -29,10 +29,10 @@ function HistoryCtrl(ahSearch, ahSpotSearch, ahResultHistory, ahSearchTerm, ahSo
 	}
 
 	function spotSearch(item){
-		vm.link = "";
+		vm.link = '';
 		ahSpotSearch(item)
 		.then((response) => {
-			let link = response.artists.items[0].external_urls.spotify;
+			let link = response.data.artists.items[0].external_urls.spotify;
 			vm.item = item;
 			vm.link = link;
 		});

@@ -6,7 +6,7 @@ angular
 .run(['ahAPIKeys', (ahAPIKeys)=>{
 	ahAPIKeys.init()
 	.then(()=>{
-		console.log('apis obj:',ahAPIKeys.apisObj);
+		// console.log('apis obj:',ahAPIKeys.apisObj);
 	});
 	
 }]);
