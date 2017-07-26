@@ -7,7 +7,6 @@
             for(var i = 0; i < responseParameters.length; i++) {
                 parameterMap[responseParameters[i].split("=")[0]] = responseParameters[i].split("=")[1];
             }
-            console.log('parameterMap:',parameterMap);
             if(parameterMap.access_token !== undefined && parameterMap.access_token !== null) {
                 var spotOAuth = {
                     oauth: {
@@ -15,10 +14,8 @@
                         expires_in: parameterMap.expires_in
                     }
                 };
-                // console.log('spotOAuth:',spotOAuth);
                 localStorage.setItem("spotOAuth", JSON.stringify(spotOAuth));
                 window.location.href = "http://localhost:8080";
-                // console.log('localStorage:',localStorage);
             } else {
                 alert("Problem authenticating");
             }

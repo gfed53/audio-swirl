@@ -21,7 +21,7 @@ Introducing Audio Swirl, a spinoff to my previously-created Media Swirl focused 
 
 4. You can serve the app locally by running `node server`. The app listens at port 8080.
 
-A new demo version is currently being created - with no API key insertion required - and a link will be supplied right here when it's usable.
+A new demo version is currently being created - with no API key insertion required. You can check it out [here](http://audio-swirl-123.herokuapp.com/)!
 
 ## Directions
 

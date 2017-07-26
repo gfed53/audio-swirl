@@ -323,16 +323,10 @@
 		this.get = get;
 		this.auth = auth;
 
-
-		console.log('token:',this.token);
-
 		function auth(){
-			console.log('req auth',ahAPIKeys.apisObj);
 			let url = 'https://accounts.spotify.com/authorize';
 			let obj = ahAPIKeys.get();
-			console.log('obj',obj);
 			let client_id = ahAPIKeys.get().spotID;
-			console.log('client_id:',client_id);
 			let redirect_uri = 'http://localhost:8080/oauth-callback.html';
 
 			window.location.href = 'https://accounts.spotify.com/authorize?client_id=' + client_id + '&response_type=token&redirect_uri='+redirect_uri;
@@ -340,7 +334,6 @@
 
 		function get(){	
 			if(obj !== null && obj !== undefined){
-				console.log('obj is:',obj);
 				return obj.oauth.access_token;
 			} else {
 				ahModals().create(spotAuthTemp)
