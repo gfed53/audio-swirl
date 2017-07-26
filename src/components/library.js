@@ -84,7 +84,6 @@
 			let spotRefreshTemp = ahModals().getTemp('spotRefreshTemp');
 
 			let token = ahGetToken.token;
-			console.log('token before search:',token);
 			if(token){
 				let url = 'https://api.spotify.com/v1/search';
 				let params = {
@@ -100,12 +99,9 @@
 					params
 				})
 				.then((response) => {
-					console.log('response is:',response);
 					let link = response.data.artists.items[0].external_urls.spotify;
-					console.log('link is:',link);
 					return $q.when(response);
 				}, (err)=>{
-					console.log(err);
 					if(err.status === 401 && ahGetToken.token){
 						ahModals().create(spotRefreshTemp)
 						.then(()=>{
@@ -271,12 +267,11 @@
 	}
 
 	function ahAPIKeys($http, $q, $state, ahModals){
-		// this.check = check;
+		
 		this.get = get;
 		this.update = update;
 		this.init = init;
 		this.initKeys = initKeys;
-		// this.apisObj = {};
 
 		let initTemp = {
 			templateUrl: './partials/search/modals/init-modal.html',
@@ -289,19 +284,6 @@
 			controller: 'UpdateModalController',
 			controllerAs: 'updateModal'
 		};
-
-
-		function check(){
-			//Checking localStorage to see if user has an id with saved API keys
-			// if(localStorage['ah-log-info']){
-			// 	let obj = JSON.parse(localStorage['ah-log-info']);
-			// 	this.apisObj = obj;
-			// 	return false;
-			// } else {
-			// 	return true;
-			// }
-
-		}
 
 		function init(){
 			let deferred = $q.defer();
@@ -333,7 +315,6 @@
 	}
 
 	function ahGetToken(ahAPIKeys, ahModals){
-// localStorage.removeItem('spotOAuth')
 		let obj = JSON.parse(localStorage.getItem('spotOAuth'));
 		let spotAuthTemp = ahModals().getTemp('spotAuthTemp');
 
@@ -370,10 +351,6 @@
 				});
 			}
 		}
-
-		// function check(){
-
-		// }
 	}
 })();
 
