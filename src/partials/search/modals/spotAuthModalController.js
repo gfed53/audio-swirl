@@ -2,12 +2,13 @@
 
 (function(){
 	angular
-	.module("myApp")
-	.controller("ErrorModalController", ["$uibModalInstance", ErrorModalController]);
+	.module('myApp')
+	.controller('SpotAuthModalController', ['$uibModalInstance', SpotAuthModalController]);
 
-	function ErrorModalController($uibModalInstance){
+	function SpotAuthModalController($uibModalInstance){
 		let vm = this;
 		vm.ok = ok;
+		vm.cancel = cancel;
 
 		function ok(){
 			$uibModalInstance.close();

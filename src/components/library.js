@@ -5,13 +5,13 @@
 	.module('myApp')
 
 	.factory('ahSearch', ['$http', '$q', 'ahResultHistory', 'ahModals', 'ahAPIKeys', ahSearch])
-	.factory('ahSpotSearch', ['$http', '$q', 'ahGetToken', ahSpotSearch])
+	.factory('ahSpotSearch', ['$http', '$q', 'ahGetToken', 'ahModals', ahSpotSearch])
 	.factory('ahModals', ['$q', '$uibModal', ahModals])
 	.service('ahSearchTerm', ahSearchTerm)
 	.service('ahResultHistory', [ahResultHistory])
 	.service('ahSortOrder', [ahSortOrder])
 	.service('ahAPIKeys', ['$http', '$q', '$state', 'ahModals', ahAPIKeys])
-	.service('ahGetToken', ['ahAPIKeys', ahGetToken]);
+	.service('ahGetToken', ['ahAPIKeys', 'ahModals', ahGetToken]);
 
 	function ahSearch($http, $q, ahResultHistory, ahModals, ahAPIKeys){
 		return (searchTerm) => {
@@ -32,7 +32,7 @@
 			return services;
 
 			function getResults(){
-				//## Note: JSON_CALLBACK doesn't work in newer versions of Angular 1.x
+				//*** Note: JSON_CALLBACK doesn't work in newer versions of Angular 1.x
 				let url = 'http://www.tastekid.com/api/similar?callback=JSON_CALLBACK';
 				let key = ahAPIKeys.apisObj.tastekidKey;
 				let request = {
@@ -79,9 +79,10 @@
 		};
 	}
 
-	// ***Currently not working since change in Spotify API restrictions!!
-	function ahSpotSearch($http, $q, ahGetToken){
+	function ahSpotSearch($http, $q, ahGetToken, ahModals){
 		return (item) => {
+			let spotRefreshTemp = ahModals().getTemp('spotRefreshTemp');
+
 			let token = ahGetToken.get();
 			console.log('token before search:',token);
 			if(typeof item === "undefined"){
@@ -105,14 +106,71 @@
 				let link = response.data.artists.items[0].external_urls.spotify;
 				console.log('link is:',link);
 				return $q.when(response);
+			}, (err)=>{
+				console.log(err);
+				if(err.status === 401 && ahGetToken.token){
+					ahModals().create(spotRefreshTemp)
+					.then(()=>{
+						ahGetToken.auth();
+					}, ()=> {
+						//declined
+					});
+				}
 			});
 		};
 	}
 
 	function ahModals($q, $uibModal){
+		let initTemp = {
+			templateUrl: './partials/search/modals/init-modal.html',
+			controller: 'InitModalController',
+			controllerAs: 'initModal'
+		};
+
+		let updateTemp = {
+			templateUrl: './partials/search/modals/update-modal.html',
+			controller: 'UpdateModalController',
+			controllerAs: 'updateModal'
+		};
+
+		let spotAuthTemp = {
+			templateUrl: './partials/search/modals/spot-auth-modal.html',
+			controller: 'SpotAuthModalController',
+			controllerAs: 'spotModal'
+		};
+
+		let spotRefreshTemp = {
+			templateUrl: './partials/search/modals/spot-refresh-modal.html',
+			controller: 'SpotAuthModalController',
+			controllerAs: 'spotModal'
+		};
+
+		let getErrorTemp = {
+			templateUrl: './partials/search/modals/get-error-modal.html',
+			controller: 'ErrorModalController',
+			controllerAs: 'errorModal'
+		};
+
+		let validErrorTemp = {
+			templateUrl: './partials/search/modals/valid-error-modal.html',
+			controller: 'ErrorModalController',
+			controllerAs: 'errorModal'
+		};
+
+		
+
 		return () => {
+			let temps = {
+				initTemp,
+				updateTemp,
+				spotAuthTemp,
+				spotRefreshTemp,
+				getErrorTemp,
+				validErrorTemp
+			};
 			let services = {
-				create: create
+				create,
+				getTemp
 			};
 
 			function create(modalObj){
@@ -130,6 +188,10 @@
 				});
 
 				return deferred.promise;
+			}
+
+			function getTemp(temp){
+				return temps[temp];
 			}
 
 			return services;
@@ -208,7 +270,7 @@
 	}
 
 	function ahAPIKeys($http, $q, $state, ahModals){
-		this.check = check;
+		// this.check = check;
 		this.get = get;
 		this.update = update;
 		this.init = init;
@@ -269,15 +331,18 @@
 		}
 	}
 
-	function ahGetToken(ahAPIKeys){
+	function ahGetToken(ahAPIKeys, ahModals){
 
-		// this.token = null;
+		let obj = JSON.parse(localStorage.getItem('spotOAuth'));
+		let spotAuthTemp = ahModals().getTemp('spotAuthTemp');
+
+		this.token = get();
+
 		this.get = get;
 		this.auth = auth;
 
-		// get();
 
-		console.log(this.token);
+		console.log('token:',this.token);
 
 		function auth(){
 			console.log('req auth',ahAPIKeys.apisObj);
@@ -291,13 +356,21 @@
 			window.location.href = 'https://accounts.spotify.com/authorize?client_id=' + client_id + '&response_type=token&redirect_uri='+redirect_uri;
 		}
 
-		function get(){
-			let obj = JSON.parse(localStorage.getItem('spotOAuth'));
+		function get(){	
 			if(obj !== null && obj !== undefined){
 				console.log('obj is:',obj);
 				return obj.oauth.access_token;
+			} else {
+				ahModals.create(spotAuthTemp)
+				.then(()=>{
+					auth();
+				});
 			}
 		}
+
+		// function check(){
+
+		// }
 	}
 })();
 
