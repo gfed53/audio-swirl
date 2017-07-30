@@ -7,7 +7,7 @@ var app = express();
 //****** Middleware
 
 app.use(bodyParser.json());
-app.use(express.static('src'));
+app.use(express.static('dist'));
 
 app.get('/access', function(req, res){
     res.json(config.KEYS);

@@ -13,11 +13,12 @@ var imagemin = require("gulp-imagemin");
 var jpeg = require('imagemin-jpegtran');
 var usemin = require('gulp-usemin');
 var del = require('del');
+var runSequence = require('run-sequence');
 
 var paths = {
 	scripts: './src/**/*.js',
 	styles: './src/styles',
-	dependencies: './src/dependencies',
+	dependencies: './src/dependencies/*',
 	html: [
 	'./src/**/*.html',
 	'!./src/index.html'
@@ -44,28 +45,43 @@ gulp.task('clean', function(){
 	return del(paths.dist);
 });
 
-gulp.task('copy', ['clean'], function() {
+gulp.task('copy-html', function() {
 	return gulp.src(paths.html)
 			.pipe(gulp.dest('dist/'));
 });
 
-// Image optimization task
-gulp.task('images', ['copy'], function() {
-  	return gulp.src(paths.images)
-		    .pipe(imagemin([imagemin.jpegtran()], true))
-		    .pipe(gulp.dest("dist/images"));
+gulp.task('copy-dep', function() {
+	return gulp.src(paths.dependencies)
+			.pipe(gulp.dest('dist/dependencies'));
 });
 
-gulp.task('usemin', ['images'], function(){
+// Image optimization task
+gulp.task('images', function() {
+  	return gulp.src(paths.images)
+		    .pipe(imagemin([imagemin.jpegtran()], true))
+		    .pipe(gulp.dest('dist/images'));
+});
+
+gulp.task('usemin', function(){
 	return gulp.src( paths.index )
 			.pipe(usemin({
 				css: [ cleanCSS() ],
 				js: [ strip(), babel({presets: ['es2015']}), ngmin(), uglify() ]
 			}))
-			.pipe(gulp.dest( paths.dist ));
+			.pipe(gulp.dest(paths.dist));
 });
 
-gulp.task('build', ['usemin']);
+// gulp.task('build', ['usemin']);
+
+gulp.task('build', function(){
+	runSequence(
+		'clean',
+		'copy-html',
+		'copy-dep',
+		'images',
+		'usemin'
+		);
+});
 
 //Default
 gulp.task('default', ['jshint', 'watch']);

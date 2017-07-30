@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
-  "scripts": {},
+  "scripts": {
+    "start": "node server"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gfed53/audio-swirl"
@@ -30,7 +32,8 @@
     "gulp-usemin": "^0.3.23",
     "imagemin-jpegtran": "^5.0.2",
     "jshint": "^2.9.2",
-    "jslint": "^0.10.1"
+    "jslint": "^0.10.1",
+    "run-sequence": "^2.1.0"
   },
   "dependencies": {
     "body-parser": "^1.17.2",
