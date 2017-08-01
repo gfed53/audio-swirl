@@ -10,7 +10,6 @@ var minifyHtml = require('gulp-minify-html');
 var minifyCss = require('gulp-minify-css');
 var cleanCSS = require('gulp-clean-css');
 var imagemin = require("gulp-imagemin");
-var jpeg = require('imagemin-jpegtran');
 var usemin = require('gulp-usemin');
 var del = require('del');
 var runSequence = require('run-sequence');
@@ -55,10 +54,10 @@ gulp.task('copy-dep', function() {
 			.pipe(gulp.dest('dist/dependencies'));
 });
 
-// Image optimization task
+// Image optimization task (Bug with more recent versions?: task doesn't minify any images, so using gulp-imagemin version 2.4.0)
 gulp.task('images', function() {
   	return gulp.src(paths.images)
-		    .pipe(imagemin([imagemin.jpegtran()], true))
+		    .pipe(imagemin())
 		    .pipe(gulp.dest('dist/images'));
 });
 
@@ -70,8 +69,6 @@ gulp.task('usemin', function(){
 			}))
 			.pipe(gulp.dest(paths.dist));
 });
-
-// gulp.task('build', ['usemin']);
 
 gulp.task('build', function(){
 	runSequence(

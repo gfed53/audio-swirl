@@ -22,7 +22,7 @@ a {
 	text-align: center;
 	margin: 3em auto;
 	border: 5px solid bisque;
-	background: url("../images/amp-guitar.jpeg") no-repeat center fixed;
+	background: url("../images/amp-guitar.jpg") no-repeat center fixed;
 	background-size: cover;
 	border-radius: 1em;
 	font-family: "Open Sans", sans-serif;
@@ -249,7 +249,7 @@ footer a {
 
 @media screen and (max-width: 500px){
 	.container {
-		background: url("../images/amp-guitar-sm.jpeg") no-repeat center fixed;		
+		background: url("../images/amp-guitar-sm.jpg") no-repeat center fixed;		
 	}
 }
 
