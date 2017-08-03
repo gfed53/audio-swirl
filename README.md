@@ -17,7 +17,7 @@ Enter an artist in the search bar, and hit "Go!" to find other similar artists t
 
 Click the "Add" button on any single result to automatically add it to the search bar. You can search multiple artists at a time if you want to get a broader blend of results, or just keep it simple and search one at a time.
 
-Click the Spotify link to access the artist's Spotify page. From there, you have access to all of the Spotify features. With most artists you'll get a more in-depth biography, possibly find more related artists, and be able to listen to their music.
+Click the Spotify link to access the artist's Spotify page. **Note that using the Spotify API requires authentication. You need to have an account with Spotify to use its features.** From there, you have access to all of the Spotify features. With most artists you'll get a more in-depth biography, possibly find more related artists, and be able to listen to their music.
 Enjoy!
 
 ## Known Bugs/Issues
@@ -45,7 +45,7 @@ To keep in mind:
 
 3. Once all dependencies are installed and everything is in place, you can run `gulp build` in the command line to create a build version.
 
-4. You can serve the app locally by running `node server`. The app listens at port 8080.
+4. You can serve the app locally by running `npm start`. The app listens at port 8080.
 
 ## The Process
 
