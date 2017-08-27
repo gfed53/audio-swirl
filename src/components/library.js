@@ -316,12 +316,19 @@
 
 	function ahGetToken(ahAPIKeys, ahModals){
 		let obj = JSON.parse(localStorage.getItem('spotOAuth'));
+
 		let spotAuthTemp = ahModals().getTemp('spotAuthTemp');
+		let spotRefreshTemp = ahModals().getTemp('spotRefreshTemp');
+
 
 		this.token = get();
 
 		this.get = get;
 		this.auth = auth;
+
+		function isExpired(authObj){
+			return authObj.oauth.time_stamp + (parseInt(authObj.oauth.expires_in)*1000) < Date.now();
+		}
 
 		function auth(){
 			let url = 'https://accounts.spotify.com/authorize';
@@ -333,15 +340,22 @@
 		}
 
 		function get(){	
-			if(obj !== null && obj !== undefined){
-				return obj.oauth.access_token;
-			} else {
+			if(obj === null || obj === undefined){
 				ahModals().create(spotAuthTemp)
 				.then(()=>{
 					auth();
 				}, ()=>{
 					return null;
 				});
+			} else if(isExpired(obj)){
+				ahModals().create(spotRefreshTemp)
+				.then(()=>{
+					auth();
+				}, ()=> {
+					return null;
+				});
+			} else {
+				return obj.oauth.access_token;
 			}
 		}
 	}
