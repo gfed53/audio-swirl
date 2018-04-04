@@ -24,18 +24,12 @@
 							<div class="result-blurb">
 								<p>{{ item.wTeaser }}</p>
 								<span>
-									<button class="btn btn-default btn-add" ng-click="search.add(item.Name)" type="button">Add</button>
+									<button class="btn btn-default btn-add" ng-click="search.appendToSeachBar(item.Name)" type="button">Add</button>
 								</span>
-								<div ng-if="search.isAdded(item.Name)" class="alert alert-success alert-video-saved" role="alert">Added to search bar!</div>
-								<!-- We set the name of the artist, passed as a param in spotSearch function, to a controller variable 'item' after the Spotify search is successful. This div below will check that condition and only render if it's true 
-								
-									TODO: find better logic, or at least rename. This is confusing.
-
-								-->
-								<div class="spot-blurb" ng-if="search.item === item.Name">
+								<div ng-if="search.isAddedToSearchBar(item.Name)" class="alert alert-success alert-video-saved" role="alert">Added to search bar!</div>
+								<div class="spot-blurb" ng-if="search.link">
 									<a target="_blank" href="{{ search.link }}"><i class="fa fa-spotify" aria-hidden="true"></i> Spotify Page</a>
-								</div>
-								
+								</div>		
 							</div>
 						</div>
 					</uib-accordion-group>
@@ -50,10 +44,10 @@
 							<div class="result-blurb">
 								<p>{{ item.wTeaser }}</p>
 								<span>
-									<button class="btn btn-default btn-add"  ng-click="search.add(item.Name)" type="button">Add</button>
+									<button class="btn btn-default btn-add"  ng-click="search.appendToSeachBar(item.Name)" type="button">Add</button>
 								</span>
-								<div ng-if="search.isAdded(item.Name)" class="alert alert-success alert-video-saved" role="alert">Added to search bar!</div>
-								<div class="spot-blurb" ng-if="search.item === item.Name">
+								<div ng-if="search.isAddedToSearchBar(item.Name)" class="alert alert-success alert-video-saved" role="alert">Added to search bar!</div>
+								<div class="spot-blurb" ng-if="search.link">
 									<a target="_blank" href="{{ search.link }}"><i class="fa fa-spotify" aria-hidden="true"></i> Spotify Page</a>
 								</div>	
 							</div>

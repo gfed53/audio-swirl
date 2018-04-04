@@ -9,19 +9,21 @@ angular
 function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTerm, ahAPIKeys, ahGetToken){
 	let vm = this;
 	vm.submit = submit;
-	vm.add = add;
-	vm.isAdded = isAdded;
+	vm.appendToSeachBar = appendToSeachBar;
+	vm.isAddedToSearchBar = isAddedToSearchBar;
 	vm.spotSearch = spotSearch;
 	vm.pastSearches = ahResultHistory.getSearched();
 	vm.pastResults = ahResultHistory.getResults();
 	vm.searchTerm = ahSearchTerm.get();
-	// vm.auth = ahGetToken.auth;
+
+	// Prob not even needed, since injecting ahGetToken service instantiates it, which does what we need to do.
+	vm.auth = ahGetToken.auth;
 
 	vm.apisObj = ahAPIKeys.apisObj;
 	vm.userName = ahAPIKeys.apisObj.id;
 
 	$scope.$watch('search.searchTerm', (newVal) => {
-		//Watches for changes in the search bar, so if the user switches over to a different tab and then return to it, they won't lose what they inputed.
+		// Watches for changes in the search bar, so if the user switches over to a different tab and then return to it, they won't lose what they inputed.
 		ahSearchTerm.set(newVal);
 	});
 
@@ -36,32 +38,24 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 			vm.results = obj.results;
 			vm.searchTerm = obj.searchTerm;
 			ahSearchTerm.set(vm.searchTerm);
-
 		});
 	}
 
-	function add(name){
+	function appendToSeachBar(name){
 		vm.searchTerm += (name+', ');
 		ahSearchTerm.set(vm.searchTerm);
-		vm.itemAdded = name;
+		vm.itemAddedToSearchBar = name;
 	}
 
-	function isAdded(name){
-		return (name === vm.itemAdded);
+	function isAddedToSearchBar(name){
+		return (name === vm.itemAddedToSearchBar);
 	}
 
-	function spotSearch(item){
+	function spotSearch(artistName){
 		vm.link = '';
-		ahSpotSearch(item)
+		ahSpotSearch(artistName)
 		.then((response) => {
 			let link = response.data.artists.items[0].external_urls.spotify;
-			/*
-			We set the name of the artist, passed as a param in spotSearch function, to a controller variable 'item' after the Spotify search is successful. This div below will check that condition and only render if it's true 
-								
-			TODO: find better logic, or at least rename. This is confusing.
-
-			*/
-			vm.item = item;
 			vm.link = link;
 		});
 	}
