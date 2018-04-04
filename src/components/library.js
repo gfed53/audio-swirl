@@ -102,12 +102,15 @@
 					let link = response.data.artists.items[0].external_urls.spotify;
 					return $q.when(response);
 				}, (err)=>{
+					/* 
+						Below should be kept in case the user's token expires while in an open session.
+					*/
 					if(err.status === 401 && ahGetToken.token){
 						ahModals().create(spotRefreshTemp)
 						.then(()=>{
 							ahGetToken.auth();
 						}, ()=> {
-							//declined
+							// declined
 						});
 					}
 				});
@@ -247,7 +250,6 @@
 
 		this.reverse = false;
 		this.predicate = '$$hashKey';
-		//Name
 		this.order = order;
 		this.get = get;
 
@@ -319,7 +321,6 @@
 
 		let spotAuthTemp = ahModals().getTemp('spotAuthTemp');
 		let spotRefreshTemp = ahModals().getTemp('spotRefreshTemp');
-
 
 		this.token = get();
 

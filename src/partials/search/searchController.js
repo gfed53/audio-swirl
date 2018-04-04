@@ -15,7 +15,7 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 	vm.pastSearches = ahResultHistory.getSearched();
 	vm.pastResults = ahResultHistory.getResults();
 	vm.searchTerm = ahSearchTerm.get();
-	vm.auth = ahGetToken.auth;
+	// vm.auth = ahGetToken.auth;
 
 	vm.apisObj = ahAPIKeys.apisObj;
 	vm.userName = ahAPIKeys.apisObj.id;
@@ -55,6 +55,12 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 		ahSpotSearch(item)
 		.then((response) => {
 			let link = response.data.artists.items[0].external_urls.spotify;
+			/*
+			We set the name of the artist, passed as a param in spotSearch function, to a controller variable 'item' after the Spotify search is successful. This div below will check that condition and only render if it's true 
+								
+			TODO: find better logic, or at least rename. This is confusing.
+
+			*/
 			vm.item = item;
 			vm.link = link;
 		});
