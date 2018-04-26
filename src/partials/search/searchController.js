@@ -16,6 +16,12 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 	vm.pastResults = ahResultHistory.getResults();
 	vm.searchTerm = ahSearchTerm.get();
 
+	vm.test = test;
+
+	vm.artistsOpened = {
+
+	};
+
 	// Prob not even needed, since injecting ahGetToken service instantiates it, which does what we need to do.
 	vm.auth = ahGetToken.auth;
 
@@ -25,6 +31,10 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 	$scope.$watch('search.searchTerm', (newVal) => {
 		// Watches for changes in the search bar, so if the user switches over to a different tab and then return to it, they won't lose what they inputed.
 		ahSearchTerm.set(newVal);
+	});
+
+	$scope.$watch('search.status.isOpen', (newVal) => {
+		console.log()
 	});
 
 
@@ -38,6 +48,26 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 			vm.results = obj.results;
 			vm.searchTerm = obj.searchTerm;
 			ahSearchTerm.set(vm.searchTerm);
+
+			// Testing
+			vm.results.forEach(function(item) {
+				var isOpened = false;
+				Object.defineProperty(item, "isOpened", {
+					get: function() {
+						return isOpened;
+					},
+					set: function(newValue) {
+						isOpened = newValue;
+						if (isOpened) {
+							console.log(item); // do something...
+							spotSearch(item.Name);
+						}
+					}
+				});
+			});
+			//
+
+
 		});
 	}
 
@@ -53,11 +83,16 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 
 	function spotSearch(artistName){
 		vm.link = '';
+		// console.log('$event',$event);
 		ahSpotSearch(artistName)
 		.then((response) => {
 			let link = response.data.artists.items[0].external_urls.spotify;
 			vm.link = link;
 		});
+	}
+
+	function test(e){
+		console.log('e',e);
 	}
 }
 
