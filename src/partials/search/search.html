@@ -18,9 +18,8 @@
 			<div class="col-md-12 output">
 				<h3 ng-if="search.info">You searched for:</h3>
 				<uib-accordion>
-					<uib-accordion-group ng-repeat="item in search.info">
-						<uib-accordion-heading ng-click="search.test($event)" ng-keypress="search.test($event)">
-							<!-- <span ng-click="search.spotSearch(item.Name)" ng-keypress="search.spotSearch(item.Name, $event)">{{ item.Name }}</span> -->
+					<uib-accordion-group ng-repeat="item in search.info" is-open="item.isOpened">
+						<uib-accordion-heading>
 							{{ item.Name }}
 						</uib-accordion-heading>
 						<div class="row inner-content">
@@ -40,8 +39,7 @@
 				<h3 ng-if="search.results">Results:</h3>
 				<uib-accordion>
 					<uib-accordion-group ng-repeat="item in search.results" is-open="item.isOpened">
-					<uib-accordion-heading ng-click="search.test($event)" ng-keypress="search.test($event)">
-						<!-- <button class="result-header-button" ng-click="search.spotSearch(item.Name)">{{ item.Name }}</button> -->
+					<uib-accordion-heading>
 						{{ item.Name }}
 					</uib-accordion-heading>	
 						<div class="row inner-content">

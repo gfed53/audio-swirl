@@ -45,33 +45,14 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 		.then((response) => {
 			let obj = ahSearch().checkValid(response);
 			vm.info = obj.info;
-			vm.results = obj.results;
+			vm.results = [...obj.results];
 			vm.searchTerm = obj.searchTerm;
 			ahSearchTerm.set(vm.searchTerm);
 
-			// Testing
-			// vm.results.forEach(function(item) {
-			// 	var isOpened = false;
-			// 	Object.defineProperty(item, "isOpened", {
-			// 		get: function() {
-			// 			return isOpened;
-			// 		},
-			// 		set: function(newValue) {
-			// 			isOpened = newValue;
-			// 			if (isOpened) {
-			// 				console.log(item); // do something...
-			// 				spotSearch(item.Name);
-			// 			}
-			// 		}
-			// 	});
-			// });
-			vm.results = ahSetIsOpenedProp(vm.results, (item) => {
-				// console.log(item); // do something...
-				spotSearch(item.Name);
-			});
+			// console.log('vm.info',vm.info);
 
-			//
-
+			vm.info = ahSetIsOpenedProp(vm.info, (item) => { spotSearch(item.Name); });
+			vm.results = ahSetIsOpenedProp(vm.results, (item) => { spotSearch(item.Name); });
 
 		});
 	}
