@@ -4,9 +4,9 @@ angular
 
 .module('myApp')
 
-.controller('SearchCtrl', ['$scope', 'ahSearch', 'ahSpotSearch', 'ahResultHistory', 'ahSearchTerm', 'ahAPIKeys', 'ahGetToken', SearchCtrl]);
+.controller('SearchCtrl', ['$scope', 'ahSearch', 'ahSpotSearch', 'ahResultHistory', 'ahSearchTerm', 'ahAPIKeys', 'ahGetToken', 'ahSetIsOpenedProp', SearchCtrl]);
 
-function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTerm, ahAPIKeys, ahGetToken){
+function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTerm, ahAPIKeys, ahGetToken, ahSetIsOpenedProp){
 	let vm = this;
 	vm.submit = submit;
 	vm.appendToSeachBar = appendToSeachBar;
@@ -50,21 +50,26 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 			ahSearchTerm.set(vm.searchTerm);
 
 			// Testing
-			vm.results.forEach(function(item) {
-				var isOpened = false;
-				Object.defineProperty(item, "isOpened", {
-					get: function() {
-						return isOpened;
-					},
-					set: function(newValue) {
-						isOpened = newValue;
-						if (isOpened) {
-							console.log(item); // do something...
-							spotSearch(item.Name);
-						}
-					}
-				});
+			// vm.results.forEach(function(item) {
+			// 	var isOpened = false;
+			// 	Object.defineProperty(item, "isOpened", {
+			// 		get: function() {
+			// 			return isOpened;
+			// 		},
+			// 		set: function(newValue) {
+			// 			isOpened = newValue;
+			// 			if (isOpened) {
+			// 				console.log(item); // do something...
+			// 				spotSearch(item.Name);
+			// 			}
+			// 		}
+			// 	});
+			// });
+			vm.results = ahSetIsOpenedProp(vm.results, (item) => {
+				// console.log(item); // do something...
+				spotSearch(item.Name);
 			});
+
 			//
 
 

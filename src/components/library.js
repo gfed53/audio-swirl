@@ -7,6 +7,7 @@
 	.factory('ahSearch', ['$http', '$q', 'ahResultHistory', 'ahModals', 'ahAPIKeys', ahSearch])
 	.factory('ahSpotSearch', ['$http', '$q', 'ahGetToken', 'ahModals', ahSpotSearch])
 	.factory('ahModals', ['$q', '$uibModal', ahModals])
+	.factory('ahSetIsOpenedProp', [ahSetIsOpenedProp])
 	.service('ahSearchTerm', ahSearchTerm)
 	.service('ahResultHistory', [ahResultHistory])
 	.service('ahSortOrder', [ahSortOrder])
@@ -227,6 +228,7 @@
 			return this.results;
 		}
 
+		// Could just use lodash uniqBy?
 		function add(array, newArray){
 			array.forEach((value,index,array) => {
 				if(getIndexIfObjWithAttr(newArray, 'yID', value.yID) === -1){
@@ -358,6 +360,35 @@
 			} else {
 				return obj.oauth.access_token;
 			}
+		}
+	}
+
+	function ahSetIsOpenedProp(){
+		return (list, onIsOpened) => {
+			let updated = [...list];
+			// console.log('updated',updated);
+
+			updated.forEach(function(item) {
+				var isOpened = false;
+				Object.defineProperty(item, "isOpened", {
+					get: function() {
+						return isOpened;
+					},
+					set: function(newValue) {
+						isOpened = newValue;
+						if (isOpened) {
+							// console.log(item); // do something...
+							// spotSearch(item.Name);
+							onIsOpened(item);
+						}
+					}
+				});
+			});
+
+			// console.log('updated after',updated);
+
+			return updated;			
+
 		}
 	}
 })();
