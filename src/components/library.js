@@ -8,6 +8,7 @@
 	.factory('ahSpotSearch', ['$http', '$q', 'ahGetToken', 'ahModals', ahSpotSearch])
 	.factory('ahModals', ['$q', '$uibModal', ahModals])
 	.factory('ahSetIsOpenedProp', [ahSetIsOpenedProp])
+	.factory('ahFocus', ['$timeout', '$window', ahFocus])
 	.service('ahSearchTerm', ahSearchTerm)
 	.service('ahResultHistory', [ahResultHistory])
 	.service('ahSortOrder', [ahSortOrder])
@@ -390,6 +391,20 @@
 			return updated;			
 
 		}
+	}
+
+	function ahFocus($timeout, $window) {
+		return function(id) {
+      // timeout makes sure that it is invoked after any other event has been triggered.
+      // e.g. click events that need to run before the focus or
+      // inputs elements that are in a disabled state but are enabled when those events
+      // are triggered.
+      $timeout(function() {
+        var element = $window.document.getElementById(id);
+        if(element)
+          element.focus();
+      });
+    };
 	}
 })();
 

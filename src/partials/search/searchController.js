@@ -4,9 +4,9 @@ angular
 
 .module('myApp')
 
-.controller('SearchCtrl', ['$scope', 'ahSearch', 'ahSpotSearch', 'ahResultHistory', 'ahSearchTerm', 'ahAPIKeys', 'ahGetToken', 'ahSetIsOpenedProp', SearchCtrl]);
+.controller('SearchCtrl', ['$scope', '$timeout', 'ahSearch', 'ahSpotSearch', 'ahResultHistory', 'ahSearchTerm', 'ahAPIKeys', 'ahGetToken', 'ahSetIsOpenedProp', 'ahFocus', SearchCtrl]);
 
-function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTerm, ahAPIKeys, ahGetToken, ahSetIsOpenedProp){
+function SearchCtrl($scope, $timeout, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTerm, ahAPIKeys, ahGetToken, ahSetIsOpenedProp, ahFocus){
 	let vm = this;
 	vm.submit = submit;
 	vm.appendToSeachBar = appendToSeachBar;
@@ -18,9 +18,7 @@ function SearchCtrl($scope, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTer
 
 	vm.test = test;
 
-	vm.artistsOpened = {
-
-	};
+	$timeout(() => { ahFocus('query'); }, 0);
 
 	// Prob not even needed, since injecting ahGetToken service instantiates it, which does what we need to do.
 	vm.auth = ahGetToken.auth;
