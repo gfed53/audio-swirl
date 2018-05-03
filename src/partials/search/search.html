@@ -29,8 +29,8 @@
 									<button class="btn btn-default btn-add" ng-click="search.appendToSeachBar(item.Name)" type="button">Add</button>
 								</span>
 								<div ng-if="search.isAddedToSearchBar(item.Name)" class="alert alert-success alert-video-saved" role="alert">Added to search bar!</div>
-								<div class="spot-blurb" ng-if="search.link">
-									<a target="_blank" href="{{ search.link }}"><i class="fa fa-spotify" aria-hidden="true"></i> Spotify Page</a>
+								<div class="spot-blurb" ng-if="item.spotLink">
+									<a target="_blank" href="{{ item.spotLink }}"><i class="fa fa-spotify" aria-hidden="true"></i> Spotify Page</a>
 								</div>		
 							</div>
 						</div>
@@ -49,8 +49,8 @@
 									<button class="btn btn-default btn-add"  ng-click="search.appendToSeachBar(item.Name)" type="button">Add</button>
 								</span>
 								<div ng-if="search.isAddedToSearchBar(item.Name)" class="alert alert-success alert-video-saved" role="alert">Added to search bar!</div>
-								<div class="spot-blurb" ng-if="search.link">
-									<a target="_blank" href="{{ search.link }}"><i class="fa fa-spotify" aria-hidden="true"></i> Spotify Page</a>
+								<div class="spot-blurb" ng-if="item.spotLink">
+									<a target="_blank" href="{{ item.spotLink }}"><i class="fa fa-spotify" aria-hidden="true"></i> Spotify Page</a>
 								</div>	
 							</div>
 						</div>

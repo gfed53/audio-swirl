@@ -31,11 +31,6 @@ function SearchCtrl($scope, $timeout, ahSearch, ahSpotSearch, ahResultHistory, a
 		ahSearchTerm.set(newVal);
 	});
 
-	$scope.$watch('search.status.isOpen', (newVal) => {
-		console.log()
-	});
-
-
 	function submit(){
 		vm.searchTermNew = 'music:'+vm.searchTerm;
 
@@ -47,11 +42,8 @@ function SearchCtrl($scope, $timeout, ahSearch, ahSpotSearch, ahResultHistory, a
 			vm.searchTerm = obj.searchTerm;
 			ahSearchTerm.set(vm.searchTerm);
 
-			// console.log('vm.info',vm.info);
-
-			vm.info = ahSetIsOpenedProp(vm.info, (item) => { spotSearch(item.Name); });
-			vm.results = ahSetIsOpenedProp(vm.results, (item) => { spotSearch(item.Name); });
-
+			vm.info = ahSetIsOpenedProp(vm.info, (item) => { spotSearch(item); });
+			vm.results = ahSetIsOpenedProp(vm.results, (item) => { spotSearch(item); });
 		});
 	}
 
@@ -65,13 +57,14 @@ function SearchCtrl($scope, $timeout, ahSearch, ahSpotSearch, ahResultHistory, a
 		return (name === vm.itemAddedToSearchBar);
 	}
 
-	function spotSearch(artistName){
+	function spotSearch(artist){
+
 		vm.link = '';
-		// console.log('$event',$event);
-		ahSpotSearch(artistName)
+
+		ahSpotSearch(artist.Name)
 		.then((response) => {
-			let link = response.data.artists.items[0].external_urls.spotify;
-			vm.link = link;
+			// Mutates the artist object..
+			artist.spotLink = response.data.artists.items[0].external_urls.spotify;
 		});
 	}
 
