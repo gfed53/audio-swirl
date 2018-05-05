@@ -3,9 +3,9 @@
 		<div class="past-searches output">
 			<h3>Previous Searches</h3>
 			<uib-accordion>
-				<uib-accordion-group ng-repeat="item in history.pastSearches">
+				<uib-accordion-group ng-repeat="item in history.pastSearches" is-open="item.isOpened">
 					<uib-accordion-heading>
-						<span ng-click="history.spotSearch(item.Name)">{{ item.Name }}</span>
+						{{ item.Name }}
 					</uib-accordion-heading>
 					<div class="row inner-content">
 						<div class="result-blurb">
@@ -14,8 +14,8 @@
 								<button class="btn btn-default btn-add" ng-click="history.add(item.Name)" type="button">Add</button>
 							</span>
 							<div ng-if="history.isAdded(item.Name)" class="alert alert-success alert-video-saved" role="alert">Added to search bar!</div>
-							<div class="spot-blurb" ng-if="history.item === item.Name">
-								<a target="_blank" href="{{ history.link }}"><i class="fa fa-spotify" aria-hidden="true"></i> Spotify Page</a>
+							<div class="spot-blurb" ng-if="item.spotLink">
+								<a target="_blank" href="{{ item.spotLink }}"><i class="fa fa-spotify" aria-hidden="true"></i> Spotify Page</a>
 							</div>
 						</div>
 					</div>
@@ -38,9 +38,9 @@
 				</button>
 			</div>
 			<uib-accordion>
-				<uib-accordion-group ng-repeat="item in history.pastResults | orderBy:history.predicate:history.reverse">
+				<uib-accordion-group ng-repeat="item in history.pastResults | orderBy:history.predicate:history.reverse" is-open="item.isOpened">
 					<uib-accordion-heading>
-						<span ng-click="history.spotSearch(item.Name)">{{ item.Name }}</span>
+						{{ item.Name }}
 					</uib-accordion-heading>
 					<div class="row inner-content">
 						<div class="result-blurb">
@@ -49,8 +49,8 @@
 								<button class="btn btn-default btn-add" ng-click="history.add(item.Name)" type="button">Add</button>
 							</span>
 							<div ng-if="history.isAdded(item.Name)" class="alert alert-success alert-video-saved" role="alert">Added to search bar!</div>
-							<div class="spot-blurb" ng-if="history.item === item.Name">
-								<a target="_blank" href="{{ history.link }}"><i class="fa fa-spotify" aria-hidden="true"></i> Spotify Page</a>
+							<div class="spot-blurb" ng-if="item.spotLink">
+								<a target="_blank" href="{{ item.spotLink }}"><i class="fa fa-spotify" aria-hidden="true"></i> Spotify Page</a>
 							</div>
 						</div>
 					</div>

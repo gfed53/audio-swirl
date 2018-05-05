@@ -4,12 +4,18 @@ angular
 
 .module('myApp')
 
-.controller('HistoryCtrl', ['ahSearch', 'ahSpotSearch', 'ahResultHistory', 'ahSearchTerm', 'ahSortOrder', HistoryCtrl]);
+.controller('HistoryCtrl', ['ahSearch', 'ahSpotSearch', 'ahResultHistory', 'ahSearchTerm', 'ahSortOrder', 'ahSetIsOpenedProp', HistoryCtrl]);
 
-function HistoryCtrl(ahSearch, ahSpotSearch, ahResultHistory, ahSearchTerm, ahSortOrder){
+function HistoryCtrl(ahSearch, ahSpotSearch, ahResultHistory, ahSearchTerm, ahSortOrder, ahSetIsOpenedProp){
 	let vm = this;
 	vm.pastSearches = ahResultHistory.getSearched();
+	console.log('vm.pastSearches',vm.pastSearches);
+
+	// vm.pastSearches = ahSetIsOpenedProp(ahResultHistory.getSearched(), (item) => { spotSearch(item); });
+
 	vm.pastResults = ahResultHistory.getResults();
+	console.log('vm.pastResults',vm.pastResults);
+
 	vm.searchTerm = ahSearchTerm.get();
 	vm.add = add;
 	vm.isAdded = isAdded;
@@ -28,13 +34,24 @@ function HistoryCtrl(ahSearch, ahSpotSearch, ahResultHistory, ahSearchTerm, ahSo
 		return (name === vm.itemAdded);
 	}
 
-	function spotSearch(item){
+	// function spotSearch(item){
+	// 	vm.link = '';
+	// 	ahSpotSearch(item)
+	// 	.then((response) => {
+	// 		let link = response.data.artists.items[0].external_urls.spotify;
+	// 		vm.item = item;
+	// 		vm.link = link;
+	// 	});
+	// }
+
+	function spotSearch(artist){
+		
 		vm.link = '';
-		ahSpotSearch(item)
+
+		ahSpotSearch(artist.Name)
 		.then((response) => {
-			let link = response.data.artists.items[0].external_urls.spotify;
-			vm.item = item;
-			vm.link = link;
+			// Mutates the artist object..
+			artist.spotLink = response.data.artists.items[0].external_urls.spotify;
 		});
 	}
 
