@@ -4,14 +4,14 @@ angular
 
 .module('myApp')
 
-.controller('SearchCtrl', ['$scope', '$timeout', 'ahSearch', 'ahSpotSearch', 'ahResultHistory', 'ahSearchTerm', 'ahAPIKeys', 'ahGetToken', 'ahSetIsOpenedProp', 'ahFocus', SearchCtrl]);
+.controller('SearchCtrl', ['$scope', '$timeout', 'ahSearch', 'ahGetSpotLink', 'ahResultHistory', 'ahSearchTerm', 'ahAPIKeys', 'ahGetToken', 'ahSetIsOpenedProp', 'ahFocus', SearchCtrl]);
 
-function SearchCtrl($scope, $timeout, ahSearch, ahSpotSearch, ahResultHistory, ahSearchTerm, ahAPIKeys, ahGetToken, ahSetIsOpenedProp, ahFocus){
+function SearchCtrl($scope, $timeout, ahSearch, ahGetSpotLink, ahResultHistory, ahSearchTerm, ahAPIKeys, ahGetToken, ahSetIsOpenedProp, ahFocus){
 	let vm = this;
 	vm.submit = submit;
 	vm.appendToSeachBar = appendToSeachBar;
 	vm.isAddedToSearchBar = isAddedToSearchBar;
-	vm.spotSearch = spotSearch;
+	// vm.spotSearch = spotSearch;
 	vm.pastSearches = ahResultHistory.getSearched();
 	vm.pastResults = ahResultHistory.getResults();
 	vm.searchTerm = ahSearchTerm.get();
@@ -42,8 +42,8 @@ function SearchCtrl($scope, $timeout, ahSearch, ahSpotSearch, ahResultHistory, a
 			vm.searchTerm = obj.searchTerm;
 			ahSearchTerm.set(vm.searchTerm);
 
-			vm.info = ahSetIsOpenedProp(vm.info, (item) => { spotSearch(item); });
-			vm.results = ahSetIsOpenedProp(vm.results, (item) => { spotSearch(item); });
+			vm.info = ahSetIsOpenedProp(vm.info, (item) => { ahGetSpotLink(item); });
+			vm.results = ahSetIsOpenedProp(vm.results, (item) => { ahGetSpotLink(item); });
 		});
 	}
 
@@ -57,16 +57,16 @@ function SearchCtrl($scope, $timeout, ahSearch, ahSpotSearch, ahResultHistory, a
 		return (name === vm.itemAddedToSearchBar);
 	}
 
-	function spotSearch(artist){
+	// function spotSearch(artist){
 
-		vm.link = '';
+	// 	vm.link = '';
 
-		ahSpotSearch(artist.Name)
-		.then((response) => {
-			// Mutates the artist object..
-			artist.spotLink = response.data.artists.items[0].external_urls.spotify;
-		});
-	}
+	// 	ahSpotSearch(artist.Name)
+	// 	.then((response) => {
+	// 		// Mutates the artist object..
+	// 		artist.spotLink = response.data.artists.items[0].external_urls.spotify;
+	// 	});
+	// }
 
 	function test(e){
 		console.log('e',e);

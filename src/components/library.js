@@ -5,7 +5,7 @@
 	.module('myApp')
 
 	.factory('ahSearch', ['$http', '$q', 'ahResultHistory', 'ahModals', 'ahAPIKeys', ahSearch])
-	.factory('ahSpotSearch', ['$http', '$q', 'ahGetToken', 'ahModals', ahSpotSearch])
+	.factory('ahGetSpotLink', ['$http', '$q', 'ahGetToken', 'ahModals', ahGetSpotLink])
 	.factory('ahModals', ['$q', '$uibModal', ahModals])
 	.factory('ahSetIsOpenedProp', [ahSetIsOpenedProp])
 	.factory('ahFocus', ['$timeout', '$window', ahFocus])
@@ -81,45 +81,55 @@
 		};
 	}
 
-	function ahSpotSearch($http, $q, ahGetToken, ahModals){
+	function ahGetSpotLink($http, $q, ahGetToken, ahModals){
 		return (item) => {
-			let spotRefreshTemp = ahModals().getTemp('spotRefreshTemp');
-
-			let token = ahGetToken.token;
-			if(token){
-				let url = 'https://api.spotify.com/v1/search';
-				let params = {
-					q: item,
-					type: 'artist'
-				};
-
-				let headers = {
-					"Authorization": `Bearer ${token}`
-				};
-				return $http.get(url,{
-					headers,
-					params
-				})
+			if(!item.spotLink){
+				spotApiCall(item.Name)
 				.then((response) => {
-					let link = response.data.artists.items[0].external_urls.spotify;
-					return $q.when(response);
-				}, (err)=>{
-					/* 
-						Below should be kept in case the user's token expires while in an open session.
-					*/
-					if(err.status === 401 && ahGetToken.token){
-						ahModals().create(spotRefreshTemp)
-						.then(()=>{
-							ahGetToken.auth();
-						}, ()=> {
-							// declined
-						});
-					}
+					// Mutates the item object..
+					item.spotLink = response.data.artists.items[0].external_urls.spotify;
 				});
-			} else {
-				return null;
 			}
 		};
+
+		function spotApiCall(q){
+			let spotRefreshTemp = ahModals().getTemp('spotRefreshTemp');
+			
+				let token = ahGetToken.token;
+				if(token){
+					let url = 'https://api.spotify.com/v1/search';
+					let params = {
+						q,
+						type: 'artist'
+					};
+	
+					let headers = {
+						"Authorization": `Bearer ${token}`
+					};
+					return $http.get(url,{
+						headers,
+						params
+					})
+					.then((response) => {
+						let link = response.data.artists.items[0].external_urls.spotify;
+						return $q.when(response);
+					}, (err)=>{
+						/* 
+							Below should be kept in case the user's token expires while in an open session.
+						*/
+						if(err.status === 401 && ahGetToken.token){
+							ahModals().create(spotRefreshTemp)
+							.then(()=>{
+								ahGetToken.auth();
+							}, ()=> {
+								// declined
+							});
+						}
+					});
+				} else {
+					return null;
+				}
+		}
 	}
 
 	function ahModals($q, $uibModal){

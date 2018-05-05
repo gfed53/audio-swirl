@@ -4,22 +4,16 @@ angular
 
 .module('myApp')
 
-.controller('HistoryCtrl', ['ahSearch', 'ahSpotSearch', 'ahResultHistory', 'ahSearchTerm', 'ahSortOrder', 'ahSetIsOpenedProp', HistoryCtrl]);
+.controller('HistoryCtrl', ['ahSearch', 'ahResultHistory', 'ahSearchTerm', 'ahSortOrder', 'ahSetIsOpenedProp', HistoryCtrl]);
 
-function HistoryCtrl(ahSearch, ahSpotSearch, ahResultHistory, ahSearchTerm, ahSortOrder, ahSetIsOpenedProp){
+function HistoryCtrl(ahSearch, ahResultHistory, ahSearchTerm, ahSortOrder, ahSetIsOpenedProp){
 	let vm = this;
 	vm.pastSearches = ahResultHistory.getSearched();
-	console.log('vm.pastSearches',vm.pastSearches);
-
-	// vm.pastSearches = ahSetIsOpenedProp(ahResultHistory.getSearched(), (item) => { spotSearch(item); });
-
 	vm.pastResults = ahResultHistory.getResults();
-	console.log('vm.pastResults',vm.pastResults);
-
 	vm.searchTerm = ahSearchTerm.get();
 	vm.add = add;
 	vm.isAdded = isAdded;
-	vm.spotSearch = spotSearch;
+	// vm.spotSearch = spotSearch;
 	vm.reverse = ahSortOrder.reverse;
 	vm.predicate = ahSortOrder.predicate;
 	vm.sort = sort;
@@ -44,16 +38,16 @@ function HistoryCtrl(ahSearch, ahSpotSearch, ahResultHistory, ahSearchTerm, ahSo
 	// 	});
 	// }
 
-	function spotSearch(artist){
+	// function spotSearch(artist){
 		
-		vm.link = '';
+	// 	vm.link = '';
 
-		ahSpotSearch(artist.Name)
-		.then((response) => {
-			// Mutates the artist object..
-			artist.spotLink = response.data.artists.items[0].external_urls.spotify;
-		});
-	}
+	// 	ahSpotSearch(artist.Name)
+	// 	.then((response) => {
+	// 		// Mutates the artist object..
+	// 		artist.spotLink = response.data.artists.items[0].external_urls.spotify;
+	// 	});
+	// }
 
 	function sort(predicate){
 		let sortObj = ahSortOrder.order(vm.predicate, predicate);
