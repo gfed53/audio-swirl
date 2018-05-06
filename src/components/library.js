@@ -377,7 +377,6 @@
 	function ahSetIsOpenedProp(){
 		return (list, onIsOpened) => {
 			let updated = [...list];
-			// console.log('updated',updated);
 
 			updated.forEach(function(item) {
 				var isOpened = false;
@@ -388,15 +387,11 @@
 					set: function(newValue) {
 						isOpened = newValue;
 						if (isOpened) {
-							// console.log(item); // do something...
-							// spotSearch(item.Name);
 							onIsOpened(item);
 						}
 					}
 				});
 			});
-
-			// console.log('updated after',updated);
 
 			return updated;			
 
@@ -405,10 +400,12 @@
 
 	function ahFocus($timeout, $window) {
 		return function(id) {
-      // timeout makes sure that it is invoked after any other event has been triggered.
-      // e.g. click events that need to run before the focus or
-      // inputs elements that are in a disabled state but are enabled when those events
-      // are triggered.
+			/*
+      	timeout makes sure that it is invoked after any other event has been triggered.
+      	e.g. click events that need to run before the focus or
+      	inputs elements that are in a disabled state but are enabled when those events
+				are triggered.
+			*/
       $timeout(function() {
         var element = $window.document.getElementById(id);
         if(element)

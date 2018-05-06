@@ -11,12 +11,9 @@ function SearchCtrl($scope, $timeout, ahSearch, ahGetSpotLink, ahResultHistory, 
 	vm.submit = submit;
 	vm.appendToSeachBar = appendToSeachBar;
 	vm.isAddedToSearchBar = isAddedToSearchBar;
-	// vm.spotSearch = spotSearch;
 	vm.pastSearches = ahResultHistory.getSearched();
 	vm.pastResults = ahResultHistory.getResults();
 	vm.searchTerm = ahSearchTerm.get();
-
-	vm.test = test;
 
 	$timeout(() => { ahFocus('query'); }, 0);
 
@@ -57,20 +54,9 @@ function SearchCtrl($scope, $timeout, ahSearch, ahGetSpotLink, ahResultHistory, 
 		return (name === vm.itemAddedToSearchBar);
 	}
 
-	// function spotSearch(artist){
-
-	// 	vm.link = '';
-
-	// 	ahSpotSearch(artist.Name)
-	// 	.then((response) => {
-	// 		// Mutates the artist object..
-	// 		artist.spotLink = response.data.artists.items[0].external_urls.spotify;
-	// 	});
+	// function test(e){
+	// 	console.log('e',e);
 	// }
-
-	function test(e){
-		console.log('e',e);
-	}
 }
 
 
