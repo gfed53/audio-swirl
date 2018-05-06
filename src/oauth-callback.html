@@ -17,6 +17,10 @@
                 };
                 localStorage.setItem("spotOAuth", JSON.stringify(spotOAuth));
                 window.location.href = "http://localhost:8080";
+                /*
+                    Dev: http://localhost:8080
+                    Prod: http://audio-swirl-123.herokuapp.com
+                */
             } else {
                 alert("Problem authenticating");
             }
@@ -24,3 +28,4 @@
     </head>
     <body>Redirecting...</body>
 </html>
+
