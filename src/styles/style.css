@@ -1,4 +1,4 @@
-/* Layout */
+/* --- Layout --- */
 
 * {
 	box-sizing: border-box;
@@ -63,7 +63,7 @@ a {
 	margin-top: 1em;
 }
 
-/* Headers */
+/* --- Headers --- */
 
 h1, h3 {
 	margin: 0.5em auto;	
@@ -86,7 +86,7 @@ h2 {
 	font-size: 2em;
 }
 
-
+/* --- Sections --- */
 
 .row {
 	margin-bottom: 2em;
@@ -187,7 +187,7 @@ h2 {
 	clear: both;
 }
 
-/* Footer */
+/* --- Footer --- */
 
 footer {
 	margin-top: 2em;
@@ -202,14 +202,14 @@ footer a {
 	transition: 250ms linear all;
 }
 
-/* Alerts */
+/* --- Alerts --- */
 
 .alert-video-saved {
 	display: inline-block;
 	margin: 0 1em;
 }
 
-/* Modals */
+/* --- Modals --- */
 
 .modal-header, .modal-body {
 	color: black;
@@ -223,7 +223,7 @@ footer a {
 	margin-bottom: 1em;
 }
 
-/* Buttons */
+/* --- Buttons --- */
 
 .btn-add {
 	margin: 1em 0;
@@ -240,6 +240,14 @@ footer a {
 	border: none;
 	background: transparent;
 }
+
+/* --- Animations --- */
+
+/* Spotify Link */
+/* .scroll-top.ng-enter { opacity:0; }
+.scroll-top.ng-enter-active { opacity:1; }
+.scroll-top.ng-leave { opacity:1; }
+.scroll-top.ng-leave-active { opacity:0; } */
 
 
 @media (max-width: 513px) {
@@ -273,7 +281,7 @@ footer a {
 
 @media screen and (min-width: 1024px){
 
-	/*Hover States*/
+	/* Hover States */
 
 	.nav>li>a:hover {
 		background-color: lightgrey;
