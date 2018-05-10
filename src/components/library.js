@@ -348,13 +348,10 @@
 			let url = 'https://accounts.spotify.com/authorize';
 			let obj = ahAPIKeys.get();
 			let client_id = ahAPIKeys.get().spotID;
+
+			// Will be different for production version. See ./config.js for URI info.
 			let redirect_uri = 'http://localhost:8080/oauth-callback.html';
-
-			/*
-				Dev: http://localhost:8080/oauth-callback.html
-				Prod: http://audio-swirl-123.herokuapp.com/oauth-callback.html
-			*/
-
+			
 			window.location.href = 'https://accounts.spotify.com/authorize?client_id=' + client_id + '&response_type=token&redirect_uri='+redirect_uri;
 		}
 

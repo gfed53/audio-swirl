@@ -16,11 +16,9 @@
                     }
                 };
                 localStorage.setItem("spotOAuth", JSON.stringify(spotOAuth));
+                
+                // Will be different for production version. See ./config.js for URI info.
                 window.location.href = "http://localhost:8080";
-                /*
-                    Dev: http://localhost:8080
-                    Prod: http://audio-swirl-123.herokuapp.com
-                */
             } else {
                 alert("Problem authenticating");
             }
