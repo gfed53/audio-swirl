@@ -243,11 +243,22 @@ footer a {
 
 /* --- Animations --- */
 
-/* Spotify Link */
-/* .scroll-top.ng-enter { opacity:0; }
-.scroll-top.ng-enter-active { opacity:1; }
-.scroll-top.ng-leave { opacity:1; }
-.scroll-top.ng-leave-active { opacity:0; } */
+/* Added to Search Bar, Spotify Link*/
+
+.alert-video-saved,
+.spot-blurb { transition: 250ms ease-in-out all; }
+
+.alert-video-saved.ng-enter,
+.spot-blurb.ng-enter { opacity:0; }
+
+.alert-video-saved.ng-enter-active,
+.spot-blurb.ng-enter-active { opacity:1; }
+
+.alert-video-saved.ng-leave,
+.spot-blurb.ng-leave { opacity:1; }
+
+.alert-video-saved.ng-leave-active,
+.spot-blurb.ng-leave-active { opacity:0; }
 
 
 @media (max-width: 513px) {
