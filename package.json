@@ -4,7 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "gulp build && node server"
+    "start": "node server",
+    "build": "gulp build && node server",
+    "postinstall": "npm run build"
   },
   "repository": {
     "type": "git",
