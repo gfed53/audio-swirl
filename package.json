@@ -1,20 +1,25 @@
 {
   "name": "audio-swirl",
   "version": "1.0.0",
+  "engines": {
+    "node": "6.11.1"
+  },
   "description": "",
   "main": "server.js",
   "scripts": {
     "start": "node server",
     "build": "gulp build && node server",
-    "postinstall": "npm run build"
+    "postinstall": "gulp build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gfed53/audio-swirl"
   },
   "author": "Gregory Federico",
-  "license": "ISC",
-  "devDependencies": {
+  "license": "UNLICENSED",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
     "babel-preset-es2015": "^6.24.1",
     "del": "^2.2.1",
     "gulp": "^3.9.1",
@@ -31,9 +36,5 @@
     "gulp-usemin": "^0.3.23",
     "jshint": "^2.9.2",
     "run-sequence": "^2.1.0"
-  },
-  "dependencies": {
-    "body-parser": "^1.17.2",
-    "express": "^4.15.3"
   }
 }
