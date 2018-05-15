@@ -53,10 +53,6 @@ function SearchCtrl($scope, $timeout, ahSearch, ahGetSpotLink, ahResultHistory, 
 	function isAddedToSearchBar(name){
 		return (name === vm.itemAddedToSearchBar);
 	}
-
-	// function test(e){
-	// 	console.log('e',e);
-	// }
 }
 
 

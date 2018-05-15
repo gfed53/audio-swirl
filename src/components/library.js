@@ -62,7 +62,7 @@
 			function checkValid(response){
 				let obj;
 				if(response.data.Similar.Info[0].Type === 'unknown'){
-					ahModals().create(validErrorUrl);
+					ahModals().create(validErrorTemp);
 					obj = {
 						info: undefined,
 						results: undefined
