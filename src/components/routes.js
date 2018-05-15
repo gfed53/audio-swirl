@@ -3,7 +3,7 @@
 angular
 .module("myApp")
 
-.config(["$compileProvider", "$stateProvider", "$urlRouterProvider", ($compileProvider, $stateProvider, $urlRouterProvider) => {
+.config(["$compileProvider", "$stateProvider", "$locationProvider", "$urlRouterProvider", ($compileProvider, $stateProvider, $locationProvider, $urlRouterProvider) => {
 	
 	$compileProvider.debugInfoEnabled(false);
 
@@ -16,7 +16,9 @@ angular
 				templateUrl: "./partials/header/header.html"
 			},
 			"content": {
-				templateUrl: "./partials/directions/directions.html"
+				templateUrl: "./partials/search/search.html",
+				controller: "SearchCtrl",
+				controllerAs: "search"
 			},
 			"footer": {
 				templateUrl: "./partials/footer/footer.html"
@@ -26,7 +28,8 @@ angular
 				controller: "MenuController",
 				controllerAs: "menu"
 			}
-		}
+		},
+		redirectTo: "search"
 	},
 	search = {
 		name: "search",
@@ -58,7 +61,12 @@ angular
 	directions = {
 		name: "directions",
 		url: "directions",
-		parent: "root"
+		parent: "root",
+		views: {
+			"content@": {
+				templateUrl: "./partials/directions/directions.html"
+			}
+		}
 	};
 
 	$stateProvider
@@ -66,6 +74,7 @@ angular
 	.state(search)
 	.state(history)
 	.state(directions);
+	
 }]);
 
 
