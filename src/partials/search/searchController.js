@@ -10,7 +10,7 @@ function SearchCtrl($scope, $timeout, ahSearch, ahGetSpotLink, ahResultHistory, 
 	let vm = this;
 	vm.submit = submit;
 	vm.appendToSeachBar = appendToSeachBar;
-	vm.isAddedToSearchBar = isAddedToSearchBar;
+	vm.showItemAddedNotification = showItemAddedNotification;
 	vm.pastSearches = ahResultHistory.getSearched();
 	vm.pastResults = ahResultHistory.getResults();
 	vm.searchTerm = ahSearchTerm.get();
@@ -48,9 +48,13 @@ function SearchCtrl($scope, $timeout, ahSearch, ahGetSpotLink, ahResultHistory, 
 		vm.searchTerm += (name+', ');
 		ahSearchTerm.set(vm.searchTerm);
 		vm.itemAddedToSearchBar = name;
+
+		$timeout(() => {
+			vm.itemAddedToSearchBar = null;
+		}, 3000);
 	}
 
-	function isAddedToSearchBar(name){
+	function showItemAddedNotification(name){
 		return (name === vm.itemAddedToSearchBar);
 	}
 }
