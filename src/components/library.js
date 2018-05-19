@@ -211,6 +211,7 @@
 	}
 
 	function ahSearchTerm($q){
+		// May want to make this into an object, containing both searchTerm (maybe call it fullQuery or something else) and most recently added artist (lastAddedArtist) to search bar. That way we can keep that logic within the service and maybe avoid repetition within the controllers?
 		this.searchTerm = '';
 		this.get = get;
 		this.set = set;
@@ -227,7 +228,6 @@
 		// Move appendToSearchBar into service
 		function concat(next){
 			let deferred = $q.defer();
-			console.log('deferred',deferred);
 			let updated = this.searchTerm + (next+', ');
 			this.set(updated);
 			deferred.resolve();

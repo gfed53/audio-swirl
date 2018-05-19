@@ -11,9 +11,9 @@
 						<div class="result-blurb">
 							<p>{{ item.wTeaser }}</p>
 							<span>
-								<button class="btn btn-default btn-add" ng-click="history.add(item.Name)" type="button">Add</button>
+								<button class="btn btn-default btn-add" ng-click="history.appendToSearchBar(item.Name)" type="button">Add</button>
 							</span>
-							<div ng-if="history.isAdded(item.Name)" class="alert alert-success alert-video-saved" role="alert">Added to search bar!</div>
+							<div ng-if="history.showItemAddedNotification(item.Name)" class="alert alert-success alert-video-saved" role="alert">Added to search bar!</div>
 							<div class="spot-blurb" ng-if="item.spotLink">
 								<a target="_blank" href="{{ item.spotLink }}"><i class="fa fa-spotify" aria-hidden="true"></i> Spotify Page</a>
 							</div>
@@ -46,9 +46,9 @@
 						<div class="result-blurb">
 							<p>{{ item.wTeaser }}</p>
 							<span>
-								<button class="btn btn-default btn-add" ng-click="history.add(item.Name)" type="button">Add</button>
+								<button class="btn btn-default btn-add" ng-click="history.appendToSearchBar(item.Name)" type="button">Add</button>
 							</span>
-							<div ng-if="history.isAdded(item.Name)" class="alert alert-success alert-video-saved" role="alert">Added to search bar!</div>
+							<div ng-if="history.showItemAddedNotification(item.Name)" class="alert alert-success alert-video-saved" role="alert">Added to search bar!</div>
 							<div class="spot-blurb" ng-if="item.spotLink">
 								<a target="_blank" href="{{ item.spotLink }}"><i class="fa fa-spotify" aria-hidden="true"></i> Spotify Page</a>
 							</div>
