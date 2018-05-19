@@ -9,7 +9,7 @@
 	.factory('ahModals', ['$q', '$uibModal', ahModals])
 	.factory('ahSetIsOpenedProp', [ahSetIsOpenedProp])
 	.factory('ahFocus', ['$timeout', '$window', ahFocus])
-	.service('ahSearchTerm', ahSearchTerm)
+	.service('ahSearchTerm', ['$q', ahSearchTerm])
 	.service('ahResultHistory', [ahResultHistory])
 	.service('ahSortOrder', [ahSortOrder])
 	.service('ahAPIKeys', ['$http', '$q', '$state', 'ahModals', ahAPIKeys])
@@ -210,10 +210,11 @@
 		};
 	}
 
-	function ahSearchTerm(){
+	function ahSearchTerm($q){
 		this.searchTerm = '';
 		this.get = get;
 		this.set = set;
+		this.concat = concat;
 
 		function get(){
 			return this.searchTerm;
@@ -221,6 +222,17 @@
 
 		function set(_searchTerm_){
 			this.searchTerm = _searchTerm_;
+		}
+
+		// Move appendToSearchBar into service
+		function concat(next){
+			let deferred = $q.defer();
+			console.log('deferred',deferred);
+			let updated = this.searchTerm + (next+', ');
+			this.set(updated);
+			deferred.resolve();
+
+			return deferred.promise;
 		}
 	}
 

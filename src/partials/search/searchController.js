@@ -9,7 +9,7 @@ angular
 function SearchCtrl($scope, $timeout, ahSearch, ahGetSpotLink, ahResultHistory, ahSearchTerm, ahAPIKeys, ahGetToken, ahSetIsOpenedProp, ahFocus){
 	let vm = this;
 	vm.submit = submit;
-	vm.appendToSeachBar = appendToSeachBar;
+	vm.appendToSearchBar = appendToSearchBar;
 	vm.showItemAddedNotification = showItemAddedNotification;
 	vm.pastSearches = ahResultHistory.getSearched();
 	vm.pastResults = ahResultHistory.getResults();
@@ -44,14 +44,18 @@ function SearchCtrl($scope, $timeout, ahSearch, ahGetSpotLink, ahResultHistory, 
 		});
 	}
 
-	function appendToSeachBar(name){
-		vm.searchTerm += (name+', ');
-		ahSearchTerm.set(vm.searchTerm);
-		vm.itemAddedToSearchBar = name;
+	function appendToSearchBar(name){
+		// vm.searchTerm += (name+', ');
+		// ahSearchTerm.set(vm.searchTerm);
 
-		$timeout(() => {
-			vm.itemAddedToSearchBar = null;
-		}, 3000);
+		ahSearchTerm.concat(name)
+		.then(() => {
+			vm.searchTerm = ahSearchTerm.get();
+			vm.itemAddedToSearchBar = name;
+			$timeout(() => {
+				vm.itemAddedToSearchBar = null;
+			}, 3000);
+		});
 	}
 
 	function showItemAddedNotification(name){
