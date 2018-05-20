@@ -45,9 +45,6 @@ function SearchCtrl($scope, $timeout, ahSearch, ahGetSpotLink, ahResultHistory, 
 	}
 
 	function appendToSearchBar(name){
-		// vm.searchTerm += (name+', ');
-		// ahSearchTerm.set(vm.searchTerm);
-
 		ahSearchTerm.concat(name)
 		.then(() => {
 			vm.searchTerm = ahSearchTerm.get();
