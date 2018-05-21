@@ -9,7 +9,7 @@
 	.factory('ahModals', ['$q', '$uibModal', ahModals])
 	.factory('ahSetIsOpenedProp', [ahSetIsOpenedProp])
 	.factory('ahFocus', ['$timeout', '$window', ahFocus])
-	.service('ahSearchTerm', ['$q', ahSearchTerm])
+	.service('ahSearchTerm', ['$q', '$timeout', ahSearchTerm])
 	.service('ahResultHistory', [ahResultHistory])
 	.service('ahSortOrder', [ahSortOrder])
 	.service('ahAPIKeys', ['$http', '$q', '$state', 'ahModals', ahAPIKeys])
@@ -210,29 +210,49 @@
 		};
 	}
 
-	function ahSearchTerm($q){
+	function ahSearchTerm($q, $timeout){
 		// May want to make this into an object, containing both searchTerm (maybe call it fullQuery or something else) and most recently added artist (lastAddedArtist) to search bar. That way we can keep that logic within the service and maybe avoid repetition within the controllers?
-		this.searchTerm = '';
-		this.get = get;
-		this.set = set;
+		// this.searchTerm = '';
+		this.searchBar = {
+			fullQuery: '',
+			lastAddedArtist: ''
+		};
+
+		this.getSearchBarContents = getSearchBarContents;
+		this.getFull = getFull;
+		this.setFull = setFull;
+		this.getLast = getLast;
+		this.setLast = setLast;
 		this.concat = concat;
 
-		function get(){
-			return this.searchTerm;
+		function getSearchBarContents() {
+			return this.searchBar;
 		}
 
-		function set(_searchTerm_){
-			this.searchTerm = _searchTerm_;
+		function getFull(){
+			return this.searchBar.fullQuery;
 		}
 
-		// Move appendToSearchBar into service
+		function setFull(full){
+			this.searchBar.fullQuery = full;
+		}
+
+		function getLast(){
+			return this.searchBar.lastAddedArtist;
+		}
+
+		function setLast(last){
+			this.searchBar.lastAddedArtist = last;
+		}
+
 		function concat(next){
-			let deferred = $q.defer();
-			let updated = this.searchTerm + (next+', ');
-			this.set(updated);
-			deferred.resolve();
+			let updated = this.searchBar.fullQuery + (next+', ');
+			this.setFull(updated);
+			this.setLast(next);
 
-			return deferred.promise;
+			$timeout(() => {
+				this.setLast('');
+			}, 3000);
 		}
 	}
 

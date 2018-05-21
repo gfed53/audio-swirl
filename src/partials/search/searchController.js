@@ -13,7 +13,12 @@ function SearchCtrl($scope, $timeout, ahSearch, ahGetSpotLink, ahResultHistory, 
 	vm.showItemAddedNotification = showItemAddedNotification;
 	vm.pastSearches = ahResultHistory.getSearched();
 	vm.pastResults = ahResultHistory.getResults();
-	vm.searchTerm = ahSearchTerm.get();
+	// vm.searchTerm = ahSearchTerm.get();
+	vm.searchBarContents = ahSearchTerm.getSearchBarContents();
+
+	// vm.itemAddedToSearchBar = ahSearchTerm;
+
+	console.log('vm.searchBarContents',vm.searchBarContents);
 
 	$timeout(() => { ahFocus('query'); }, 0);
 
@@ -23,21 +28,24 @@ function SearchCtrl($scope, $timeout, ahSearch, ahGetSpotLink, ahResultHistory, 
 	vm.apisObj = ahAPIKeys.apisObj;
 	vm.userName = ahAPIKeys.apisObj.id;
 
-	$scope.$watch('search.searchTerm', (newVal) => {
+	$scope.$watch('search.searchBarContents.fullQuery', (newVal) => {
 		// Watches for changes in the search bar, so if the user switches over to a different tab and then return to it, they won't lose what they inputed.
-		ahSearchTerm.set(newVal);
+		ahSearchTerm.setFull(newVal);
+		console.log('vm.searchBarContents',vm.searchBarContents);
 	});
 
 	function submit(){
-		vm.searchTermNew = 'music:'+vm.searchTerm;
+		vm.searchTermNew = 'music:'+vm.searchBarContents.fullQuery;
 
 		ahSearch(vm.searchTermNew).getResults()
 		.then((response) => {
 			let obj = ahSearch().checkValid(response);
+
+			console.log('obj',obj);
 			vm.info = obj.info;
 			vm.results = [...obj.results];
-			vm.searchTerm = obj.searchTerm;
-			ahSearchTerm.set(vm.searchTerm);
+			vm.searchBarContents.fullQuery = obj.searchTerm;
+			ahSearchTerm.setFull(vm.searchBarContents.fullQuery);
 
 			vm.info = ahSetIsOpenedProp(vm.info, (item) => { ahGetSpotLink(item); });
 			vm.results = ahSetIsOpenedProp(vm.results, (item) => { ahGetSpotLink(item); });
@@ -45,18 +53,20 @@ function SearchCtrl($scope, $timeout, ahSearch, ahGetSpotLink, ahResultHistory, 
 	}
 
 	function appendToSearchBar(name){
-		ahSearchTerm.concat(name)
-		.then(() => {
-			vm.searchTerm = ahSearchTerm.get();
-			vm.itemAddedToSearchBar = name;
-			$timeout(() => {
-				vm.itemAddedToSearchBar = null;
-			}, 3000);
-		});
+		ahSearchTerm.concat(name);
+		// .then(() => {
+		// 	vm.searchTerm = ahSearchTerm.get();
+		// 	vm.itemAddedToSearchBar = name;
+		// 	$timeout(() => {
+		// 		vm.itemAddedToSearchBar = null;
+		// 	}, 3000);
+		// });
+
+		console.log('vm.searchBarContents',vm.searchBarContents);
 	}
 
 	function showItemAddedNotification(name){
-		return (name === vm.itemAddedToSearchBar);
+		return (name === vm.searchBarContents.lastAddedArtist);
 	}
 }
 
