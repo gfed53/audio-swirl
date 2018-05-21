@@ -13,12 +13,7 @@ function SearchCtrl($scope, $timeout, ahSearch, ahGetSpotLink, ahResultHistory, 
 	vm.showItemAddedNotification = showItemAddedNotification;
 	vm.pastSearches = ahResultHistory.getSearched();
 	vm.pastResults = ahResultHistory.getResults();
-	// vm.searchTerm = ahSearchTerm.get();
 	vm.searchBarContents = ahSearchTerm.getSearchBarContents();
-
-	// vm.itemAddedToSearchBar = ahSearchTerm;
-
-	console.log('vm.searchBarContents',vm.searchBarContents);
 
 	$timeout(() => { ahFocus('query'); }, 0);
 
@@ -31,7 +26,6 @@ function SearchCtrl($scope, $timeout, ahSearch, ahGetSpotLink, ahResultHistory, 
 	$scope.$watch('search.searchBarContents.fullQuery', (newVal) => {
 		// Watches for changes in the search bar, so if the user switches over to a different tab and then return to it, they won't lose what they inputed.
 		ahSearchTerm.setFull(newVal);
-		console.log('vm.searchBarContents',vm.searchBarContents);
 	});
 
 	function submit(){
@@ -40,8 +34,6 @@ function SearchCtrl($scope, $timeout, ahSearch, ahGetSpotLink, ahResultHistory, 
 		ahSearch(vm.searchTermNew).getResults()
 		.then((response) => {
 			let obj = ahSearch().checkValid(response);
-
-			console.log('obj',obj);
 			vm.info = obj.info;
 			vm.results = [...obj.results];
 			vm.searchBarContents.fullQuery = obj.searchTerm;
@@ -54,15 +46,6 @@ function SearchCtrl($scope, $timeout, ahSearch, ahGetSpotLink, ahResultHistory, 
 
 	function appendToSearchBar(name){
 		ahSearchTerm.concat(name);
-		// .then(() => {
-		// 	vm.searchTerm = ahSearchTerm.get();
-		// 	vm.itemAddedToSearchBar = name;
-		// 	$timeout(() => {
-		// 		vm.itemAddedToSearchBar = null;
-		// 	}, 3000);
-		// });
-
-		console.log('vm.searchBarContents',vm.searchBarContents);
 	}
 
 	function showItemAddedNotification(name){

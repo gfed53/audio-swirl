@@ -10,7 +10,7 @@ function HistoryCtrl($timeout, ahResultHistory, ahSearchTerm, ahSortOrder, ahSet
 	let vm = this;
 	vm.pastSearches = ahResultHistory.getSearched();
 	vm.pastResults = ahResultHistory.getResults();
-	vm.searchTerm = ahSearchTerm.get();
+	vm.searchBarContents = ahSearchTerm.getSearchBarContents();
 	vm.appendToSearchBar = appendToSearchBar;
 	vm.showItemAddedNotification = showItemAddedNotification;
 	vm.reverse = ahSortOrder.reverse;
@@ -18,18 +18,11 @@ function HistoryCtrl($timeout, ahResultHistory, ahSearchTerm, ahSortOrder, ahSet
 	vm.sort = sort;
 
 	function appendToSearchBar(name){
-		ahSearchTerm.concat(name)
-		.then(() => {
-			vm.searchTerm = ahSearchTerm.get();
-			vm.itemAddedToSearchBar = name;
-			$timeout(() => {
-				vm.itemAddedToSearchBar = null;
-			}, 3000);
-		});
+		ahSearchTerm.concat(name);
 	}
 
 	function showItemAddedNotification(name){
-		return (name === vm.itemAddedToSearchBar);
+		return (name === vm.searchBarContents.lastAddedArtist);
 	}
 
 	function sort(predicate){
