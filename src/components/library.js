@@ -5,7 +5,8 @@
 	.module('myApp')
 
 	.factory('ahSearch', ['$http', '$q', 'ahResultHistory', 'ahModals', 'ahAPIKeys', ahSearch])
-	.factory('ahGetSpotLink', ['$http', '$q', 'ahGetToken', 'ahModals', ahGetSpotLink])
+	.factory('ahGetSpotLink', ['$http', '$q', 'ahGetToken', 'ahModals', 'ahFindSpotMatch', ahGetSpotLink])
+	.factory('ahFindSpotMatch', [ahFindSpotMatch])
 	.factory('ahModals', ['$q', '$uibModal', ahModals])
 	.factory('ahSetIsOpenedProp', [ahSetIsOpenedProp])
 	.factory('ahFocus', ['$timeout', '$window', ahFocus])
@@ -81,13 +82,23 @@
 		};
 	}
 
-	function ahGetSpotLink($http, $q, ahGetToken, ahModals){
+	function ahGetSpotLink($http, $q, ahGetToken, ahModals, ahFindSpotMatch){
 		return (item) => {
 			if(!item.spotLink){
 				spotApiCall(item.Name)
 				.then((response) => {
+					// the array of results..
+					let results = response.data.artists.items;
+					console.log('results',results);
+
+					let result = ahFindSpotMatch(results,item.Name);
+					console.log('result',result);
+
 					// Mutates the item object..
-					item.spotLink = response.data.artists.items[0].external_urls.spotify;
+					// item.spotLink = response.data.artists.items[0].external_urls.spotify;
+
+					// spotLink prop will be set to null if we don't find a match.
+					item.spotLink = result.external_urls.spotify;
 				});
 			}
 		};
@@ -129,6 +140,27 @@
 				} else {
 					return null;
 				}
+		}
+	}
+
+	function ahFindSpotMatch(){
+		return (results, artistName) => {
+			let testStr = `^${artistName.toLowerCase()}$`;
+			console.log('testStr',testStr);
+			let regTest = new RegExp(testStr,'g');
+
+			for(let result of results){
+				let name = result.name.toLowerCase();
+				console.log(name);
+
+				if(regTest.test(name)){
+					return result;
+				}
+			}
+
+			// Return null if no exact match
+			return null;
+
 		}
 	}
 
