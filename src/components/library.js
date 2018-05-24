@@ -87,15 +87,8 @@
 			if(!item.spotLink){
 				spotApiCall(item.Name)
 				.then((response) => {
-					// the array of results..
 					let results = response.data.artists.items;
-					console.log('results',results);
-
 					let result = ahFindSpotMatch(results,item.Name);
-					console.log('result',result);
-
-					// Mutates the item object..
-					// item.spotLink = response.data.artists.items[0].external_urls.spotify;
 
 					// spotLink prop will be set to null if we don't find a match.
 					item.spotLink = result.external_urls.spotify;
@@ -146,12 +139,10 @@
 	function ahFindSpotMatch(){
 		return (results, artistName) => {
 			let testStr = `^${artistName.toLowerCase()}$`;
-			console.log('testStr',testStr);
 			let regTest = new RegExp(testStr,'g');
 
 			for(let result of results){
 				let name = result.name.toLowerCase();
-				console.log(name);
 
 				if(regTest.test(name)){
 					return result;
@@ -243,8 +234,6 @@
 	}
 
 	function ahSearchTerm($q, $timeout){
-		// May want to make this into an object, containing both searchTerm (maybe call it fullQuery or something else) and most recently added artist (lastAddedArtist) to search bar. That way we can keep that logic within the service and maybe avoid repetition within the controllers?
-		// this.searchTerm = '';
 		this.searchBar = {
 			fullQuery: '',
 			lastAddedArtist: ''
