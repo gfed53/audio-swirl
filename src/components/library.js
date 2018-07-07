@@ -69,8 +69,10 @@
 						results: undefined
 					};
 				} else {
-					ahResultHistory.add(response.data.Similar.Info, ahResultHistory.searched);
-					ahResultHistory.add(response.data.Similar.Results, ahResultHistory.results);
+					// ahResultHistory.add(response.data.Similar.Info, ahResultHistory.searched);
+					// ahResultHistory.add(response.data.Similar.Results, ahResultHistory.results);
+					ahResultHistory.searched = ahResultHistory.concatUniq(response.data.Similar.Info, ahResultHistory.searched);
+					ahResultHistory.results = ahResultHistory.concatUniq(response.data.Similar.Results, ahResultHistory.results);
 					obj = {
 						info: response.data.Similar.Info,
 						results: response.data.Similar.Results,
@@ -282,7 +284,8 @@
 		this.results = [];
 		this.getSearched = getSearched;
 		this.getResults = getResults;
-		this.add = add;
+		// this.add = add;
+		this.concatUniq = concatUniq;
 
 		function getSearched() {
 			return this.searched;
@@ -293,12 +296,18 @@
 		}
 
 		// Could just use lodash uniqBy?
-		function add(array, newArray){
-			array.forEach((value,index,array) => {
-				if(getIndexIfObjWithAttr(newArray, 'yID', value.yID) === -1){
-					newArray.push(array[index]);
-				}
-			});
+		// function add(array, newArray){
+		// 	array.forEach((value,index,array) => {
+		// 		if(getIndexIfObjWithAttr(newArray, 'yID', value.yID) === -1){
+		// 			newArray.push(array[index]);
+		// 		}
+		// 	});
+		// }
+
+		// Test
+		function concatUniq(array, newArray){
+			console.log('concatUniq running..');
+			return _.uniqBy(array.concat(newArray), 'yID');
 		}
 
 
@@ -405,7 +414,7 @@
 			// Will be different for production version. See ./config.js for URI info.
 			let redirect_uri = 'http://localhost:8080/oauth-callback.html';
 			
-			window.location.href = 'https://accounts.spotify.com/authorize?client_id=' + client_id + '&response_type=token&redirect_uri='+redirect_uri;
+			window.location.href = url + '?client_id=' + client_id + '&response_type=token&redirect_uri='+redirect_uri;
 		}
 
 		function get(){	
