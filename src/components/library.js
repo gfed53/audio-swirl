@@ -69,8 +69,6 @@
 						results: undefined
 					};
 				} else {
-					// ahResultHistory.add(response.data.Similar.Info, ahResultHistory.searched);
-					// ahResultHistory.add(response.data.Similar.Results, ahResultHistory.results);
 					ahResultHistory.searched = ahResultHistory.concatUniq(response.data.Similar.Info, ahResultHistory.searched);
 					ahResultHistory.results = ahResultHistory.concatUniq(response.data.Similar.Results, ahResultHistory.results);
 					obj = {
@@ -284,7 +282,6 @@
 		this.results = [];
 		this.getSearched = getSearched;
 		this.getResults = getResults;
-		// this.add = add;
 		this.concatUniq = concatUniq;
 
 		function getSearched() {
@@ -295,29 +292,8 @@
 			return this.results;
 		}
 
-		// Could just use lodash uniqBy?
-		// function add(array, newArray){
-		// 	array.forEach((value,index,array) => {
-		// 		if(getIndexIfObjWithAttr(newArray, 'yID', value.yID) === -1){
-		// 			newArray.push(array[index]);
-		// 		}
-		// 	});
-		// }
-
-		// Test
 		function concatUniq(array, newArray){
-			console.log('concatUniq running..');
 			return _.uniqBy(array.concat(newArray), 'yID');
-		}
-
-
-		function getIndexIfObjWithAttr(array, attr, value) {
-			for(let i = 0; i < array.length; i++) {
-				if(array[i][attr] === value) {
-					return i;
-				}
-			}
-			return -1;
 		}
 	}
 

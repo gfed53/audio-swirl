@@ -4,17 +4,13 @@ angular
 
 .module('myApp')
 
-.controller('SearchCtrl', ['$scope', '$timeout', 'ahSearch', 'ahGetSpotLink', 'ahResultHistory', 'ahSearchTerm', 'ahAPIKeys', 'ahGetToken', 'ahSetIsOpenedProp', 'ahFocus', SearchCtrl]);
+.controller('SearchCtrl', ['$scope', '$timeout', 'ahSearch', 'ahGetSpotLink', 'ahSearchTerm', 'ahAPIKeys', 'ahGetToken', 'ahSetIsOpenedProp', 'ahFocus', SearchCtrl]);
 
-function SearchCtrl($scope, $timeout, ahSearch, ahGetSpotLink, ahResultHistory, ahSearchTerm, ahAPIKeys, ahGetToken, ahSetIsOpenedProp, ahFocus){
+function SearchCtrl($scope, $timeout, ahSearch, ahGetSpotLink, ahSearchTerm, ahAPIKeys, ahGetToken, ahSetIsOpenedProp, ahFocus){
 	let vm = this;
 	vm.submit = submit;
 	vm.appendToSearchBar = appendToSearchBar;
 	vm.showItemAddedNotification = showItemAddedNotification;
-
-	// vm.pastSearches = ahResultHistory.getSearched();
-	// vm.pastResults = ahResultHistory.getResults();
-	
 	vm.searchBarContents = ahSearchTerm.getSearchBarContents();
 
 	$timeout(() => { ahFocus('query'); }, 0);
